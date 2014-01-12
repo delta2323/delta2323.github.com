@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-01-12T13:02:57+09:00</updated>
+  <updated>2014-01-12T13:57:13+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
-    
+    <name><![CDATA[Kenta OONO]]></name>
+    <email><![CDATA[k.oono.delta@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[テスト投稿]]></title>
+    <link href="http://delta2323.github.io/blog/2014/01/12/first-post/"/>
+    <updated>2014-01-12T13:14:10+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/01/12/first-post</id>
+    <content type="html"><![CDATA[<p>今年はきちんとものを書こうと決めたので、個人サイトとブログの整備を行う。
+個人サイトは昔作ったものがあったのでそれを掘り出して利用する。
+ブログについては調べてみると、Octpress + Github PagesがMarkDownも使えて便利そうなのでこれを採用しようと思う。</p>
+
+<h2 id="section">数式の表示</h2>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+ %]]&gt;</script>
+
+<h2 id="section-1">参考にしたサイト</h2>
+
+<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
+
+<ul>
+  <li><a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/">Glide Note</a></li>
+</ul>
+
+<p>Rubyの管理はrbenvで既に行っていたので、rvmは使用しなかった。</p>
+
+<h4 id="section-2">数式の表示について</h4>
+
+<ul>
+  <li><a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">Carpe diem (Felix’s blog)</a></li>
+</ul>
+
+<p>ここに書いている通りに行ってうまくいった。</p>
+]]></content>
+  </entry>
   
 </feed>
