@@ -4,7 +4,7 @@
   <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-01-26T10:06:46+09:00</updated>
+  <updated>2014-01-26T10:33:34+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -18,19 +18,27 @@
     <link href="http://delta2323.github.io/blog/2014/01/25/nips-reading/"/>
     <updated>2014-01-25T01:49:35+09:00</updated>
     <id>http://delta2323.github.io/blog/2014/01/25/nips-reading</id>
-    <content type="html"><![CDATA[<p>1/23に開催されたNIPS2013読み会に詠み人として参加しました。資料はSlideShareで公開しています。</p>
+    <content type="html"><![CDATA[<p>1/23に開催されたNIPS2013読み会に詠み人として参加しました。
+主催者の<a href="https://twitter.com/sla">@sla</a>さんをはじめ、参加していただいた皆さんありがとうございました。
+資料はSlideShareで公開しています（SlideShare上だと日本語部分が文字化けしてしまっていますが、ダウンロードすれば直るはずです）。</p>
 
 <iframe src="http://www.slideshare.net/slideshow/embed_code/30337341 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
 
 <p>自分が発表したのは”Inverse Density as an Inverse Problem: The Fredholm Equation Approach”という密度比推定に関する論文です。
-発表資料中でも挙げていますが、密度比推定全般に関する説明は東工大杉山先生の2012年のMLSSでの講演資料が非常に詳しいのでそちらをご参考ください。</p>
+密度比推定の問題を第1種Fredholm方程式という良く知られた積分方程式に変形し、やはり良く知られたTikhonov-Phillips正則化という方法で得られる値を近似解として用いています。</p>
 
-<p>密度比推定に関して今回の発表するにあたっていろいろとサーベイが出来たのでかなり勉強になりました。</p>
+<p>発表資料中でも挙げていますが、密度比推定全般に関する説明は東工大杉山先生の2012年のMLSSでの講演資料が非常に詳しく、この分野を概観する事が出来ます。
+今回の発表の準備でも大変参考にさせていただきました。</p>
 
 <h2 id="section">関連サイト</h2>
 
 <ul>
-  <li><a href="http://connpass.com/event/4728/">NIPS2013読み会</a>(connpass)</li>
+  <li>
+    <p><a href="http://connpass.com/event/4728/">NIPS2013読み会</a>(connpass)</p>
+  </li>
+  <li>
+    <p><a href="http://togetter.com/li/620871">NIPS2013読み会</a>(Togetter)</p>
+  </li>
 </ul>
 ]]></content>
   </entry>
