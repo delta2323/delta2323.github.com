@@ -4,7 +4,7 @@
   <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-08-10T13:09:52+09:00</updated>
+  <updated>2014-08-10T14:31:56+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -14,7 +14,65 @@
 
   
   <entry>
-    <title type="html"><![CDATA[記事の公開日時を最終更新日時にする（仮）]]></title>
+    <title type="html"><![CDATA[Octopress CheatSheet]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/10/octopress-command/"/>
+    <updated>2014-08-10T14:31:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/10/octopress-command</id>
+    <content type="html"><![CDATA[<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ rake new_post\["&lt;title&gt;"\] # 新規記事作成
+</span><span class="line">$ rake preview # localhost:4000でプレビュー表示
+</span><span class="line">$ rake generate # 現在の設定でブログを生成
+</span><span class="line">$ rake publish_draft # 下書き記事を公開設定に変更
+</span><span class="line">$ rake gen_deploy # 本番反映</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Golden Thompson]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/10/golden-thompson/"/>
+    <updated>2014-08-10T14:31:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/10/golden-thompson</id>
+    <content type="html"><![CDATA[<p>試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。</p>
+
+<p>A, BをHermite 行列として、</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+\end{align*}
+</script>
+
+<p>ただし、行列が3つだと同様の式は成立しない。つまり、A, B, CをHermite行列に対して、以下の式は一般的には成立しない。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B+C) \leq \mathrm{tr}(\exp (A) \exp (B) \exp(C))
+\end{align*}
+</script>
+
+<h2 id="section">出典</h2>
+
+<p>下記のチュートリアルの30ページ</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
+
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[記事の公開日時を最終更新日時にする]]></title>
     <link href="http://delta2323.github.io/blog/2014/08/10/change-to-update-time/"/>
     <updated>2014-08-10T11:49:00+09:00</updated>
     <id>http://delta2323.github.io/blog/2014/08/10/change-to-update-time</id>

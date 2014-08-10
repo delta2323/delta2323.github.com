@@ -9,7 +9,15 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="元々のデフォルトだとブログ記事の投稿時間は下書きを作成した時間だったのだけれど、記事を書いた後何日か寝かせた後に公開する事が結構あるので、公開した時を時刻を投稿時間にしたいと思い変更した。 参考にしたサイト Octpress + Github Pagesの連携について shimotori / &hellip;">
+  <meta name="description" content="1
+2
+3
+4
+5
+$ rake new_post\["&lt;title&gt;"\] # 新規記事作成
+$ rake preview # localhost:4000でプレビュー表示
+$ rake generate # 現在の設定でブログを生成
+$ rake publish_draft # &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,7 +78,121 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする（仮）</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/10/octopress-command/">Octopress CheatSheet</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ rake new_post\["&lt;title&gt;"\] # 新規記事作成
+</span><span class="line">$ rake preview # localhost:4000でプレビュー表示
+</span><span class="line">$ rake generate # 現在の設定でブログを生成
+</span><span class="line">$ rake publish_draft # 下書き記事を公開設定に変更
+</span><span class="line">$ rake gen_deploy # 本番反映</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/golden-thompson/">Golden Thompson</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。</p>
+
+<p>A, BをHermite 行列として、</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+\end{align*}
+</script>
+
+<p>ただし、行列が3つだと同様の式は成立しない。つまり、A, B, CをHermite行列に対して、以下の式は一般的には成立しない。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B+C) \leq \mathrm{tr}(\exp (A) \exp (B) \exp(C))
+\end{align*}
+</script>
+
+<h2 id="section">出典</h2>
+
+<p>下記のチュートリアルの30ページ</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
+
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする</a></h1>
     
     
       <p class="meta">
@@ -450,7 +572,15 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする（仮）</a>
+        <a href="/blog/2014/08/10/octopress-command/">Octopress CheatSheet</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/10/golden-thompson/">Golden Thompson</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする</a>
       </li>
     
       <li class="post">
@@ -461,20 +591,16 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
         <a href="/blog/2014/08/10/default-unpublised/">記事をデフォルトでは非公開設定にする</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/01/26/manage-draft/">記事の下書きの管理</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/25/nips-reading/">NIPS2013読み会で発表しました</a>
-      </li>
-    
   </ul>
 </section>
 
 
 
 
+<section>
+  <h1>Top Categories</h1>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (6)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/math'>math (1)</a></li></ul>
+</section>
 
   
 </aside>

@@ -5,11 +5,19 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>GWAS, Post-GWASに関する資料を公開しました - 読書帳</title>
+  <title>Octopress CheatSheet - 読書帳</title>
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。 海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、 &hellip;">
+  <meta name="description" content="1
+2
+3
+4
+5
+$ rake new_post\["&lt;title&gt;"\] # 新規記事作成
+$ rake preview # localhost:4000でプレビュー表示
+$ rake generate # 現在の設定でブログを生成
+$ rake publish_draft # &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://delta2323.github.io/blog/2014/01/21/gwas-phewas">
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/08/10/octopress-command">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
@@ -67,7 +75,7 @@
   
   <header>
     
-      <h1 class="entry-title">GWAS, Post-GWASに関する資料を公開しました</h1>
+      <h1 class="entry-title">Octopress CheatSheet</h1>
     
     
       <p class="meta">
@@ -84,36 +92,24 @@
 
 
 
-	<time datetime="2014-01-21T09:04:37+09:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。</p>
+<div class="entry-content"><div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ rake new_post\["&lt;title&gt;"\] # 新規記事作成
+</span><span class="line">$ rake preview # localhost:4000でプレビュー表示
+</span><span class="line">$ rake generate # 現在の設定でブログを生成
+</span><span class="line">$ rake publish_draft # 下書き記事を公開設定に変更
+</span><span class="line">$ rake gen_deploy # 本番反映</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<iframe src="http://www.slideshare.net/slideshow/embed_code/30240670 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
-
-<p>海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、かなり詳しい方に入ると思います。海外文献ではPhe-WASを用いて実際に行った網羅的探索を報告した論文の他にも、以下の2記事がおすすめです。</p>
-
-<ul>
-  <li><a href="http://www.nytimes.com/2013/11/28/science/linking-genes-to-diseases-by-sifting-through-electronic-medical-records.html?_r=0">Linking Genes to Diseases by Sifting Through Electronic Medical Records</a> (New York Times 2013年11月28日)</li>
-</ul>
-
-<p>Phe-WASに関するNew York Timesの記事、提唱者のJoshua氏がインタビューされています。</p>
-
-<ul>
-  <li><a href="http://www.tcpinnovations.com/drugbaron/phewas-the-tool-thats-revolutionizing-drug-development-that-youve-likely-never-heard-of/">PheWAS – the tool that’s revolutionizing drug development that you’ve likely never heard of</a> (Drug Baron 2014年1月3日)</li>
-</ul>
-
-<p>PheWASの利点・欠点を特に創薬の観点から詳しく議論しています。非常に参考になりました。</p>
-
-<ul>
-  <li><a href="https://github.com/petehamilton/Octopress-Slideshare-Plugin">Octopress-Slideshare-Plugin</a></li>
-</ul>
-
-<p>OctopressへのSlideShareの埋め込みにはこちらのプラグインを使用しました。README.mdのやり方をそのまま実行して出来ました</p>
 </div>
 
 
@@ -136,12 +132,12 @@
   
 
 
-<time datetime="2014-01-21T09:04:37+09:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/fa-biao-zi-liao/'>発表資料</a>
+    <a class='category' href='/blog/categories/octopress/'>octopress</a>
   
 </span>
 
@@ -150,7 +146,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/01/21/gwas-phewas/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/01/21/gwas-phewas/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/08/10/octopress-command/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/08/10/octopress-command/" >Tweet</a>
   
   
   
@@ -159,10 +155,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/01/12/first-post/" title="Previous Post: テスト投稿">&laquo; テスト投稿</a>
+        <a class="basic-alignment left" href="/blog/2014/08/10/golden-thompson/" title="Previous Post: Golden Thompson">&laquo; Golden Thompson</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/01/25/nips-reading/" title="Next Post: NIPS2013読み会で発表しました">NIPS2013読み会で発表しました &raquo;</a>
       
     </p>
   </footer>

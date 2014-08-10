@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>GWAS, Post-GWASに関する資料を公開しました - 読書帳</title>
+  <title>Golden Thompson - 読書帳</title>
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。 海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、 &hellip;">
+  <meta name="description" content="試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。 A, BをHermite 行列として、 \begin{align*} \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+\end{align*} &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://delta2323.github.io/blog/2014/01/21/gwas-phewas">
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/08/10/golden-thompson">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
@@ -67,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">GWAS, Post-GWASに関する資料を公開しました</h1>
+      <h1 class="entry-title">Golden Thompson</h1>
     
     
       <p class="meta">
@@ -84,36 +86,44 @@
 
 
 
-	<time datetime="2014-01-21T09:04:37+09:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。</p>
+<div class="entry-content"><p>試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。</p>
 
-<iframe src="http://www.slideshare.net/slideshow/embed_code/30240670 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+<p>A, BをHermite 行列として、</p>
 
-<p>海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、かなり詳しい方に入ると思います。海外文献ではPhe-WASを用いて実際に行った網羅的探索を報告した論文の他にも、以下の2記事がおすすめです。</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+\end{align*}
+</script>
+
+<p>ただし、行列が3つだと同様の式は成立しない。つまり、A, B, CをHermite行列に対して、以下の式は一般的には成立しない。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B+C) \leq \mathrm{tr}(\exp (A) \exp (B) \exp(C))
+\end{align*}
+</script>
+
+<h2 id="section">出典</h2>
+
+<p>下記のチュートリアルの30ページ</p>
+
+<h2 id="section-1">参考文献</h2>
 
 <ul>
-  <li><a href="http://www.nytimes.com/2013/11/28/science/linking-genes-to-diseases-by-sifting-through-electronic-medical-records.html?_r=0">Linking Genes to Diseases by Sifting Through Electronic Medical Records</a> (New York Times 2013年11月28日)</li>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
 </ul>
 
-<p>Phe-WASに関するNew York Timesの記事、提唱者のJoshua氏がインタビューされています。</p>
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
 
-<ul>
-  <li><a href="http://www.tcpinnovations.com/drugbaron/phewas-the-tool-thats-revolutionizing-drug-development-that-youve-likely-never-heard-of/">PheWAS – the tool that’s revolutionizing drug development that you’ve likely never heard of</a> (Drug Baron 2014年1月3日)</li>
-</ul>
-
-<p>PheWASの利点・欠点を特に創薬の観点から詳しく議論しています。非常に参考になりました。</p>
-
-<ul>
-  <li><a href="https://github.com/petehamilton/Octopress-Slideshare-Plugin">Octopress-Slideshare-Plugin</a></li>
-</ul>
-
-<p>OctopressへのSlideShareの埋め込みにはこちらのプラグインを使用しました。README.mdのやり方をそのまま実行して出来ました</p>
 </div>
 
 
@@ -136,12 +146,12 @@
   
 
 
-<time datetime="2014-01-21T09:04:37+09:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/fa-biao-zi-liao/'>発表資料</a>
+    <a class='category' href='/blog/categories/math/'>math</a>
   
 </span>
 
@@ -150,7 +160,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/01/21/gwas-phewas/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/01/21/gwas-phewas/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/08/10/golden-thompson/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/08/10/golden-thompson/" >Tweet</a>
   
   
   
@@ -159,10 +169,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/01/12/first-post/" title="Previous Post: テスト投稿">&laquo; テスト投稿</a>
+        <a class="basic-alignment left" href="/blog/2014/08/10/change-to-update-time/" title="Previous Post: 記事の公開日時を最終更新日時にする">&laquo; 記事の公開日時を最終更新日時にする</a>
       
       
-        <a class="basic-alignment right" href="/blog/2014/01/25/nips-reading/" title="Next Post: NIPS2013読み会で発表しました">NIPS2013読み会で発表しました &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2014/08/10/octopress-command/" title="Next Post: Octopress CheatSheet">Octopress CheatSheet &raquo;</a>
       
     </p>
   </footer>
