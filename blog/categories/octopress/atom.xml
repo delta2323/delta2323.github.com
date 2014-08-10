@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 読書帳]]></title>
   <link href="http://delta2323.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-08-10T12:35:31+09:00</updated>
+  <updated>2014-08-10T13:09:52+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[記事の公開日時を最終更新日時にする（仮）]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/10/change-to-update-time/"/>
+    <updated>2014-08-10T11:49:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/10/change-to-update-time</id>
+    <content type="html"><![CDATA[<p>元々のデフォルトだとブログ記事の投稿時間は下書きを作成した時間だったのだけれど、記事を書いた後何日か寝かせた後に公開する事が結構あるので、公開した時を時刻を投稿時間にしたいと思い変更した。</p>
+
+<h2 id="section">参考にしたサイト</h2>
+
+<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
+
+<ul>
+  <li><a href="https://gist.github.com/shimotori/5325720">shimotori / article.html</a></li>
+</ul>
+
+<p>上記のgistで書かれている通り行い、うまく行きました。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopressの記事に「続きを読む」を追加する]]></title>
@@ -27,6 +46,43 @@
 </ul>
 
 <p>ここに書いてある通りでうまくいった。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[記事をデフォルトでは非公開設定にする]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/10/default-unpublised/"/>
+    <updated>2014-08-10T11:42:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/10/default-unpublised</id>
+    <content type="html"><![CDATA[<p>デフォルトでは記事は非公開設定にしておきたい。その方法を調べた。</p>
+
+<!-- more -->
+
+<p>調べた所、同じ事を考えている方がいて、
+<code>rake new_post["blog_title"]</code>で新規記事を作成した時に、ヘッダーに<code>published: false</code>をつける方法を紹介していた（[Nukino’s memorandum]より）。
+この方はvimのプラグインとしてそれを実現している。</p>
+
+<p>前回<code>rake publish_draft</code>コマンドを追加した方法にヒントを得て、自分は<code>rake new_post</code>コマンドに直接埋め込む事にした。</p>
+
+<p><code>
+$ git diff Rakefile
+@@ -111,6 +111,7 @@ task :new_post, :title do |t, args|
+     post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
+     post.puts "comments: true"
+     post.puts "categories: "
++    post.puts "published: false"
+     post.puts "---"
+   end
+ end
+</code></p>
+
+<p>今回の記事もこの方法で新規作成し、ヘッダーに「published: false」が追加された事を確認した。</p>
+
+<ul>
+  <li><a href="http://nukino.github.io/blog/2012/01/12/Octopress/">Nukino’s memorandum</a></li>
+</ul>
+
+<p>vimのプラグインを用いて新規記事にデフォルト<code>published: false</code>をつける方法。</p>
 ]]></content>
   </entry>
   

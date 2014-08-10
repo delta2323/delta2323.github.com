@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 発表資料 | 読書帳]]></title>
+  <link href="http://delta2323.github.io/blog/categories/fa-biao-zi-liao/atom.xml" rel="self"/>
+  <link href="http://delta2323.github.io/"/>
+  <updated>2014-08-10T13:09:52+09:00</updated>
+  <id>http://delta2323.github.io/</id>
+  <author>
+    <name><![CDATA[Kenta OONO]]></name>
+    <email><![CDATA[k.oono.delta@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[NIPS2013読み会で発表しました]]></title>
+    <link href="http://delta2323.github.io/blog/2014/01/25/nips-reading/"/>
+    <updated>2014-01-25T01:49:35+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/01/25/nips-reading</id>
+    <content type="html"><![CDATA[<p>1/23に開催されたNIPS2013読み会に詠み人として参加しました。
+主催者の<a href="https://twitter.com/sla">@sla</a>さんをはじめ、参加していただいた皆さんありがとうございました。
+資料はSlideShareで公開しています（SlideShare上だと日本語部分が文字化けしてしまっていますが、ダウンロードすれば直るはずです）。</p>
+
+<p><iframe src="http://www.slideshare.net/slideshow/embed_code/30337341 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen></iframe> </p>
+
+<p>自分が発表したのは”Inverse Density as an Inverse Problem: The Fredholm Equation Approach”という密度比推定に関する論文です。
+密度比推定の問題を第1種Fredholm方程式という良く知られた積分方程式に変形し、やはり良く知られたTikhonov-Phillips正則化という方法で得られる値を近似解として用いています。</p>
+
+<p>発表資料中でも挙げていますが、密度比推定全般に関する説明は東工大杉山先生の2012年のMLSSでの講演資料が非常に詳しく、この分野を概観する事が出来ます。
+今回の発表の準備でも大変参考にさせていただきました。</p>
+
+<h2 id="section">関連サイト</h2>
+
+<ul>
+  <li>
+    <p><a href="http://connpass.com/event/4728/">NIPS2013読み会</a>(connpass)</p>
+  </li>
+  <li>
+    <p><a href="http://togetter.com/li/620871">NIPS2013読み会</a>(Togetter)</p>
+  </li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GWAS, Post-GWASに関する資料を公開しました]]></title>
+    <link href="http://delta2323.github.io/blog/2014/01/21/gwas-phewas/"/>
+    <updated>2014-01-21T09:04:37+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/01/21/gwas-phewas</id>
+    <content type="html"><![CDATA[<p>先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。</p>
+
+<p><iframe src="http://www.slideshare.net/slideshow/embed_code/30240670 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen></iframe> </p>
+
+<p>海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、かなり詳しい方に入ると思います。海外文献ではPhe-WASを用いて実際に行った網羅的探索を報告した論文の他にも、以下の2記事がおすすめです。</p>
+
+<ul>
+  <li><a href="http://www.nytimes.com/2013/11/28/science/linking-genes-to-diseases-by-sifting-through-electronic-medical-records.html?_r=0">Linking Genes to Diseases by Sifting Through Electronic Medical Records</a> (New York Times 2013年11月28日)</li>
+</ul>
+
+<p>Phe-WASに関するNew York Timesの記事、提唱者のJoshua氏がインタビューされています。</p>
+
+<ul>
+  <li><a href="http://www.tcpinnovations.com/drugbaron/phewas-the-tool-thats-revolutionizing-drug-development-that-youve-likely-never-heard-of/">PheWAS – the tool that’s revolutionizing drug development that you’ve likely never heard of</a> (Drug Baron 2014年1月3日)</li>
+</ul>
+
+<p>PheWASの利点・欠点を特に創薬の観点から詳しく議論しています。非常に参考になりました。</p>
+
+<ul>
+  <li><a href="https://github.com/petehamilton/Octopress-Slideshare-Plugin">Octopress-Slideshare-Plugin</a></li>
+</ul>
+
+<p>OctopressへのSlideShareの埋め込みにはこちらのプラグインを使用しました。README.mdのやり方をそのまま実行して出来ました</p>
+]]></content>
+  </entry>
+  
+</feed>
