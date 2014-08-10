@@ -4,7 +4,7 @@
   <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-01-26T10:33:34+09:00</updated>
+  <updated>2014-08-10T11:43:49+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressの記事に「続きを読む」を追加する]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/10/more/"/>
+    <updated>2014-08-10T11:42:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/10/more</id>
+    <content type="html"><![CDATA[<p>Octopressの記事に「続きを読む」を追加するには、表示させたい箇所に <code>&lt;!-- more --&gt;</code>を追加すれば良い。</p>
+
+<h2 id="section">参考</h2>
+
+<ul>
+  <li><a href="http://octopress.org/docs/blogging/">Octopress</a></li>
+</ul>
+
+<p>ここに書いてある通りでうまくいった。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[記事をデフォルトでは非公開設定にする]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/10/default-unpublised/"/>
+    <updated>2014-08-10T11:42:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/10/default-unpublised</id>
+    <content type="html"><![CDATA[<p>デフォルトでは記事は非公開設定にしておきたい。その方法を調べた。</p>
+
+<!-- more -->
+
+<p>調べた所、同じ事を考えている方がいて、
+<code>rake new_post["blog_title"]</code>で新規記事を作成した時に、ヘッダーに<code>published: false</code>をつける方法を紹介していた（[Nukino’s memorandum]より）。
+この方はvimのプラグインとしてそれを実現している。</p>
+
+<p>前回<code>rake publish_draft</code>コマンドを追加した方法にヒントを得て、自分は<code>rake new_post</code>コマンドに直接埋め込む事にした。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git diff Rakefile
+</span><span class="line">@@ -111,6 +111,7 @@ task :new_post, :title do |t, args|
+</span><span class="line">     post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
+</span><span class="line">     post.puts "comments: true"
+</span><span class="line">     post.puts "categories: "
+</span><span class="line">+    post.puts "published: false"
+</span><span class="line">     post.puts "---"
+</span><span class="line">   end
+</span><span class="line"> end</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>今回の記事もこの方法で新規作成し、ヘッダーに「published: false」が追加された事を確認した。</p>
+
+<ul>
+  <li><a href="http://nukino.github.io/blog/2012/01/12/Octopress/">Nukino’s memorandum</a></li>
+</ul>
+
+<p>vimのプラグインを用いて新規記事にデフォルト<code>published: false</code>をつける方法。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[記事の下書きの管理]]></title>
+    <link href="http://delta2323.github.io/blog/2014/01/26/manage-draft/"/>
+    <updated>2014-01-26T10:42:22+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/01/26/manage-draft</id>
+    <content type="html"><![CDATA[<p>普段のメールでもそうなのだけれど、緊急のものでなければ文章を書いた後にそれを「寝かし」てから公開する事が多い
+（なので、このブログでも日付が公開日時より大分前になってしまう記事が今後増えるような気がする）。
+Octopressで下書きってどう管理するのが良いのだろうと思い、調べてみた。</p>
+
+<!-- more -->
+
+<p>まず、記事を公開しないようにするには、記事のヘッダー部分に<code>published: false</code>と書けば十分の様子（[Octopress]より）。
+この状態で通常の通り</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ rake exec generate
+</span><span class="line">$ rake exec gen_deploy</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>を行うと、該当の記事は非公開のままデプロイされる。</p>
+
+<p>一方、以下の手順で記事を手元でプレビューした際には、<code>publised: false</code>の有無にかかわらず記事が表示される。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ rake exec generate
+</span><span class="line">$ rake exec preview</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>「えっ？」と思ったけれど、確かに記事作成途中にどのように表示されるかは確認したいし、それがプレビューの目的だからそりゃそうだと納得した
+しかし、一方でプレビューだけでは、どの記事が非公開設定となっているかがわからないので、誤って非公開の記事を公開してしまうかもと思った。</p>
+
+<p>そこで探した所、下書き状態の記事を一覧表示し、書き終わった記事を公開するためのRakeコマンド<code>publish_draft</code>を作成した人を発見した（[Chatswood]より）。
+具体的にはRakefileにリンク先のスクリプトを追加し、コマンドラインから<code>rake publish_draft</code>を実行すれば良い。
+公開設定されていない記事が一覧表示された。
+今回の記事もこのワークフローで公開している（予定）。</p>
+
+<h2 id="section">参考</h2>
+
+<ul>
+  <li><a href="http://octopress.org/docs/blogging/">Octopress</a></li>
+</ul>
+
+<p><code>published: false</code>について、ここに書いてある通りでうまくいった。</p>
+
+<ul>
+  <li><a href="http://blog.chatswood.org.uk/blog/2012/10/21/working-with-drafts-in-octopress/">Chatswood</a></li>
+</ul>
+
+<p><code>rake publish_draft</code>について、ここに書いてある通りでうまくいった。</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NIPS2013読み会で発表しました]]></title>
