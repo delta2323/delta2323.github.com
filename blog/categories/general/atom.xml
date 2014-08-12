@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: General | 読書帳]]></title>
+  <link href="http://delta2323.github.io/blog/categories/general/atom.xml" rel="self"/>
+  <link href="http://delta2323.github.io/"/>
+  <updated>2014-08-13T08:29:42+09:00</updated>
+  <id>http://delta2323.github.io/</id>
+  <author>
+    <name><![CDATA[Kenta OONO]]></name>
+    <email><![CDATA[k.oono.delta@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[小道具集め]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/13/resume/"/>
+    <updated>2014-08-13T08:25:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/13/resume</id>
+    <content type="html"><![CDATA[<p>最近他の人と議論する機会が多くなってきて特に思うのが、パッと取り出せる知識の引き出しの重要性。確かにWikipediaや個人のウェブサイトなど辞書的に利用できるようなウェブサイトは多数あり、それらに書いてあるから必要になった時に調べれば良いというのは一理あるけれど、そもそも今の自分に必要な情報がある事に気づいて調べられるためには、そのきっかけとなる引き出しが必要。それに、発展した分野の常套手段に関する確かな知識は議論している時に適切な方向性に素早くに進むのに強力な道具になる。</p>
+
+<p>数式がメインの論文では、著者が証明したい定理の補題として、マイナーな等式や不等式評価をreferenceとして紹介されることがある。そういったものをストックとして貯めてるのは、手持ちの武器を充実させるのに役立つのではないかとふと思った。</p>
+
+<p>というわけで、論文や本・Wikipediaなどを読んだ時に、気になった定理・等式・不等式などをまとめてみようと思う。
+とりあえず数学の定理や補題に焦点を絞るけれど、うまくいきそうだったら別の種類にも試してみたい。</p>
+
+<p>今年のはじめにブログを書く宣言していたにも関わらずなんだかんだ言って、結局放置してしまっていたので、これを気にこのブログを掘り出した。
+ブログを再開するついでにこれまで寝かしていたいくつかの記事（主にOctpressのセッティングに関する記事）を公開した。
+目的がはっきりしているから今度はブログ書きを継続できるといいな。</p>
+
+]]></content>
+  </entry>
+  
+</feed>
