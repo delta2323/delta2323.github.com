@@ -9,9 +9,9 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="定理を述べるために、まず関数族に対して、growth functionとVC次元を定義する。
-$X$を集合、$\mathcal{H}$を$X$から${ -1, 1 }$への写像の部分集合とする。
-$X$の有限部分集合の$S \subset X$, $|S| = m$に対して、$\mathcal{H &hellip;">
+  <meta name="description" content="Octopressのブログの下書きはmarkdownで書かれている。
+業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。 既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。 1
+M-x &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,176 @@ $X$の有限部分集合の$S \subset X$, $|S| = m$に対して、$\mathcal{H &h
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/17/markdown-mode/">Emacsにmarkdown-modeを導入</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-17T13:41:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressのブログの下書きはmarkdownで書かれている。
+業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。</p>
+
+<p>既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">M-x el-get-install markdown-mode</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>基本的には下記のサイトで紹介されている方法で導入できたが、Octopressが自動生成するmarkdownテンプレートの拡張子が.markdownなので、markdonw-modeに紐付ける拡張子は.mdと.markdownの2種類とした。その結果.emacsの設定は以下のようになった。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">;; markdown
+</span><span class="line">(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+</span><span class="line">(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+</span><span class="line">(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://futurismo.biz/archives/2137">Futurismo</a></li>
+</ul>
+
+<p>この方法で導入することができた。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/17/top-category-plugin/">トップ画面にカテゴリ一覧を表示する</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>せっかくブログ記事にカテゴリを付与しているのに、カテゴリ名で記事一覧を引く事ができないのは不便なのでトップ画面にカテゴリ一覧を追加した。</p>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://qiita.com/amay077/items/3296fdf1ea11c7c9ace4">Octopress Top Categories Plugin を使う</a></li>
+</ul>
+
+<p>amay077さんのQiitaの投稿。記事の通りに作業しうまく導入できた。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/17/style-change/">スタイルシートを変更する</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressでスタイルシートをカスタマイズするには、sass/custom/_styles.scssを変更すれば良い。
+例えばこのブログの場合、見出しのフォントが少し大きいと感じたのでサイズを調整した。</p>
+
+<p>例えばこのような設定で各エントリのタイトルのサイズを変更できた（もう少し上手く書けるかもしれないけれど、動いているようなのでこれで良しとしている）。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">.entry-title * {
+</span><span class="line">  font-size: 24px;
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">.entry-title {
+</span><span class="line">  font-size: 24px;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Alessandro Melandri</a></li>
+</ul>
+
+<p>この記事の方法で正しく設定できた。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -445,167 +615,6 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/26/manage-draft/">記事の下書きの管理</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-01-26T10:42:22+09:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>普段のメールでもそうなのだけれど、緊急のものでなければ文章を書いた後にそれを「寝かし」てから公開する事が多い
-（なので、このブログでも日付が公開日時より大分前になってしまう記事が今後増えるような気がする）。
-Octopressで下書きってどう管理するのが良いのだろうと思い、調べてみた。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/26/manage-draft/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/25/nips-reading/">NIPS2013読み会で発表しました</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-01-25T01:49:35+09:00" pubdate data-updated="true">Jan 25<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>1/23に開催されたNIPS2013読み会に詠み人として参加しました。
-主催者の<a href="https://twitter.com/sla">@sla</a>さんをはじめ、参加していただいた皆さんありがとうございました。
-資料はSlideShareで公開しています（SlideShare上だと日本語部分が文字化けしてしまっていますが、ダウンロードすれば直るはずです）。</p>
-
-<iframe src="http://www.slideshare.net/slideshow/embed_code/30337341 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
-
-<p>自分が発表したのは”Inverse Density as an Inverse Problem: The Fredholm Equation Approach”という密度比推定に関する論文です。
-密度比推定の問題を第1種Fredholm方程式という良く知られた積分方程式に変形し、やはり良く知られたTikhonov-Phillips正則化という方法で得られる値を近似解として用いています。</p>
-
-<p>発表資料中でも挙げていますが、密度比推定全般に関する説明は東工大杉山先生の2012年のMLSSでの講演資料が非常に詳しく、この分野を概観する事が出来ます。
-今回の発表の準備でも大変参考にさせていただきました。</p>
-
-<h2 id="section">関連サイト</h2>
-
-<ul>
-  <li>
-    <p><a href="http://connpass.com/event/4728/">NIPS2013読み会</a>(connpass)</p>
-  </li>
-  <li>
-    <p><a href="http://togetter.com/li/620871">NIPS2013読み会</a>(Togetter)</p>
-  </li>
-</ul>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/21/gwas-phewas/">GWAS, Post-GWASに関する資料を公開しました</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-01-21T09:04:37+09:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。</p>
-
-<iframe src="http://www.slideshare.net/slideshow/embed_code/30240670 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
-
-<p>海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、かなり詳しい方に入ると思います。海外文献ではPhe-WASを用いて実際に行った網羅的探索を報告した論文の他にも、以下の2記事がおすすめです。</p>
-
-<ul>
-  <li><a href="http://www.nytimes.com/2013/11/28/science/linking-genes-to-diseases-by-sifting-through-electronic-medical-records.html?_r=0">Linking Genes to Diseases by Sifting Through Electronic Medical Records</a> (New York Times 2013年11月28日)</li>
-</ul>
-
-<p>Phe-WASに関するNew York Timesの記事、提唱者のJoshua氏がインタビューされています。</p>
-
-<ul>
-  <li><a href="http://www.tcpinnovations.com/drugbaron/phewas-the-tool-thats-revolutionizing-drug-development-that-youve-likely-never-heard-of/">PheWAS – the tool that’s revolutionizing drug development that you’ve likely never heard of</a> (Drug Baron 2014年1月3日)</li>
-</ul>
-
-<p>PheWASの利点・欠点を特に創薬の観点から詳しく議論しています。非常に参考になりました。</p>
-
-<ul>
-  <li><a href="https://github.com/petehamilton/Octopress-Slideshare-Plugin">Octopress-Slideshare-Plugin</a></li>
-</ul>
-
-<p>OctopressへのSlideShareの埋め込みにはこちらのプラグインを使用しました。README.mdのやり方をそのまま実行して出来ました</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -621,23 +630,23 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/17/markdown-mode/">Emacsにmarkdown-modeを導入</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/17/top-category-plugin/">トップ画面にカテゴリ一覧を表示する</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/17/style-change/">スタイルシートを変更する</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/13/sauer/">Sauer&#8217;s Theorem</a>
       </li>
     
       <li class="post">
         <a href="/blog/2014/08/13/resume/">小道具集め</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/10/octopress-command/">Octopress CheatSheet</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/10/golden-thompson/">Golden Thompson</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする</a>
       </li>
     
   </ul>
@@ -648,7 +657,7 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (6)</a></li><li><a href='/blog/categories/math'>math (2)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (2)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   

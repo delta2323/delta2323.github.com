@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Emacs | 読書帳]]></title>
+  <link href="http://delta2323.github.io/blog/categories/emacs/atom.xml" rel="self"/>
+  <link href="http://delta2323.github.io/"/>
+  <updated>2014-08-17T13:51:57+09:00</updated>
+  <id>http://delta2323.github.io/</id>
+  <author>
+    <name><![CDATA[Kenta OONO]]></name>
+    <email><![CDATA[k.oono.delta@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Emacsにmarkdown-modeを導入]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/17/markdown-mode/"/>
+    <updated>2014-08-17T13:41:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/17/markdown-mode</id>
+    <content type="html"><![CDATA[<p>Octopressのブログの下書きはmarkdownで書かれている。
+業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。</p>
+
+<p>既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。</p>
+
+<p><code>
+M-x el-get-install markdown-mode
+</code></p>
+
+<p>基本的には下記のサイトで紹介されている方法で導入できたが、Octopressが自動生成するmarkdownテンプレートの拡張子が.markdownなので、markdonw-modeに紐付ける拡張子は.mdと.markdownの2種類とした。その結果.emacsの設定は以下のようになった。</p>
+
+<p><code>
+;; markdown
+(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+</code></p>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://futurismo.biz/archives/2137">Futurismo</a></li>
+</ul>
+
+<p>この方法で導入することができた。</p>
+]]></content>
+  </entry>
+  
+</feed>

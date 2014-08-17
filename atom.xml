@@ -4,7 +4,7 @@
   <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-08-17T13:35:17+09:00</updated>
+  <updated>2014-08-17T13:51:57+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Emacsにmarkdown-modeを導入]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/17/markdown-mode/"/>
+    <updated>2014-08-17T13:41:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/17/markdown-mode</id>
+    <content type="html"><![CDATA[<p>Octopressのブログの下書きはmarkdownで書かれている。
+業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。</p>
+
+<p>既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">M-x el-get-install markdown-mode</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>基本的には下記のサイトで紹介されている方法で導入できたが、Octopressが自動生成するmarkdownテンプレートの拡張子が.markdownなので、markdonw-modeに紐付ける拡張子は.mdと.markdownの2種類とした。その結果.emacsの設定は以下のようになった。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">;; markdown
+</span><span class="line">(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+</span><span class="line">(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+</span><span class="line">(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://futurismo.biz/archives/2137">Futurismo</a></li>
+</ul>
+
+<p>この方法で導入することができた。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[トップ画面にカテゴリ一覧を表示する]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/17/top-category-plugin/"/>
+    <updated>2014-08-17T13:38:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/17/top-category-plugin</id>
+    <content type="html"><![CDATA[<p>せっかくブログ記事にカテゴリを付与しているのに、カテゴリ名で記事一覧を引く事ができないのは不便なのでトップ画面にカテゴリ一覧を追加した。</p>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://qiita.com/amay077/items/3296fdf1ea11c7c9ace4">Octopress Top Categories Plugin を使う</a></li>
+</ul>
+
+<p>amay077さんのQiitaの投稿。記事の通りに作業しうまく導入できた。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[スタイルシートを変更する]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/17/style-change/"/>
+    <updated>2014-08-17T13:38:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/17/style-change</id>
+    <content type="html"><![CDATA[<p>Octopressでスタイルシートをカスタマイズするには、sass/custom/_styles.scssを変更すれば良い。
+例えばこのブログの場合、見出しのフォントが少し大きいと感じたのでサイズを調整した。</p>
+
+<p>例えばこのような設定で各エントリのタイトルのサイズを変更できた（もう少し上手く書けるかもしれないけれど、動いているようなのでこれで良しとしている）。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">.entry-title * {
+</span><span class="line">  font-size: 24px;
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">.entry-title {
+</span><span class="line">  font-size: 24px;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Alessandro Melandri</a></li>
+</ul>
+
+<p>この記事の方法で正しく設定できた。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sauer's Theorem]]></title>
