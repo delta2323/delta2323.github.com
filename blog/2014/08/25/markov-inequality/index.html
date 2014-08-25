@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>NIPS2013読み会で発表しました - 読書帳</title>
+  <title>Markov's Inequality - 読書帳</title>
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="1/23に開催されたNIPS2013読み会に詠み人として参加しました。
-主催者の@slaさんをはじめ、参加していただいた皆さんありがとうございました。
-資料はSlideShareで公開しています（SlideShare上だと日本語部分が文字化けしてしまっていますが、ダウンロードすれば直るはずです &hellip;">
+  <meta name="description" content="非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
+Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
+Wikipediaにあるように証明は数行で終わるのだけれど、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://delta2323.github.io/blog/2014/01/25/nips-reading">
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/08/25/markov-inequality">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">NIPS2013読み会で発表しました</h1>
+      <h1 class="entry-title">Markov's Inequality</h1>
     
     
       <p class="meta">
@@ -86,35 +86,30 @@
 
 
 
-	<time datetime="2014-01-25T01:49:35+09:00" pubdate data-updated="true">Jan 25<span>th</span>, 2014</time>
+	<time datetime="2014-08-25T20:58:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>1/23に開催されたNIPS2013読み会に詠み人として参加しました。
-主催者の<a href="https://twitter.com/sla">@sla</a>さんをはじめ、参加していただいた皆さんありがとうございました。
-資料はSlideShareで公開しています（SlideShare上だと日本語部分が文字化けしてしまっていますが、ダウンロードすれば直るはずです）。</p>
+<div class="entry-content"><p>非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
+Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
+Wikipediaにあるように証明は数行で終わるのだけれど、応用範囲がものすごく広くここからこの系統の種々の不等式を導ける。</p>
 
-<iframe src="http://www.slideshare.net/slideshow/embed_code/30337341 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+<p>$X$を$\mathbb{R}$に値を取る非負の確率変数。$t&gt;0$に対して以下が成立する。</p>
 
-<p>自分が発表したのは”Inverse Density as an Inverse Problem: The Fredholm Equation Approach”という密度比推定に関する論文です。
-密度比推定の問題を第1種Fredholm方程式という良く知られた積分方程式に変形し、やはり良く知られたTikhonov-Phillips正則化という方法で得られる値を近似解として用いています。</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathbb{P}\left[ X \geq t\right] \leq \frac{\mathbb{E}[X]}{t}
+\end{align*}
+</script>
 
-<p>発表資料中でも挙げていますが、密度比推定全般に関する説明は東工大杉山先生の2012年のMLSSでの講演資料が非常に詳しく、この分野を概観する事が出来ます。
-今回の発表の準備でも大変参考にさせていただきました。</p>
+<p>$X$が非負の条件を外すと簡単に反例を作れる（例えば$X$が常に負を取るような確率変数など）。</p>
 
-<h2 id="section">関連サイト</h2>
+<h2 id="section">出典</h2>
 
-<ul>
-  <li>
-    <p><a href="http://connpass.com/event/4728/">NIPS2013読み会</a>(connpass)</p>
-  </li>
-  <li>
-    <p><a href="http://togetter.com/li/620871">NIPS2013読み会</a>(Togetter)</p>
-  </li>
-</ul>
+<p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
 </div>
 
 
@@ -137,12 +132,12 @@
   
 
 
-<time datetime="2014-01-25T01:49:35+09:00" pubdate data-updated="true">Jan 25<span>th</span>, 2014</time>
+<time datetime="2014-08-25T20:58:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/fa-biao-zi-liao/'>発表資料</a>
+    <a class='category' href='/blog/categories/math/'>math</a>
   
 </span>
 
@@ -151,7 +146,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/01/25/nips-reading/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/01/25/nips-reading/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/08/25/markov-inequality/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/08/25/markov-inequality/" >Tweet</a>
   
   
   
@@ -160,10 +155,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/01/21/gwas-phewas/" title="Previous Post: GWAS, Post-GWASに関する資料を公開しました">&laquo; GWAS, Post-GWASに関する資料を公開しました</a>
+        <a class="basic-alignment left" href="/blog/2014/08/17/markdown-mode/" title="Previous Post: Emacsにmarkdown-modeを導入">&laquo; Emacsにmarkdown-modeを導入</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/01/26/manage-draft/" title="Next Post: 記事の下書きの管理">記事の下書きの管理 &raquo;</a>
       
     </p>
   </footer>

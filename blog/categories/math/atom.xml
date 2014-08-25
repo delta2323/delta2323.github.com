@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | 読書帳]]></title>
   <link href="http://delta2323.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-08-17T13:51:57+09:00</updated>
+  <updated>2014-08-25T20:59:17+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Markov's Inequality]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/25/markov-inequality/"/>
+    <updated>2014-08-25T20:58:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/25/markov-inequality</id>
+    <content type="html"><![CDATA[<p>非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
+Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
+Wikipediaにあるように証明は数行で終わるのだけれど、応用範囲がものすごく広くここからこの系統の種々の不等式を導ける。</p>
+
+<p>$X$を$\mathbb{R}$に値を取る非負の確率変数。$t&gt;0$に対して以下が成立する。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathbb{P}\left[ X \geq t\right] \leq \frac{\mathbb{E}[X]}{t}
+\end{align*}
+</script>
+
+<p>$X$が非負の条件を外すと簡単に反例を作れる（例えば$X$が常に負を取るような確率変数など）。</p>
+
+<h2 id="section">出典</h2>
+
+<p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Sauer's Theorem]]></title>

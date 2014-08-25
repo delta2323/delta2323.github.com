@@ -9,9 +9,9 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="Octopressのブログの下書きはmarkdownで書かれている。
-業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。 既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。 1
-M-x &hellip;">
+  <meta name="description" content="非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
+Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
+Wikipediaにあるように証明は数行で終わるのだけれど、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,59 @@ M-x &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/25/markov-inequality/">Markov&#8217;s Inequality</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-25T20:58:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
+Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
+Wikipediaにあるように証明は数行で終わるのだけれど、応用範囲がものすごく広くここからこの系統の種々の不等式を導ける。</p>
+
+<p>$X$を$\mathbb{R}$に値を取る非負の確率変数。$t&gt;0$に対して以下が成立する。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathbb{P}\left[ X \geq t\right] \leq \frac{\mathbb{E}[X]}{t}
+\end{align*}
+</script>
+
+<p>$X$が非負の条件を外すと簡単に反例を作れる（例えば$X$が常に負を取るような確率変数など）。</p>
+
+<h2 id="section">出典</h2>
+
+<p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -573,48 +626,6 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/10/default-unpublised/">記事をデフォルトでは非公開設定にする</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-10T11:42:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>デフォルトでは記事は非公開設定にしておきたい。その方法を調べた。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/10/default-unpublised/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -628,6 +639,10 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/08/25/markov-inequality/">Markov&#8217;s Inequality</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/08/17/markdown-mode/">Emacsにmarkdown-modeを導入</a>
@@ -645,10 +660,6 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
         <a href="/blog/2014/08/13/sauer/">Sauer&#8217;s Theorem</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/08/13/resume/">小道具集め</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -657,7 +668,7 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (2)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (3)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   
