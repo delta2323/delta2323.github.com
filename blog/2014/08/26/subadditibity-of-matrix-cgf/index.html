@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Golden Thompson - 読書帳</title>
+  <title>Matrix キュムラント母関数の劣加法性 - 読書帳</title>
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="試しに一つエントリを作ってみる。
-このぐらいの軽さで継続していけるようにしたい。 A, BをHermite 行列として、 \begin{align*} \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
-\end{align*} &hellip;">
+  <meta name="description" content="通常の確率変数と同様に行列に値を取る確率変数に対しても積率母関数とキュムラント母関数を定義できる。
+具体的には$d$次正方行列に値を取る確率変数$\mathbf{X}$に対して、その積率母関数(Moment Generating Function:MGF)$ M_{\mathbf{X}}$ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://delta2323.github.io/blog/2014/08/10/golden-thompson">
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/08/26/subadditibity-of-matrix-cgf">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
@@ -69,7 +68,7 @@
   
   <header>
     
-      <h1 class="entry-title">Golden Thompson</h1>
+      <h1 class="entry-title">Matrix キュムラント母関数の劣加法性</h1>
     
     
       <p class="meta">
@@ -86,35 +85,57 @@
 
 
 
-	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+	<time datetime="2014-08-26T22:00:00+09:00" pubdate data-updated="true">Aug 26<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>試しに一つエントリを作ってみる。
-このぐらいの軽さで継続していけるようにしたい。</p>
-
-<p>A, BをHermite 行列として、</p>
+<div class="entry-content"><p>通常の確率変数と同様に行列に値を取る確率変数に対しても積率母関数とキュムラント母関数を定義できる。
+具体的には$d$次正方行列に値を取る確率変数$\mathbf{X}$に対して、その積率母関数(Moment Generating Function:MGF)$ M_{\mathbf{X}}$とキュムラント母関数(Cummurant Generating Function:CGF) $\Xi_{\mathbf{X}}$をスカラー値の場合と同様の形式に以下で定義する。すなわち、</p>
 
 <script type="math/tex; mode=display">
 \begin{align*}
-  \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+  M_{\mathbf{X}}(\theta) = \mathbb{E}\left[ \exp (\theta \mathbf{X})\right]\\
+  \Xi_{\mathbf{X}}(\theta) = \log \mathbb{E}\left[ \exp (\theta \mathbf{X})\right]
 \end{align*}
 </script>
 
-<p>ただし、行列が3つだと同様の式は成立しない。つまり、A, B, CをHermite行列に対して、以下の式は一般的には成立しない。</p>
+<p>ここで$\theta \in \mathbb{R}$。</p>
+
+<p>すると、CGFに関して次が成立する。$\mathbf{X}_{i}(i = 1, \ldots, n)$を$d$次正方行列に値を取る独立な確率変数として、次の不等式が成立する。</p>
 
 <script type="math/tex; mode=display">
 \begin{align*}
-  \mathrm{tr} \exp (A+B+C) \leq \mathrm{tr}(\exp (A) \exp (B) \exp(C))
+  \mathrm{tr} \exp \left(\Xi_{\left(\sum_{i} \mathbf{X}_{i}\right)}(\theta)\right) \leq \mathrm{tr} \exp \left( \sum_{i} \Xi_{\mathbf{X}_{i}} (\theta)\right).
 \end{align*}
 </script>
+
+<p>スカラー値の確率変数の場合、MGFには乗法性、CGFには加法性が成立する。MGFの乗法性は次のように示せる。</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align*}
+M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] \\
+                          &= \mathbb{E}\left[ \prod_{i} \exp(\theta X_{i}) \right] \\
+                          &= \prod_{i} \mathbb{E}\left[ \exp(\theta X_{i}) \right] \\
+						  &= \prod_{i} M_{X_{i}} (\theta)
+\end{align*}
+ %]]></script>
+
+<p>ここで、3行目の等式では、$X_{i}$達の独立性を用いた。この式の$\log$を取れば、CGFの加法性も言える。</p>
+
+<p>しかし、行列値の場合はこのような式変形はできない。
+スカラー値$x, y$に対しては、$\exp(x+y) = \exp(x)\exp(y)$が成立する。
+一方、行列$\mathrm{X}, \mathrm{Y}$に対しては、一般的には$\exp(\mathrm{X}+\mathrm{Y}) = \exp(\mathrm{X})\exp(\mathrm{Y})$が成立せず、従って、2行目の等式が成立しないためである
+（例えば$\mathrm{X}, \mathrm{Y}$が可換である事は$\exp$の分配法則が成立する十分条件である）。</p>
+
+<p>冒頭に上げた定理は、それにもかかわらず$\mathrm{tr} \exp$を取ればCGFに関しては劣加法性だけは成立している事を主張している。</p>
 
 <h2 id="section">出典</h2>
 
-<p>下記のチュートリアルの30ページ</p>
+<p>下記のチュートリアルの25ページ、Lemma 3.5.1</p>
 
 <h2 id="section-1">参考文献</h2>
 
@@ -146,7 +167,7 @@
   
 
 
-<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+<time datetime="2014-08-26T22:00:00+09:00" pubdate data-updated="true">Aug 26<span>th</span>, 2014</time>
       
 
 <span class="categories">
@@ -160,7 +181,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/08/10/golden-thompson/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/08/10/golden-thompson/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/08/26/subadditibity-of-matrix-cgf/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/08/26/subadditibity-of-matrix-cgf/" >Tweet</a>
   
   
   
@@ -169,10 +190,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/08/10/change-to-update-time/" title="Previous Post: 記事の公開日時を最終更新日時にする">&laquo; 記事の公開日時を最終更新日時にする</a>
+        <a class="basic-alignment left" href="/blog/2014/08/25/markov-inequality/" title="Previous Post: Markov's Inequality">&laquo; Markov's Inequality</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/08/10/octopress-command/" title="Next Post: Octopress CheatSheet">Octopress CheatSheet &raquo;</a>
       
     </p>
   </footer>
