@@ -9,8 +9,8 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="通常の確率変数と同様に行列に値を取る確率変数に対しても積率母関数とキュムラント母関数を定義できる。
-具体的には$d$次正方行列に値を取る確率変数$\mathbf{X}$に対して、その積率母関数(Moment Generating Function:MGF)$ M_{\mathbf{X}}$ &hellip;">
+  <meta name="description" content="方針としてはチュートリアルなどを読んだ時に、知らない定理があったらそれを取り出してコメントするという形にしていこうと思う。
+もうしばらくランダム行列のチュートリアルからの抜粋。 $\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,91 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-09-15T19:52:00+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>方針としてはチュートリアルなどを読んだ時に、知らない定理があったらそれを取り出してコメントするという形にしていこうと思う。
+もうしばらくランダム行列のチュートリアルからの抜粋。</p>
+
+<p>$\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、非対角要素は標準正規分布に従う独立な確率変数とする。
+すなわち、</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align*}
+  \mathbf{W}_{d} = \sum_{i < j} X_{ij} \left(\mathbf{E}_{ij} + \mathbf{E}_{ji}\right)\quad
+  (X_{ij})_{i < j} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_{d(d-1)/2}) 
+\end{align*}
+ %]]></script>
+
+<p>$\lambda_{d}$を$\mathbf{W}_{d}$の最大固有値とすると、$lambda_{d}/\sqrt{d}$は$d\to \infty$でalmost surelyに2に収束する。</p>
+
+<p>参考にしているチュートリアルでの比較的簡単な証明で得られる結果（参考資料の定理4.1.1）では、
+ここまでtightなバウンドを示すことができない（$\log d$のfactorがかかる）。
+これ自体の証明は結構大変らしいが、できれば何か直感的な理解ができるような説明があるとうれしい。</p>
+
+<p>また、ここで$\mathbf{W}_{d}$の事をWigner行列と呼んでいるが、Wigner行列自体はもっと広いクラスの行列を指す言葉の様子。
+統計物理の文脈でよく出るようで、適当に検索するとそれ関連のチュートリアルや講義資料が多く見つかった。</p>
+
+<h2 id="section">出典</h2>
+
+<p>下記のチュートリアルの35ページ、4.4.1章</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
+
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
+
+<h3 id="wigner-matrix">Wigner Matrixについて</h3>
+
+<ul>
+  <li><a href="http://www.umpa.ens-lyon.fr/%7Eaguionne/pcmipark.pdf">Statistical Mechanics and Random Matrices</a></li>
+</ul>
+
+<p>Alice Guionnet氏のレクチャーノート</p>
+
+<ul>
+  <li><a href="http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf">MATH 247A: INTRODUCTION TO RANDOM MATRIX THEORY</a></li>
+</ul>
+
+<p>Todd Kemp氏のレクチャーノート</p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -383,6 +468,97 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/08/14/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-14T11:40:47+09:00" pubdate data-updated="true">Aug 14<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>NIPS2012のランダム行列のチュートリアルからの抜粋。</p>
+
+<p>$\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、非対角要素は標準正規分布に従う独立な確率変数とする。
+すなわち、</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align*}
+  \mathbf{W}_{d} = \sum_{i < j} X_{ij} \left(\mathbf{E}_{ij} + \mathbf{E}_{ji}\right)\quad
+  (X_{ij})_{i < j} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_{d(d-1)/2}) 
+\end{align*}
+ %]]></script>
+
+<p>$\lambda_{d}$を$\mathbf{W}_{d}$の最大固有値とすると、$\lambda_{d}/\sqrt{d}$は$d\to \infty$でalmost surelyに2に収束する。</p>
+
+<p>参考にしているチュートリアルでの比較的簡単な証明で得られる結果（参考資料の定理4.1.1）では、
+ここまでtightなバウンドを示すことができない（$\log d$のfactorがかかる）。
+これ自体の証明は結構大変らしいが、できれば何か直感的な理解ができるような説明があるとうれしい。</p>
+
+<p>また、ここで$\mathbf{W}_{d}$の事をWigner行列と呼んでいるが、Wigner行列自体はもっと広いクラスの行列を指す言葉の様子。
+統計物理の文脈でよく出るようで、関連するチュートリアルや講義資料が多く見つかった。</p>
+
+<p>（追記）</p>
+
+<p>しばらく前にここまで原稿を書いた後によくよく考えたら、これはWigner’s Semicircle Lawからすぐに示せることに気づいた。
+実際、以下のTodd Kemp氏のレクチャーノートで、Lemma 6.1としてこの事実をSemicircle Lawから示している。
+NIPS2012のチュートリアルにあった「難しい定理」というのはSemicircle Lawの事だったのかな。</p>
+
+<p>ついでに上に挙げたWigner行列のもっと広義の定義というのは、Kemp氏のチュートリアルによると、各エントリが独立かつ2乗の期待値が有限。さらに対角成分はi.i.d.の分布、非対角成分も（対角成分とは異なるかもしれない）i.i.d.の分布というものを言う（従って、スカラーの確率変数としては対角成分と非対角成分の2種類しかなく、2乗の期待値もその2種類での有限性だけ言えば十分）。
+また、Wigner行列を$d^{-1/2}$（$d$は行列のサイズ）でスケール変換したものもWigner行列と言うらしい。</p>
+
+<h2 id="section">出典</h2>
+
+<p>Tropp氏のチュートリアルの35ページ、4.4.1章</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
+
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
+
+<ul>
+  <li><a href="http://www.umpa.ens-lyon.fr/%7Eaguionne/pcmipark.pdf">Statistical Mechanics and Random Matrices</a></li>
+</ul>
+
+<p>Alice Guionnet氏のレクチャーノート</p>
+
+<ul>
+  <li><a href="http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf">MATH 247A: INTRODUCTION TO RANDOM MATRIX THEORY</a></li>
+</ul>
+
+<p>Todd Kemp氏のレクチャーノート</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/08/13/sauer/">Sauer&#8217;s Theorem</a></h1>
     
     
@@ -555,120 +731,6 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/10/golden-thompson/">Golden Thompson</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>試しに一つエントリを作ってみる。
-このぐらいの軽さで継続していけるようにしたい。</p>
-
-<p>A, BをHermite 行列として、</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
-\end{align*}
-</script>
-
-<p>ただし、行列が3つだと同様の式は成立しない。つまり、A, B, CをHermite行列に対して、以下の式は一般的には成立しない。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathrm{tr} \exp (A+B+C) \leq \mathrm{tr}(\exp (A) \exp (B) \exp(C))
-\end{align*}
-</script>
-
-<h2 id="section">出典</h2>
-
-<p>下記のチュートリアルの30ページ</p>
-
-<h2 id="section-1">参考文献</h2>
-
-<ul>
-  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
-</ul>
-
-<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-10T11:49:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>元々のデフォルトだとブログ記事の投稿時間は下書きを作成した時間だったのだけれど、記事を書いた後何日か寝かせた後に公開する事が結構あるので、公開した時を時刻を投稿時間にしたいと思い変更した。</p>
-
-<h2 id="section">参考にしたサイト</h2>
-
-<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
-
-<ul>
-  <li><a href="https://gist.github.com/shimotori/5325720">shimotori / article.html</a></li>
-</ul>
-
-<p>上記のgistで書かれている通り行い、うまく行きました。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -682,6 +744,10 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a>
@@ -699,10 +765,6 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
         <a href="/blog/2014/08/17/top-category-plugin/">トップ画面にカテゴリ一覧を表示する</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/08/17/style-change/">スタイルシートを変更する</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -711,7 +773,7 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (4)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (6)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   

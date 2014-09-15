@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Math - 読書帳</title>
+  <title>Gaussian Wigner Matrixの最大固有値の収束 - 読書帳</title>
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="Category: math">
+  <meta name="description" content="方針としてはチュートリアルなどを読んだ時に、知らない定理があったらそれを取り出してコメントするという形にしていこうと思う。
+もうしばらくランダム行列のチュートリアルからの抜粋。 $\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://delta2323.github.ioblog/categories/math">
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/09/15/gaussian-wigner-matrices">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
@@ -63,105 +64,133 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Math</h1>
+    
+      <h1 class="entry-title">Gaussian Wigner Matrixの最大固有値の収束</h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-09-15T19:52:00+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>方針としてはチュートリアルなどを読んだ時に、知らない定理があったらそれを取り出してコメントするという形にしていこうと思う。
+もうしばらくランダム行列のチュートリアルからの抜粋。</p>
 
-  
-  <h2>2014</h2>
+<p>$\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、非対角要素は標準正規分布に従う独立な確率変数とする。
+すなわち、</p>
 
-<article>
-  
-<h1><a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a></h1>
-<time datetime="2014-09-15T19:52:00+09:00" pubdate><span class='month'>Sep</span> <span class='day'>15</span> <span class='year'>2014</span></time>
+<script type="math/tex; mode=display">% <![CDATA[
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/math/'>math</a></span>
-</footer>
+\begin{align*}
+  \mathbf{W}_{d} = \sum_{i < j} X_{ij} \left(\mathbf{E}_{ij} + \mathbf{E}_{ji}\right)\quad
+  (X_{ij})_{i < j} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_{d(d-1)/2}) 
+\end{align*}
+ %]]></script>
 
+<p>$\lambda_{d}$を$\mathbf{W}_{d}$の最大固有値とすると、$lambda_{d}/\sqrt{d}$は$d\to \infty$でalmost surelyに2に収束する。</p>
 
-</article>
+<p>参考にしているチュートリアルでの比較的簡単な証明で得られる結果（参考資料の定理4.1.1）では、
+ここまでtightなバウンドを示すことができない（$\log d$のfactorがかかる）。
+これ自体の証明は結構大変らしいが、できれば何か直感的な理解ができるような説明があるとうれしい。</p>
 
+<p>また、ここで$\mathbf{W}_{d}$の事をWigner行列と呼んでいるが、Wigner行列自体はもっと広いクラスの行列を指す言葉の様子。
+統計物理の文脈でよく出るようで、適当に検索するとそれ関連のチュートリアルや講義資料が多く見つかった。</p>
 
+<h2 id="section">出典</h2>
 
-<article>
-  
-<h1><a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a></h1>
-<time datetime="2014-08-26T22:00:00+09:00" pubdate><span class='month'>Aug</span> <span class='day'>26</span> <span class='year'>2014</span></time>
+<p>下記のチュートリアルの35ページ、4.4.1章</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/math/'>math</a></span>
-</footer>
+<h2 id="section-1">参考文献</h2>
 
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
 
-</article>
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
 
+<h3 id="wigner-matrix">Wigner Matrixについて</h3>
 
+<ul>
+  <li><a href="http://www.umpa.ens-lyon.fr/%7Eaguionne/pcmipark.pdf">Statistical Mechanics and Random Matrices</a></li>
+</ul>
 
-<article>
-  
-<h1><a href="/blog/2014/08/25/markov-inequality/">Markov's Inequality</a></h1>
-<time datetime="2014-08-25T20:58:00+09:00" pubdate><span class='month'>Aug</span> <span class='day'>25</span> <span class='year'>2014</span></time>
+<p>Alice Guionnet氏のレクチャーノート</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/math/'>math</a></span>
-</footer>
+<ul>
+  <li><a href="http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf">MATH 247A: INTRODUCTION TO RANDOM MATRIX THEORY</a></li>
+</ul>
 
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/08/14/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a></h1>
-<time datetime="2014-08-14T11:40:47+09:00" pubdate><span class='month'>Aug</span> <span class='day'>14</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/math/'>math</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/08/13/sauer/">Sauer's Theorem</a></h1>
-<time datetime="2014-08-13T08:26:00+09:00" pubdate><span class='month'>Aug</span> <span class='day'>13</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/math/'>math</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/08/10/golden-thompson/">Golden Thompson</a></h1>
-<time datetime="2014-08-10T14:31:00+09:00" pubdate><span class='month'>Aug</span> <span class='day'>10</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/math/'>math</a></span>
-</footer>
-
-
-</article>
+<p>Todd Kemp氏のレクチャーノート</p>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Kenta OONO</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-15T19:52:00+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/09/15/gaussian-wigner-matrices/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/09/15/gaussian-wigner-matrices/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/08/26/subadditibity-of-matrix-cgf/" title="Previous Post: Matrix キュムラント母関数の劣加法性">&laquo; Matrix キュムラント母関数の劣加法性</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>

@@ -9,8 +9,9 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="Octopressの記事に「続きを読む」を追加するには、表示させたい箇所に &lt;!-- more --&gt;を追加すれば良い。 参考 Octopress ここに書いてある通りでうまくいった。
-">
+  <meta name="description" content="試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。 A, BをHermite 行列として、 \begin{align*} \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+\end{align*} &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,120 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/golden-thompson/">Golden Thompson</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。</p>
+
+<p>A, BをHermite 行列として、</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+\end{align*}
+</script>
+
+<p>ただし、行列が3つだと同様の式は成立しない。つまり、A, B, CをHermite行列に対して、以下の式は一般的には成立しない。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B+C) \leq \mathrm{tr}(\exp (A) \exp (B) \exp(C))
+\end{align*}
+</script>
+
+<h2 id="section">出典</h2>
+
+<p>下記のチュートリアルの30ページ</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
+
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T11:49:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>元々のデフォルトだとブログ記事の投稿時間は下書きを作成した時間だったのだけれど、記事を書いた後何日か寝かせた後に公開する事が結構あるので、公開した時を時刻を投稿時間にしたいと思い変更した。</p>
+
+<h2 id="section">参考にしたサイト</h2>
+
+<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
+
+<ul>
+  <li><a href="https://gist.github.com/shimotori/5325720">shimotori / article.html</a></li>
+</ul>
+
+<p>上記のgistで書かれている通り行い、うまく行きました。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -406,6 +521,10 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a>
       </li>
     
@@ -421,10 +540,6 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
         <a href="/blog/2014/08/17/top-category-plugin/">トップ画面にカテゴリ一覧を表示する</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/08/17/style-change/">スタイルシートを変更する</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -433,7 +548,7 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (4)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (6)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   
