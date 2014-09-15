@@ -4,7 +4,7 @@
   <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-09-15T21:19:58+09:00</updated>
+  <updated>2014-09-15T21:24:09+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Gaussian Wigner Matrixの最大固有値の収束]]></title>
+    <link href="http://delta2323.github.io/blog/2014/09/15/gaussian-wigner-matrices/"/>
+    <updated>2014-09-15T21:22:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/09/15/gaussian-wigner-matrices</id>
+    <content type="html"><![CDATA[<p>NIPS2012のランダム行列のチュートリアルからの抜粋。</p>
+
+<p>$\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、非対角要素は標準正規分布に従う独立な確率変数とする。
+すなわち、</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align*}
+  \mathbf{W}_{d} = \sum_{i < j} X_{ij} \left(\mathbf{E}_{ij} + \mathbf{E}_{ji}\right)\quad
+  (X_{ij})_{i < j} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_{d(d-1)/2}) 
+\end{align*}
+ %]]&gt;</script>
+
+<p>$\lambda_{d}$を$\mathbf{W}_{d}$の最大固有値とすると、$\lambda_{d}/\sqrt{d}$は$d\to \infty$でalmost surelyに2に収束する。</p>
+
+<p>参考にしているチュートリアルでの比較的簡単な証明で得られる結果（参考資料の定理4.1.1）では、
+ここまでtightなバウンドを示すことができない（$\log d$のfactorがかかる）。
+これ自体の証明は結構大変らしいが、できれば何か直感的な理解ができるような説明があるとうれしい。</p>
+
+<p>また、ここで$\mathbf{W}_{d}$の事をWigner行列と呼んでいるが、Wigner行列自体はもっと広いクラスの行列を指す言葉の様子。
+統計物理の文脈でよく出るようで、関連するチュートリアルや講義資料が多く見つかった。</p>
+
+<p>（追記）</p>
+
+<p>しばらく前にここまで原稿を書いた後によくよく考えたら、これはWigner’s Semicircle Lawからすぐに示せることに気づいた。
+実際、以下のTodd Kemp氏のレクチャーノートで、Lemma 6.1としてこの事実をSemicircle Lawから示している。
+NIPS2012のチュートリアルにあった「難しい定理」というのはSemicircle Lawの事だったのかな。</p>
+
+<p>ついでに上に挙げたWigner行列のもっと広義の定義というのは、Kemp氏のチュートリアルによると、各エントリが独立かつ2乗の期待値が有限。さらに対角成分はi.i.d.の分布、非対角成分も（対角成分とは異なるかもしれない）i.i.d.の分布というものを言う（従って、スカラーの確率変数としては対角成分と非対角成分の2種類しかなく、2乗の期待値もその2種類での有限性だけ言えば十分）。
+また、Wigner行列を$d^{-1/2}$（$d$は行列のサイズ）でスケール変換したものもWigner行列と言うらしい。</p>
+
+<h2 id="section">出典</h2>
+
+<p>Tropp氏のチュートリアルの35ページ、4.4.1章</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
+
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
+
+<ul>
+  <li><a href="http://www.umpa.ens-lyon.fr/%7Eaguionne/pcmipark.pdf">Statistical Mechanics and Random Matrices</a></li>
+</ul>
+
+<p>Alice Guionnet氏のレクチャーノート</p>
+
+<ul>
+  <li><a href="http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf">MATH 247A: INTRODUCTION TO RANDOM MATRIX THEORY</a></li>
+</ul>
+
+<p>Todd Kemp氏のレクチャーノート</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Matrix キュムラント母関数の劣加法性]]></title>
@@ -182,69 +245,6 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
 </ul>
 
 <p>この記事の方法で正しく設定できた。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gaussian Wigner Matrixの最大固有値の収束]]></title>
-    <link href="http://delta2323.github.io/blog/2014/08/14/gaussian-wigner-matrices/"/>
-    <updated>2014-08-14T11:40:47+09:00</updated>
-    <id>http://delta2323.github.io/blog/2014/08/14/gaussian-wigner-matrices</id>
-    <content type="html"><![CDATA[<p>NIPS2012のランダム行列のチュートリアルからの抜粋。</p>
-
-<p>$\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、非対角要素は標準正規分布に従う独立な確率変数とする。
-すなわち、</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-\begin{align*}
-  \mathbf{W}_{d} = \sum_{i < j} X_{ij} \left(\mathbf{E}_{ij} + \mathbf{E}_{ji}\right)\quad
-  (X_{ij})_{i < j} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_{d(d-1)/2}) 
-\end{align*}
- %]]&gt;</script>
-
-<p>$\lambda_{d}$を$\mathbf{W}_{d}$の最大固有値とすると、$\lambda_{d}/\sqrt{d}$は$d\to \infty$でalmost surelyに2に収束する。</p>
-
-<p>参考にしているチュートリアルでの比較的簡単な証明で得られる結果（参考資料の定理4.1.1）では、
-ここまでtightなバウンドを示すことができない（$\log d$のfactorがかかる）。
-これ自体の証明は結構大変らしいが、できれば何か直感的な理解ができるような説明があるとうれしい。</p>
-
-<p>また、ここで$\mathbf{W}_{d}$の事をWigner行列と呼んでいるが、Wigner行列自体はもっと広いクラスの行列を指す言葉の様子。
-統計物理の文脈でよく出るようで、関連するチュートリアルや講義資料が多く見つかった。</p>
-
-<p>（追記）</p>
-
-<p>しばらく前にここまで原稿を書いた後によくよく考えたら、これはWigner’s Semicircle Lawからすぐに示せることに気づいた。
-実際、以下のTodd Kemp氏のレクチャーノートで、Lemma 6.1としてこの事実をSemicircle Lawから示している。
-NIPS2012のチュートリアルにあった「難しい定理」というのはSemicircle Lawの事だったのかな。</p>
-
-<p>ついでに上に挙げたWigner行列のもっと広義の定義というのは、Kemp氏のチュートリアルによると、各エントリが独立かつ2乗の期待値が有限。さらに対角成分はi.i.d.の分布、非対角成分も（対角成分とは異なるかもしれない）i.i.d.の分布というものを言う（従って、スカラーの確率変数としては対角成分と非対角成分の2種類しかなく、2乗の期待値もその2種類での有限性だけ言えば十分）。
-また、Wigner行列を$d^{-1/2}$（$d$は行列のサイズ）でスケール変換したものもWigner行列と言うらしい。</p>
-
-<h2 id="section">出典</h2>
-
-<p>Tropp氏のチュートリアルの35ページ、4.4.1章</p>
-
-<h2 id="section-1">参考文献</h2>
-
-<ul>
-  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
-</ul>
-
-<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
-
-<ul>
-  <li><a href="http://www.umpa.ens-lyon.fr/%7Eaguionne/pcmipark.pdf">Statistical Mechanics and Random Matrices</a></li>
-</ul>
-
-<p>Alice Guionnet氏のレクチャーノート</p>
-
-<ul>
-  <li><a href="http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf">MATH 247A: INTRODUCTION TO RANDOM MATRIX THEORY</a></li>
-</ul>
-
-<p>Todd Kemp氏のレクチャーノート</p>
-
 ]]></content>
   </entry>
   
