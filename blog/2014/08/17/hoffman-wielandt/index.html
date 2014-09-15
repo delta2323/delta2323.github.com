@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hoffman Wielandtの定理 - 読書帳</title>
+  <meta name="author" content="Kenta OONO">
+
+  
+  <meta name="description" content="$A$, $B$を$d$次元の対称行列とし、それぞれの固有値を$\lambda_{1} \leq \cdots \leq \lambda_{d}$, $\mu_{1} \leq \cdots \leq \mu_{d}$とする。
+この時次が成立する： \sum_{i=1}^{d} (\lambda_ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/08/17/hoffman-wielandt">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">読書帳</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:delta2323.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Hoffman Wielandtの定理</h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-17T15:52:15+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>$A$, $B$を$d$次元の対称行列とし、それぞれの固有値を$\lambda_{1} \leq \cdots \leq \lambda_{d}$, $\mu_{1} \leq \cdots \leq \mu_{d}$とする。
+この時次が成立する：</p>
+
+<script type="math/tex; mode=display">
+\sum_{i=1}^{d} (\lambda_{i} - \mu_{i})^{2} \leq \mathrm{tr} (A-B)^{2} \leq 2\sum_{i \leq j} (A_{ij} - B_{ij})^{2}.
+</script>
+
+<p>この形での不等式は下記の参考文献の形でのステートメントだが、調べてみると、$A, B$の条件は正規行列までゆるめて、最右辺をフロベニウスノルム$|A-B|_{F}^{2} = \sum_{i, j} \left(A_{ij} - B_{ij}\right)^{2}$で抑えれられていることが多い様子
+（実正方行列$A$が正規であるとは$A^{t}A = AA^{t}$が成立すること）。
+対称行列は正規なので、特別な場合とみなせるが、今回のステートメントのほうが最右辺の値は$\sum_{i=1}^{d} (A_{ii}-B_{ii})^{2}$だけ大きい。</p>
+
+<p>また、真ん中の項は入っていない形をHoffman Wielandtの定理としているケースが多い様子
+（真ん中の項は2乗とtraceを適用する順番がわからない..）。</p>
+
+<p>対称行列$X$の固有値を$\lambda_{1}, \ldots, \lambda{d}$とした時、$X$のStieltjes変換$g_{X}$とは、$g_{X}(z) = \frac{1}{d} \sum_{i=1}^{d} \frac{1}{\lambda_{i} - z}$の事を言う。
+これを用いると、Stieltjes変換の（$z$についてではなく、$X$についての）Lipschitz連続性が言える（らしい）。</p>
+
+<h2 id="section">出典</h2>
+
+<p>RANDOM MATRIX THEORYの15ページLemma 3.9</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://www-personal.umich.edu/~yudovina/lecture_notes/random_matrices.pdf">RANDOM MATRIX THEORY</a> S. Kargin and E. Yudovina</li>
+</ul>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kenta OONO</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-17T15:52:15+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/08/17/hoffman-wielandt/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/08/17/hoffman-wielandt/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/08/17/vague-convergence/" title="Previous Post: 測度のVague収束">&laquo; 測度のVague収束</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/08/24/airy-function/" title="Next Post: Airy 関数">Airy 関数 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/09/15/inverse-tangent-addition-formula/">Inverse Tangentの加法定理</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/14/stability-of-markov-chain/">Stability_of_markov_chain</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/06/hausdorff-measure/">Hausdorff_measure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/06/coarea-formula/">Coarea_formula</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Top Categories</h1>
+    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (11)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Kenta OONO -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+</html>
+
