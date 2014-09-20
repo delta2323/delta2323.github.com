@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | 読書帳]]></title>
   <link href="http://delta2323.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-09-15T21:47:36+09:00</updated>
+  <updated>2014-09-21T01:30:05+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -162,49 +162,6 @@ M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] 
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Chernoff Inequality]]></title>
-    <link href="http://delta2323.github.io/blog/2014/08/25/chernoff-inequality/"/>
-    <updated>2014-08-25T21:17:15+09:00</updated>
-    <id>http://delta2323.github.io/blog/2014/08/25/chernoff-inequality</id>
-    <content type="html"><![CDATA[<p>$X_{1}, \ldots, X_{n}$を独立な確率変数（同分布である必要はない）で、ある$K&gt;0$が存在して、任意の$i$についてalmost surelyに$|X_{i}| &lt; K$が成立するとする。
-確率変数$X_{i}$の期待値を$\mu_{i}$、分散を$\sigma_{i}^{2}$とし、$\mu = \sum_{i=1}^{n} \mu_{i}$、$\sigma^{2} = \sum_{i=1}^{n} \sigma_{i}^{2}$、
-$S=\sum_{i=1}^{n}X_{i}$と置く。</p>
-
-<p>この時、定数$C, c$が存在して、任意の$\lambda &gt; 0$に対し、</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-\begin{align*}
-  \mathbb{P}(|S - \mu| > \lambda \sigma) <  C\max (\exp(-c\lambda^{2}), \exp(-c\lambda\sigma /K))
-\end{align*}
- %]]&gt;</script>
-
-<p>証明は、まず、Hoeffding’s lammaと呼ばれる補題から、$X$の積率母関数に関する評価、</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathbb{E} \exp(tX) \leq \exp(O(t^{2} \sigma_{i}^{2}))
-\end{align*}
-</script>
-
-<p>を得る。ここから、$X_{i}$達の独立性より$\mathbb{E}\exp(tS)$を$X_{i}$の積率母関数の積で書けるので、それぞれの項を上の不等式で評価する。
-最後にMarkovの補題を用いて、定理の左辺を上から評価し、最後に$t$について最小値をとる事で求める不等式が得られる。</p>
-
-<h2 id="section">出典</h2>
-
-<p>下記参考文献の75ページ</p>
-
-<h2 id="section-1">参考文献</h2>
-
-<ul>
-  <li><a href="http://terrytao.files.wordpress.com/2011/02/matrix-book.pdf">Topics in random matrix theory</a></li>
-</ul>
-
-<p>ランダム行列に関するTerence Tao氏講義ノート</p>
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[Markov's Inequality]]></title>
     <link href="http://delta2323.github.io/blog/2014/08/25/markov-inequality/"/>
     <updated>2014-08-25T20:58:00+09:00</updated>
@@ -226,6 +183,61 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
 <h2 id="section">出典</h2>
 
 <p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sauer's Theorem]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/13/sauer/"/>
+    <updated>2014-08-13T08:26:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/13/sauer</id>
+    <content type="html"><![CDATA[<p>定理を述べるために、まず関数族に対して、growth functionとVC次元を定義する。
+$X$を集合、$\mathcal{H}$を$X$から${ -1, 1 }$への写像の部分集合とする。
+$X$の有限部分集合の$S \subset X$, $|S| = m$に対して、$\mathcal{H}$の$S$への制限
+$\mathcal{H}\mid_{S}$を次の様に定義する。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathcal{H}\left|_{S}\right. = \{(f(x))_{x\in S} \mid f \in \mathcal{H}\}
+\end{align*}
+</script>
+
+<p>さらに、$\mathcal{H}$のgrowth function $g_{\mathcal{H}} : \mathbb{N}\to \mathbb{N}$を次で定義する。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  g_{\mathcal{H}}(m) = \max_{S\subset X, |S|=m} \left|\mathcal{H}\left|_{S}\right.\right|
+\end{align*}
+</script>
+
+<p>すると、自明な不等式として、$g_{\mathcal{H}}(m) \leq 2^{m}$が成立する。
+また、ある$m$で等号が成立していたら、任意の$m’ \leq m$でも等号は成立している
+（等号を達成する$m$点集合$S$に対して、$S$の$m’$点部分集合を取れば良い）。</p>
+
+<p>この不等式で等式が成立する最大の$m$を$\mathcal{H}$のVC次元と定義する
+（任意の$m$で等号が成立する場合には、VC次元は無限大と定義する）。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \text{VC-}\mathrm{dim}(\mathcal{H}) = \max \{ m \mid g_{\mathcal{H}}(m) = 2^{m}\}
+\end{align*}
+</script>
+
+<p>以上を準備として、Sauerの定理は次の通り</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  g_{\mathcal{H}}(m) \leq \sum_{i=0}^{\text{VC-}\mathrm{dim}(\mathcal{H})} \binom{m}{i}
+\end{align*}
+</script>
+
+<h2 id="section">出典</h2>
+
+<ul>
+  <li><a href="http://www.cs.huji.ac.il/~shais/IML2014.html">Understanding Machine Learning, Shai Shalev-Shwartz</a>の6.5.1章</li>
+</ul>
+
+<p>会社では著者名を取ってSSS本と呼んでいる。</p>
 ]]></content>
   </entry>
   

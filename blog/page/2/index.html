@@ -9,9 +9,9 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="Chernoffの不等式では、$X_{i}$達の独立性を仮定していた。
-しかし、実はもっと緩い仮定でもChernoffの不等式に近い不等式を示すことができる。
-それがAzumaの不等式。 Wikipediaを信じるならば、名前は、発見者の吾妻一興氏に由来し、この論文で発表されたのが初出らしい。 &hellip;">
+  <meta name="description" content="試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。 A, BをHermite 行列として、 \begin{align*} \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+\end{align*} &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,549 +72,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/24/azuma-lemma/">Azuma&#8217; Lemma</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-24T14:41:27+09:00" pubdate data-updated="true">Aug 24<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Chernoffの不等式では、$X_{i}$達の独立性を仮定していた。
-しかし、実はもっと緩い仮定でもChernoffの不等式に近い不等式を示すことができる。
-それがAzumaの不等式。</p>
-
-<p>Wikipediaを信じるならば、名前は、発見者の吾妻一興氏に由来し、この論文で発表されたのが初出らしい。</p>
-
-<p>http://projecteuclid.org/DPubS?verb=Display&amp;version=1.0&amp;service=UI&amp;handle=euclid.tmj/1178243286&amp;page=record</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/24/airy-function/">Airy 関数</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-24T11:17:32+09:00" pubdate data-updated="true">Aug 24<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>次の2階の線型微分方程式を考える。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \frac{\mathrm{d}^{2}y}{\mathrm{d}x^{2}} - xy = 0
-\end{align*}
-</script>
-
-<p>これの線型独立な解として、次の2つがとれる。</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-
-\begin{align*}
-  \mathrm{Ai}(x) &= \frac{1}{\pi} \int_{0}^{\infty} \cos\left(\frac{t^{3}}{3}+xt \right) \mathrm{d}t \\
-  \mathrm{Bi}(x) &= \frac{1}{\pi} \int_{0}^{\infty} \exp\left(-\frac{t^{3}}{3}+xt\right) + \sin \left(\frac{t^{3}}{3}+xt\right) \mathrm{d}t
-\end{align*}
- %]]></script>
-
-<p>両者が収束することは、部分積分するとわかる。
-もしくは、alternating testからわかる。</p>
-
-<p>もしくは、ここにあるものを使えば、$x=0$の場合については、直接示せている。
-http://en.wikipedia.org/wiki/Fresnel_integral</p>
-
-<p>http://n.ethz.ch/~lukaswi/download/WS0506/MMP1/solution9-2.pdf
-https://www.math.ucdavis.edu/~tracy/talks/SITE7.pdf</p>
-
-<p>Riemann-Lesbegueの定理から言えるかと悩んだけれどうまく言えなかった。
-$\mathrm{Ai}$の方をAiry関数と呼ぶ。</p>
-
-<p>ランダム行列について調べていて、このAiry関数に行き当たったが、Airy関数とランダム行列の関係は例えば、ここに書いてある</p>
-
-<p>https://www.math.ucdavis.edu/~tracy/talks/SITE7.pdf</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/hoffman-wielandt/">Hoffman Wielandtの定理</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T15:52:15+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>$A$, $B$を$d$次元の対称行列とし、それぞれの固有値を$\lambda_{1} \leq \cdots \leq \lambda_{d}$, $\mu_{1} \leq \cdots \leq \mu_{d}$とする。
-この時次が成立する：</p>
-
-<script type="math/tex; mode=display">
-\sum_{i=1}^{d} (\lambda_{i} - \mu_{i})^{2} \leq \mathrm{tr} (A-B)^{2} \leq 2\sum_{i \leq j} (A_{ij} - B_{ij})^{2}.
-</script>
-
-<p>この形での不等式は下記の参考文献の形でのステートメントだが、調べてみると、$A, B$の条件は正規行列までゆるめて、最右辺をフロベニウスノルム$|A-B|_{F}^{2} = \sum_{i, j} \left(A_{ij} - B_{ij}\right)^{2}$で抑えれられていることが多い様子
-（実正方行列$A$が正規であるとは$A^{t}A = AA^{t}$が成立すること）。
-対称行列は正規なので、特別な場合とみなせるが、今回のステートメントのほうが最右辺の値は$\sum_{i=1}^{d} (A_{ii}-B_{ii})^{2}$だけ大きい。</p>
-
-<p>また、真ん中の項は入っていない形をHoffman Wielandtの定理としているケースが多い様子
-（真ん中の項は2乗とtraceを適用する順番がわからない..）。</p>
-
-<p>対称行列$X$の固有値を$\lambda_{1}, \ldots, \lambda{d}$とした時、$X$のStieltjes変換$g_{X}$とは、$g_{X}(z) = \frac{1}{d} \sum_{i=1}^{d} \frac{1}{\lambda_{i} - z}$の事を言う。
-これを用いると、Stieltjes変換の（$z$についてではなく、$X$についての）Lipschitz連続性が言える（らしい）。</p>
-
-<h2 id="section">出典</h2>
-
-<p>RANDOM MATRIX THEORYの15ページLemma 3.9</p>
-
-<h2 id="section-1">参考文献</h2>
-
-<ul>
-  <li><a href="http://www-personal.umich.edu/~yudovina/lecture_notes/random_matrices.pdf">RANDOM MATRIX THEORY</a> S. Kargin and E. Yudovina</li>
-</ul>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/vague-convergence/">測度のVague収束</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T14:19:17+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>測度の収束の種類としてVague Convergenceというものがあることを知る。</p>
-
-<p>定義自体は弱収束とよく似ている。
-$\mathbb{R}$上の測度の列$(\mu_{n})_{n=0, \ldots}$が$\mu$にVague収束するとは、任意の$f\in \mathcal{C}_{\infty}(\mathbb{R})$に対して、
-$\int_{\mathbb{R}} f(x) \mathrm{d}{\mu_{n}}(x)$が$\int_{\mathbb{R}} f(x) \mathrm{d}{\mu}(x)$に収束することをいう。
-ここで、$\mathcal{C}_{\infty}(\mathbb{R})$は、$\mathbb{R}$上の連続関数$f$で、$f(x) \to 0$ (as $x \to \pm \infty$)となるものを言う
-（下記の参考文献では$\mathcal{C}_{0}(\mathbb{R})$と書いているけれど、自分はこの記号はコンパクト台に使うことが多い気がしたので表記を変えてみた）。</p>
-
-<p>上記の定義は$\mathbb{R}$上であったが、Vague収束の概念はより一般的にLocally Compact Hausdorffな位相空間でも良いらしい。</p>
-
-<p>上の定義で、$\mathcal{C}_{\infty}(\mathbb{R})$を連続関数全体の集合$\mathcal{C}^{0}(\mathbb{R})$に変更すると弱収束の定義になる。
-$\mathcal{C}_{\infty}(\mathbb{R}) \subset \mathcal{C}^{0}(\mathbb{R})$なので、弱収束すればVague収束するが、その逆は成立しない。
-例えば参考文献の例を挙げると、$\mu$を台がコンパクトで全空間での積分が有限な測度として、$\mu_{n}(x) = \mu(x-n)$と定義すると、$(\mu_{n})_{n=0, \ldots}$は0にVague収束するが弱収束はしない。
-従って、Vague収束は弱収束より真に弱い条件となっている。</p>
-
-<p>しかし、測度が確率測度であるときはVague収束の収束先に追加で条件をつければ弱収束が言える。
-具体的には参考文献のFact2にある通り、確率測度列がVague収束し、さらに収束先も確率測度である時、この収束列はVague収束先に弱収束している。</p>
-
-<h2 id="section">出典</h2>
-
-<p>RANDOM MATRIX THEORYの12ページ3.1章</p>
-
-<h2 id="section-1">参考文献</h2>
-
-<ul>
-  <li>
-    <p><a href="http://www-personal.umich.edu/~yudovina/lecture_notes/random_matrices.pdf">RANDOM MATRIX THEORY</a> S. Kargin and E. Yudovina</p>
-  </li>
-  <li>
-    <p>Wikipediaの<a href="http://en.wikipedia.org/wiki/Vanish_at_infinity">Vague topology</a>の項目</p>
-  </li>
-</ul>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/markdown-mode/">Emacsにmarkdown-modeを導入</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T13:41:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopressのブログの下書きはmarkdownで書かれている。
-業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。</p>
-
-<p>既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">M-x el-get-install markdown-mode</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>基本的には下記のサイトで紹介されている方法で導入できたが、Octopressが自動生成するmarkdownテンプレートの拡張子が.markdownなので、markdonw-modeに紐付ける拡張子は.mdと.markdownの2種類とした。その結果.emacsの設定は以下のようになった。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">;; markdown
-</span><span class="line">(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-</span><span class="line">(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-</span><span class="line">(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">参考サイト</h2>
-
-<ul>
-  <li><a href="http://futurismo.biz/archives/2137">Futurismo</a></li>
-</ul>
-
-<p>この方法で導入することができた。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/top-category-plugin/">トップ画面にカテゴリ一覧を表示する</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>せっかくブログ記事にカテゴリを付与しているのに、カテゴリ名で記事一覧を引く事ができないのは不便なのでトップ画面にカテゴリ一覧を追加した。</p>
-
-<h2 id="section">参考サイト</h2>
-
-<ul>
-  <li><a href="http://qiita.com/amay077/items/3296fdf1ea11c7c9ace4">Octopress Top Categories Plugin を使う</a></li>
-</ul>
-
-<p>amay077さんのQiitaの投稿。記事の通りに作業しうまく導入できた。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/style-change/">スタイルシートを変更する</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopressでスタイルシートをカスタマイズするには、sass/custom/_styles.scssを変更すれば良い。
-例えばこのブログの場合、見出しのフォントが少し大きいと感じたのでサイズを調整した。</p>
-
-<p>例えばこのような設定で各エントリのタイトルのサイズを変更できた（もう少し上手く書けるかもしれないけれど、動いているようなのでこれで良しとしている）。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">.entry-title * {
-</span><span class="line">  font-size: 24px;
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">.entry-title {
-</span><span class="line">  font-size: 24px;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">参考サイト</h2>
-
-<ul>
-  <li><a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Alessandro Melandri</a></li>
-</ul>
-
-<p>この記事の方法で正しく設定できた。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/13/sauer/">Sauer&#8217;s Theorem</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-13T08:26:00+09:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>定理を述べるために、まず関数族に対して、growth functionとVC次元を定義する。
-$X$を集合、$\mathcal{H}$を$X$から${ -1, 1 }$への写像の部分集合とする。
-$X$の有限部分集合の$S \subset X$, $|S| = m$に対して、$\mathcal{H}$の$S$への制限
-$\mathcal{H}\mid_{S}$を次の様に定義する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathcal{H}\left|_{S}\right. = \{(f(x))_{x\in S} \mid f \in \mathcal{H}\}
-\end{align*}
-</script>
-
-<p>さらに、$\mathcal{H}$のgrowth function $g_{\mathcal{H}} : \mathbb{N}\to \mathbb{N}$を次で定義する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  g_{\mathcal{H}}(m) = \max_{S\subset X, |S|=m} \left|\mathcal{H}\left|_{S}\right.\right|
-\end{align*}
-</script>
-
-<p>すると、自明な不等式として、$g_{\mathcal{H}}(m) \leq 2^{m}$が成立する。
-また、ある$m$で等号が成立していたら、任意の$m’ \leq m$でも等号は成立している
-（等号を達成する$m$点集合$S$に対して、$S$の$m’$点部分集合を取れば良い）。</p>
-
-<p>この不等式で等式が成立する最大の$m$を$\mathcal{H}$のVC次元と定義する
-（任意の$m$で等号が成立する場合には、VC次元は無限大と定義する）。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \text{VC-}\mathrm{dim}(\mathcal{H}) = \max \{ m \mid g_{\mathcal{H}}(m) = 2^{m}\}
-\end{align*}
-</script>
-
-<p>以上を準備として、Sauerの定理は次の通り</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  g_{\mathcal{H}}(m) \leq \sum_{i=0}^{\text{VC-}\mathrm{dim}(\mathcal{H})} \binom{m}{i}
-\end{align*}
-</script>
-
-<h2 id="section">出典</h2>
-
-<ul>
-  <li><a href="http://www.cs.huji.ac.il/~shais/IML2014.html">Understanding Machine Learning, Shai Shalev-Shwartz</a>の6.5.1章</li>
-</ul>
-
-<p>会社では著者名を取ってSSS本と呼んでいる。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/13/resume/">小道具集め</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-13T08:25:00+09:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近他の人と議論する機会が多くなってきて特に思うのが、パッと取り出せる知識の引き出しの重要性。確かにWikipediaや個人のウェブサイトなど辞書的に利用できるようなウェブサイトは多数あり、それらに書いてあるから必要になった時に調べれば良いというのは一理あるけれど、そもそも今の自分に必要な情報がある事に気づいて調べられるためには、そのきっかけとなる引き出しが必要。それに、発展した分野の常套手段に関する確かな知識は議論している時に適切な方向性に素早くに進むのに強力な道具になる。</p>
-
-<p>数式がメインの論文では、著者が証明したい定理の補題として、マイナーな等式や不等式評価をreferenceとして紹介されることがある。そういったものをストックとして貯めてるのは、手持ちの武器を充実させるのに役立つのではないかとふと思った。</p>
-
-<p>というわけで、論文や本・Wikipediaなどを読んだ時に、気になった定理・等式・不等式などをまとめてみようと思う。
-とりあえず数学の定理や補題に焦点を絞るけれど、うまくいきそうだったら別の種類にも試してみたい。</p>
-
-<p>今年のはじめにブログを書く宣言していたにも関わらずなんだかんだ言って、結局放置してしまっていたので、これを気にこのブログを掘り出した。
-ブログを再開するついでにこれまで寝かしていたいくつかの記事（主にOctpressのセッティングに関する記事）を公開した。
-目的がはっきりしているから今度はブログ書きを継続できるといいな。</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/10/octopress-command/">Octopress CheatSheet</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/10/golden-thompson/">Golden Thompson</a></h1>
     
     
       <p class="meta">
@@ -638,16 +96,36 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
   </header>
 
 
-  <div class="entry-content"><div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ rake new_post\["&lt;title&gt;"\] # 新規記事作成
-</span><span class="line">$ rake preview # localhost:4000でプレビュー表示
-</span><span class="line">$ rake generate # 現在の設定でブログを生成
-</span><span class="line">$ rake publish_draft # 下書き記事を公開設定に変更
-</span><span class="line">$ rake gen_deploy # 本番反映</span></code></pre></td></tr></table></div></figure></notextile></div>
+  <div class="entry-content"><p>試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。</p>
+
+<p>A, BをHermite 行列として、</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
+\end{align*}
+</script>
+
+<p>ただし、行列が3つだと同様の式は成立しない。つまり、A, B, CをHermite行列に対して、以下の式は一般的には成立しない。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp (A+B+C) \leq \mathrm{tr}(\exp (A) \exp (B) \exp(C))
+\end{align*}
+</script>
+
+<h2 id="section">出典</h2>
+
+<p>下記のチュートリアルの30ページ</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
+
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
 
 </div>
   
@@ -656,9 +134,379 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
     </article>
   
-  <div class="pagination">
+  
+    <article>
+      
+  <header>
     
-      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+      <h1 class="entry-title"><a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T11:49:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>元々のデフォルトだとブログ記事の投稿時間は下書きを作成した時間だったのだけれど、記事を書いた後何日か寝かせた後に公開する事が結構あるので、公開した時を時刻を投稿時間にしたいと思い変更した。</p>
+
+<h2 id="section">参考にしたサイト</h2>
+
+<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
+
+<ul>
+  <li><a href="https://gist.github.com/shimotori/5325720">shimotori / article.html</a></li>
+</ul>
+
+<p>上記のgistで書かれている通り行い、うまく行きました。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/more/">Octopressの記事に「続きを読む」を追加する</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T11:42:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressの記事に「続きを読む」を追加するには、表示させたい箇所に <code>&lt;!-- more --&gt;</code>を追加すれば良い。</p>
+
+<h2 id="section">参考</h2>
+
+<ul>
+  <li><a href="http://octopress.org/docs/blogging/">Octopress</a></li>
+</ul>
+
+<p>ここに書いてある通りでうまくいった。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/default-unpublised/">記事をデフォルトでは非公開設定にする</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T11:42:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>デフォルトでは記事は非公開設定にしておきたい。その方法を調べた。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/10/default-unpublised/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/26/manage-draft/">記事の下書きの管理</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-01-26T10:42:22+09:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>普段のメールでもそうなのだけれど、緊急のものでなければ文章を書いた後にそれを「寝かし」てから公開する事が多い
+（なので、このブログでも日付が公開日時より大分前になってしまう記事が今後増えるような気がする）。
+Octopressで下書きってどう管理するのが良いのだろうと思い、調べてみた。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/26/manage-draft/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/25/nips-reading/">NIPS2013読み会で発表しました</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-01-25T01:49:35+09:00" pubdate data-updated="true">Jan 25<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1/23に開催されたNIPS2013読み会に詠み人として参加しました。
+主催者の<a href="https://twitter.com/sla">@sla</a>さんをはじめ、参加していただいた皆さんありがとうございました。
+資料はSlideShareで公開しています（SlideShare上だと日本語部分が文字化けしてしまっていますが、ダウンロードすれば直るはずです）。</p>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/30337341 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>自分が発表したのは”Inverse Density as an Inverse Problem: The Fredholm Equation Approach”という密度比推定に関する論文です。
+密度比推定の問題を第1種Fredholm方程式という良く知られた積分方程式に変形し、やはり良く知られたTikhonov-Phillips正則化という方法で得られる値を近似解として用いています。</p>
+
+<p>発表資料中でも挙げていますが、密度比推定全般に関する説明は東工大杉山先生の2012年のMLSSでの講演資料が非常に詳しく、この分野を概観する事が出来ます。
+今回の発表の準備でも大変参考にさせていただきました。</p>
+
+<h2 id="section">関連サイト</h2>
+
+<ul>
+  <li>
+    <p><a href="http://connpass.com/event/4728/">NIPS2013読み会</a>(connpass)</p>
+  </li>
+  <li>
+    <p><a href="http://togetter.com/li/620871">NIPS2013読み会</a>(Togetter)</p>
+  </li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/21/gwas-phewas/">GWAS, Post-GWASに関する資料を公開しました</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-01-21T09:04:37+09:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。</p>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/30240670 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、かなり詳しい方に入ると思います。海外文献ではPhe-WASを用いて実際に行った網羅的探索を報告した論文の他にも、以下の2記事がおすすめです。</p>
+
+<ul>
+  <li><a href="http://www.nytimes.com/2013/11/28/science/linking-genes-to-diseases-by-sifting-through-electronic-medical-records.html?_r=0">Linking Genes to Diseases by Sifting Through Electronic Medical Records</a> (New York Times 2013年11月28日)</li>
+</ul>
+
+<p>Phe-WASに関するNew York Timesの記事、提唱者のJoshua氏がインタビューされています。</p>
+
+<ul>
+  <li><a href="http://www.tcpinnovations.com/drugbaron/phewas-the-tool-thats-revolutionizing-drug-development-that-youve-likely-never-heard-of/">PheWAS – the tool that’s revolutionizing drug development that you’ve likely never heard of</a> (Drug Baron 2014年1月3日)</li>
+</ul>
+
+<p>PheWASの利点・欠点を特に創薬の観点から詳しく議論しています。非常に参考になりました。</p>
+
+<ul>
+  <li><a href="https://github.com/petehamilton/Octopress-Slideshare-Plugin">Octopress-Slideshare-Plugin</a></li>
+</ul>
+
+<p>OctopressへのSlideShareの埋め込みにはこちらのプラグインを使用しました。README.mdのやり方をそのまま実行して出来ました</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/12/first-post/">テスト投稿</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-01-12T13:14:10+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今年はきちんとものを書こうと決めたので、個人サイトとブログの整備を行う。
+個人サイトは昔作ったものがあったのでそれを掘り出して利用する。
+ブログについては調べてみると、Octpress + Github PagesがMarkDownも使えて便利そうなのでこれを採用しようと思う。</p>
+
+<h2 id="section">数式の表示</h2>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+ %]]></script>
+
+<h2 id="section-1">参考にしたサイト</h2>
+
+<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
+
+<ul>
+  <li><a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/">Glide Note</a></li>
+</ul>
+
+<p>Rubyの管理はrbenvで既に行っていたので、rvmは使用しなかった。</p>
+
+<h4 id="section-2">数式の表示について</h4>
+
+<ul>
+  <li><a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">Carpe diem (Felix’s blog)</a></li>
+</ul>
+
+<p>ここに書いている通りに行ってうまくいった。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -681,15 +529,15 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/14/stability-of-markov-chain/">Stability_of_markov_chain</a>
+        <a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/06/hausdorff-measure/">Hausdorff_measure</a>
+        <a href="/blog/2014/08/25/markov-inequality/">Markov&#8217;s Inequality</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/06/coarea-formula/">Coarea_formula</a>
+        <a href="/blog/2014/08/17/markdown-mode/">Emacsにmarkdown-modeを導入</a>
       </li>
     
   </ul>
@@ -700,7 +548,7 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (11)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (6)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (2)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   
