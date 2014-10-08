@@ -125,365 +125,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-10-07T19:17:01+09:00" pubdate data-updated="true">Oct 7<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>http://qiita.com/katryo/items/918667f28301fdec89ba
-http://matplotlib.org/users/customizing.html</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/03/parser-tokenizer-pattern/">Tokenizer_builder_pattern</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-10-03T05:58:08+09:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>mafで最近よく使うお気に入りパターン。</p>
-
-<p>データのフォーマットを変換するときに、処理の最初にデータをパーズし、処理の最後にデータを後段の処理モジュールが受け入れられるフォーマットで出力する必要がある。</p>
-
-<p>このパターンはデータをパーズする具体的方法を記述する部分と具体的にデータファイル全体をパーズする
-具体例として、vowpal形式のファイルを入力し、何らかの処理をした上で、libsvm形式で出力する場合を考える。
-それぞれの形式は以下を参照</p>
-
-<p>vowpal
-https://github.com/JohnLangford/vowpal_wabbit/wiki/Input-format
-libsvm
-https://github.com/cjlin1/libsvm/blob/master/README</p>
-
-<p>どちらも1行に1サンプルの情報が記述されている
-まず、1行の文字列を得て、パーズを行う関数を用意する</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def vowpal_tokenizer(line):
-</span><span class="line">    
-</span><span class="line">    pass</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>そして、mafのタスクにparserを渡す</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">exp(source = 'path/to/input/file',
-</span><span class="line">    target = 'maf/output/node',
-</span><span class="line">	rule = parse_each_line(tokenizer = util.parser.vowpal_tokenizer)
-</span><span class="line">	)</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>ruleの中でtokenizerに1行ずつ順にデータを渡していく</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">@maflib.util.rule
-</span><span class="line">def parse_each_line(task):
-</span><span class="line">    tokenizer = task.paramter['tokenizer']
-</span><span class="line">	samples = []
-</span><span class="line">    with open(task.inputs[0].read()) as i:
-</span><span class="line">	     for line in i.readlines():
-</span><span class="line">		     sample = tokenizer(line)
-</span><span class="line">			 samples.append(samples)
-</span><span class="line">    task.outputs[0].write(json.dumps(samples))</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>出力についても同様に、builderを関数として用意して、ruleに渡す</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">def libsvm_builder(label, values):
-</span><span class="line">    pass</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">exp(source = 'maf/input/node',
-</span><span class="line">    target = 'maf/output/node',
-</span><span class="line">	rule = builder_each_line(builder = util.builder.libsvm_builder)
-</span><span class="line">)</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>builderの具体的な処理の中身は次の通り</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">@maflib.util.rule
-</span><span class="line">def builder_each_line(task):
-</span><span class="line">    builder = task.paramter['builder']
-</span><span class="line">    j = json.loads(task.inputs[0].read())
-</span><span class="line">	for sample in j
-</span><span class="line">	    line = builder(sample['label'], sample['feature'])
-</span><span class="line">		task.outputs[0].write(line, 'a')</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>データ形式の変換はtokenizerとbuilderを組み合わせれば良い</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">exp(source = 'path/to/input/file',
-</span><span class="line">    target = 'path/to/output/file',
-</span><span class="line">	rule = convert_each_line(tokenizer = util.tokenizer.vowpal_tokenizer,
-</span><span class="line">	                         builder = util.builder.libsvm_builder
-</span><span class="line">	)
-</span><span class="line">)</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>convert関数には具体的なtokenizer, builderの手続きは書かず、ロジックだけを書く</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">@maflib.util.rule
-</span><span class="line">def convert_each_line(task):
-</span><span class="line">    tokenizer = task.parameter['tokenizer']
-</span><span class="line">    builder = task.paramter['builder']
-</span><span class="line">	with open(task.inputs[0], 'r') as i, open(task.outputs[0], 'w') as o:
-</span><span class="line">	    for line in i.readlines():
-</span><span class="line">		    o.write(builder(tokenizer(line)))</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>データのフォーマットはいろいろなバラエティがある一方、入力データの処理の仕方はフォーマットによらず共通している（例えば1行に1サンプルなど）場合が多く、
-このパターンでは、パーズの具体的な手続きとファイル全体の処理方法を分離することでそれをプラガブルにしている。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/23/suwa-todo-mcmc/">Suwa_todo_mcmc</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-09-23T18:23:28+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>http://arxiv.org/pdf/1106.3562v2.pdf
-http://www-adsys.sys.i.kyoto-u.ac.jp/mohzeki/YSMSPIP/Abst2012/abst_suwa.pdf</p>
-
-<p>http://www-adsys.sys.i.kyoto-u.ac.jp/mohzeki/YSMSPIP/Proc2012/all.pdf</p>
-
-<p>適当な確率分布π(x)をMCMCでサンプリングする場合、πT = πとなるような遷移行列Tを取ってきて、</p>
-
-<ul>
-  <li>
-    <p>適当な初期状態x_{0}をとる</p>
-  </li>
-  <li>
-    <p>T<em>{x</em>{t}}からランダムにサンプリングして、x_{t+1}とする</p>
-  </li>
-</ul>
-
-<p>を繰り返すことによってサンプリングできる。
-（xは離散値を取るとする）</p>
-
-<p>πT = πを満たすための十分条件として、詳細釣り合い条件π(x) T<em>{xy} = π(y)T</em>{yx}がある。
-これは十分条件でしかないが、この論文の主張によると、詳細釣り合い条件を満たしていないような遷移確率はこの論文での方法が初めてであるとのこと。</p>
-
-<p>この論文では、メトロポリスヘイスティングやギブスサンプリングで発生する棄却確率を低減でき、また多くの場合棄却確率を0にできることを主張している。</p>
-
-<p>MCMCでサンプリングを行う場合π<em>{x}そのものは計算出来ないと仮定することが多いので、それに比例するw</em>{x}を考える。πT = πはwT = wと同値。
-v<em>{xy} = w</em>{x} T<em>{xy}とすると、この条件は、w</em>{x} = Σ<em>{y} v</em>{xy}とかける。さらに、棄却確率は Σ<em>{x} v</em>{xx}/Σ<em>{x} w</em>{x}とかける。</p>
-
-<p>そこで、この論文では、w<em>{x}達をgivenとして、w</em>{x} = Σ<em>{y} v</em>{xy}, w<em>{x} = Σ</em>{y} v<em>{yx} を満たし、棄却確率を最小化するようなv</em>{xy}達を求めるアルゴリズムを提案している。
-この問題はallocation problemと呼ばれている。</p>
-
-<p>確かに、アルゴリズムはシンプルであるのだが、疑問なのがつぎの点である。実際にサンプリングをする時には、v<em>{xy}ではなく、(T</em>{xy})<em>{y} where T</em>{xy} = v<em>{xy}/w</em>{x} の分布に従ってサンプリングを行うが、
-これは本当に実行できるのかという点である。もともとMCMCはw<em>{x}の分配関数を計算出来ない（intractable）であることからこのような遷移確率を用いたサンプリングを行っているので、Σ</em>{x}は実行できないはずである。
-例えばxは2値を取る1000個のelementの全状態みたいなものを考えると、xの取りうる値は2^{1000}である。</p>
-
-<p>そうすると、そもそもこのT_{xy}達をメモリで持てるという仮定や、その上で確率分布を取るといったことが可能かどうかは怪しいのではと思う。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/23/large-deviation-intro/">Large_deviation_intro</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-09-23T14:22:05+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>読んだ
-http://people.math.umass.edu/~rsellis/pdf-files/boltzmann.pdf</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/15/birkhoff-von-neumann/">Birkhoff_von_neumann</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-09-15T23:36:35+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>前に書いたHoffman–Wielandtの定理に関連してもう一つ。</p>
-
-<p>Hoffman-Wielangtの定理は、Todd Kemp氏のレクチャーノートのLemma 5.4として証明されている。
-Birkhoff-von Neumannの定理を用いると、その証明が比較的平易に行える事がわかった。</p>
-
-<p>まず、Birkhoff-von Neumannの定理のステートメントを述べる為にいくつか言葉の定義を行う。</p>
-
-<p>$d$次元の正方行列が、2重確率行列 (doubly stochastic matrix)であるとは、各行、各列の和が全て1である事を言う。
-2つの2重確率行列の重み付き平均は再び2重確率行列となるので、2重確率行列全体の集合全体は凸であり、さらに多面体である事が知られている。これをBirkohff polytopeという。</p>
-
-<p>特別な2重確率行列として、permutation matrixがある。これは、各行・各列に1つだけ1、残りが0である製法行列をいう。ベクトルにpermutation matrixをかけるとベクトルのエントリをシャッフル効果があるのでこう呼ばれる。</p>
-
-<p>以上の準備のもとで、Birkhoff polytopeはpermutation matrix全体の集合の凸包であるというのが、Birkhoff-von Neumann定理である。</p>
-
-<p>このことの帰結、Birkhoff polytope上に値を取る線形関数はpermutation matrix乗で最大・最小値を取る事がわかる。
-前述のKemp氏のレクチャーノートでは、2つの対称行列の固有値を小さい順に並べた時の差の2乗の和をBirkhoff polytope上の線形関数で上から抑えた上でBirkhoff-von Neumannの定理を適用、考える対象をpermutation matrixに絞った上で、更に固有値を小さい順に並べていることから、permutationの中でも、単位行列で最大値を取ることを示し、それを式変形すると、その値は差の2乗のTraceであることを示している。</p>
-
-<p>http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/blog/2014/09/15/inverse-tangent-addition-formula/">Inverse Tangentの加法定理</a></h1>
     
     
@@ -627,7 +268,7 @@ NIPS2012のチュートリアルにあった「難しい定理」というのは
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/14/stability-of-markov-chain/">Stability_of_markov_chain</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a></h1>
     
     
       <p class="meta">
@@ -644,21 +285,66 @@ NIPS2012のチュートリアルにあった「難しい定理」というのは
 
 
 
-	<time datetime="2014-09-14T07:25:22+09:00" pubdate data-updated="true">Sep 14<span>th</span>, 2014</time>
+	<time datetime="2014-08-26T22:00:00+09:00" pubdate data-updated="true">Aug 26<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>これのTheorem3
-http://arxiv.org/pdf/1306.1091.pdf</p>
+  <div class="entry-content"><p>通常の確率変数と同様に行列に値を取る確率変数に対しても積率母関数とキュムラント母関数を定義できる。
+具体的には$d$次正方行列に値を取る確率変数$\mathbf{X}$に対して、その積率母関数(Moment Generating Function:MGF)$ M_{\mathbf{X}}$とキュムラント母関数(Cummurant Generating Function:CGF) $\Xi_{\mathbf{X}}$をスカラー値の場合と同様の形式に以下で定義する。すなわち、</p>
 
-<p>Reference元はこれらしい
-http://www.sciencedirect.com/science/article/pii/S0024379501003202</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+  M_{\mathbf{X}}(\theta) = \mathbb{E}\left[ \exp (\theta \mathbf{X})\right]\\
+  \Xi_{\mathbf{X}}(\theta) = \log \mathbb{E}\left[ \exp (\theta \mathbf{X})\right]
+\end{align*}
+</script>
 
-<p>更に言うとこれらしい
-http://www.jstor.org/discover/10.2307/3212261?uid=3738328&amp;uid=2129&amp;uid=2&amp;uid=70&amp;uid=4&amp;sid=21104159480671</p>
+<p>ここで$\theta \in \mathbb{R}$。</p>
+
+<p>すると、CGFに関して次が成立する。$\mathbf{X}_{i}(i = 1, \ldots, n)$を$d$次正方行列に値を取る独立な確率変数として、次の不等式が成立する。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathrm{tr} \exp \left(\Xi_{\left(\sum_{i} \mathbf{X}_{i}\right)}(\theta)\right) \leq \mathrm{tr} \exp \left( \sum_{i} \Xi_{\mathbf{X}_{i}} (\theta)\right).
+\end{align*}
+</script>
+
+<p>スカラー値の確率変数の場合、MGFには乗法性、CGFには加法性が成立する。MGFの乗法性は次のように示せる。</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align*}
+M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] \\
+                          &= \mathbb{E}\left[ \prod_{i} \exp(\theta X_{i}) \right] \\
+                          &= \prod_{i} \mathbb{E}\left[ \exp(\theta X_{i}) \right] \\
+						  &= \prod_{i} M_{X_{i}} (\theta)
+\end{align*}
+ %]]></script>
+
+<p>ここで、3行目の等式では、$X_{i}$達の独立性を用いた。この式の$\log$を取れば、CGFの加法性も言える。</p>
+
+<p>しかし、行列値の場合はこのような式変形はできない。
+スカラー値$x, y$に対しては、$\exp(x+y) = \exp(x)\exp(y)$が成立する。
+一方、行列$\mathrm{X}, \mathrm{Y}$に対しては、一般的には$\exp(\mathrm{X}+\mathrm{Y}) = \exp(\mathrm{X})\exp(\mathrm{Y})$が成立せず、従って、2行目の等式が成立しないためである
+（例えば$\mathrm{X}, \mathrm{Y}$が可換である事は$\exp$の分配法則が成立する十分条件である）。</p>
+
+<p>冒頭に上げた定理は、それにもかかわらず$\mathrm{tr} \exp$を取ればCGFに関しては劣加法性だけは成立している事を主張している。</p>
+
+<h2 id="section">出典</h2>
+
+<p>下記のチュートリアルの25ページ、Lemma 3.5.1</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
+</ul>
+
+<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
+
 </div>
   
   
@@ -671,7 +357,7 @@ http://www.jstor.org/discover/10.2307/3212261?uid=3738328&amp;uid=2129&amp;uid=2
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/06/hausdorff-measure/">Hausdorff_measure</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/25/markov-inequality/">Markov&#8217;s Inequality</a></h1>
     
     
       <p class="meta">
@@ -688,14 +374,330 @@ http://www.jstor.org/discover/10.2307/3212261?uid=3738328&amp;uid=2129&amp;uid=2
 
 
 
-	<time datetime="2014-09-06T22:17:27+09:00" pubdate data-updated="true">Sep 6<span>th</span>, 2014</time>
+	<time datetime="2014-08-25T20:58:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>http://en.wikipedia.org/wiki/Hausdorff_measure</p>
+  <div class="entry-content"><p>非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
+Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
+Wikipediaにあるように証明は数行で終わるのだけれど、応用範囲がものすごく広くここからこの系統の種々の不等式を導ける。</p>
+
+<p>$X$を$\mathbb{R}$に値を取る非負の確率変数。$t&gt;0$に対して以下が成立する。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathbb{P}\left[ X \geq t\right] \leq \frac{\mathbb{E}[X]}{t}
+\end{align*}
+</script>
+
+<p>$X$が非負の条件を外すと簡単に反例を作れる（例えば$X$が常に負を取るような確率変数など）。</p>
+
+<h2 id="section">出典</h2>
+
+<p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/17/markdown-mode/">Emacsにmarkdown-modeを導入</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-17T13:41:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressのブログの下書きはmarkdownで書かれている。
+業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。</p>
+
+<p>既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">M-x el-get-install markdown-mode</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>基本的には下記のサイトで紹介されている方法で導入できたが、Octopressが自動生成するmarkdownテンプレートの拡張子が.markdownなので、markdonw-modeに紐付ける拡張子は.mdと.markdownの2種類とした。その結果.emacsの設定は以下のようになった。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">;; markdown
+</span><span class="line">(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
+</span><span class="line">(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+</span><span class="line">(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://futurismo.biz/archives/2137">Futurismo</a></li>
+</ul>
+
+<p>この方法で導入することができた。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/17/top-category-plugin/">トップ画面にカテゴリ一覧を表示する</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>せっかくブログ記事にカテゴリを付与しているのに、カテゴリ名で記事一覧を引く事ができないのは不便なのでトップ画面にカテゴリ一覧を追加した。</p>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://qiita.com/amay077/items/3296fdf1ea11c7c9ace4">Octopress Top Categories Plugin を使う</a></li>
+</ul>
+
+<p>amay077さんのQiitaの投稿。記事の通りに作業しうまく導入できた。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/17/style-change/">スタイルシートを変更する</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressでスタイルシートをカスタマイズするには、sass/custom/_styles.scssを変更すれば良い。
+例えばこのブログの場合、見出しのフォントが少し大きいと感じたのでサイズを調整した。</p>
+
+<p>例えばこのような設定で各エントリのタイトルのサイズを変更できた（もう少し上手く書けるかもしれないけれど、動いているようなのでこれで良しとしている）。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">.entry-title * {
+</span><span class="line">  font-size: 24px;
+</span><span class="line">}
+</span><span class="line">
+</span><span class="line">.entry-title {
+</span><span class="line">  font-size: 24px;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">参考サイト</h2>
+
+<ul>
+  <li><a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Alessandro Melandri</a></li>
+</ul>
+
+<p>この記事の方法で正しく設定できた。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/13/sauer/">Sauer&#8217;s Theorem</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-13T08:26:00+09:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>定理を述べるために、まず関数族に対して、growth functionとVC次元を定義する。
+$X$を集合、$\mathcal{H}$を$X$から${ -1, 1 }$への写像の部分集合とする。
+$X$の有限部分集合の$S \subset X$, $|S| = m$に対して、$\mathcal{H}$の$S$への制限
+$\mathcal{H}\mid_{S}$を次の様に定義する。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \mathcal{H}\left|_{S}\right. = \{(f(x))_{x\in S} \mid f \in \mathcal{H}\}
+\end{align*}
+</script>
+
+<p>さらに、$\mathcal{H}$のgrowth function $g_{\mathcal{H}} : \mathbb{N}\to \mathbb{N}$を次で定義する。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  g_{\mathcal{H}}(m) = \max_{S\subset X, |S|=m} \left|\mathcal{H}\left|_{S}\right.\right|
+\end{align*}
+</script>
+
+<p>すると、自明な不等式として、$g_{\mathcal{H}}(m) \leq 2^{m}$が成立する。
+また、ある$m$で等号が成立していたら、任意の$m’ \leq m$でも等号は成立している
+（等号を達成する$m$点集合$S$に対して、$S$の$m’$点部分集合を取れば良い）。</p>
+
+<p>この不等式で等式が成立する最大の$m$を$\mathcal{H}$のVC次元と定義する
+（任意の$m$で等号が成立する場合には、VC次元は無限大と定義する）。</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  \text{VC-}\mathrm{dim}(\mathcal{H}) = \max \{ m \mid g_{\mathcal{H}}(m) = 2^{m}\}
+\end{align*}
+</script>
+
+<p>以上を準備として、Sauerの定理は次の通り</p>
+
+<script type="math/tex; mode=display">
+\begin{align*}
+  g_{\mathcal{H}}(m) \leq \sum_{i=0}^{\text{VC-}\mathrm{dim}(\mathcal{H})} \binom{m}{i}
+\end{align*}
+</script>
+
+<h2 id="section">出典</h2>
+
+<ul>
+  <li><a href="http://www.cs.huji.ac.il/~shais/IML2014.html">Understanding Machine Learning, Shai Shalev-Shwartz</a>の6.5.1章</li>
+</ul>
+
+<p>会社では著者名を取ってSSS本と呼んでいる。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/13/resume/">小道具集め</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-13T08:25:00+09:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近他の人と議論する機会が多くなってきて特に思うのが、パッと取り出せる知識の引き出しの重要性。確かにWikipediaや個人のウェブサイトなど辞書的に利用できるようなウェブサイトは多数あり、それらに書いてあるから必要になった時に調べれば良いというのは一理あるけれど、そもそも今の自分に必要な情報がある事に気づいて調べられるためには、そのきっかけとなる引き出しが必要。それに、発展した分野の常套手段に関する確かな知識は議論している時に適切な方向性に素早くに進むのに強力な道具になる。</p>
+
+<p>数式がメインの論文では、著者が証明したい定理の補題として、マイナーな等式や不等式評価をreferenceとして紹介されることがある。そういったものをストックとして貯めてるのは、手持ちの武器を充実させるのに役立つのではないかとふと思った。</p>
+
+<p>というわけで、論文や本・Wikipediaなどを読んだ時に、気になった定理・等式・不等式などをまとめてみようと思う。
+とりあえず数学の定理や補題に焦点を絞るけれど、うまくいきそうだったら別の種類にも試してみたい。</p>
+
+<p>今年のはじめにブログを書く宣言していたにも関わらずなんだかんだ言って、結局放置してしまっていたので、これを気にこのブログを掘り出した。
+ブログを再開するついでにこれまで寝かしていたいくつかの記事（主にOctpressのセッティングに関する記事）を公開した。
+目的がはっきりしているから今度はブログ書きを継続できるといいな。</p>
+
 </div>
   
   
@@ -722,19 +724,19 @@ http://www.jstor.org/discover/10.2307/3212261?uid=3738328&amp;uid=2129&amp;uid=2
       </li>
     
       <li class="post">
-        <a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a>
+        <a href="/blog/2014/09/15/inverse-tangent-addition-formula/">Inverse Tangentの加法定理</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/10/03/parser-tokenizer-pattern/">Tokenizer_builder_pattern</a>
+        <a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/23/suwa-todo-mcmc/">Suwa_todo_mcmc</a>
+        <a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/23/large-deviation-intro/">Large_deviation_intro</a>
+        <a href="/blog/2014/08/25/markov-inequality/">Markov&#8217;s Inequality</a>
       </li>
     
   </ul>
@@ -745,7 +747,7 @@ http://www.jstor.org/discover/10.2307/3212261?uid=3738328&amp;uid=2129&amp;uid=2
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (11)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (6)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   
