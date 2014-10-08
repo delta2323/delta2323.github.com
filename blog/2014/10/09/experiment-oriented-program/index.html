@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PFIセミナーで実験プログラム開発方法論について話しました - 読書帳</title>
+  <meta name="author" content="Kenta OONO">
+
+  
+  <meta name="description" content="先日9月25日の社内セミナーにて「実験プログラム開発方法論」というタイトルで発表を行いました。
+発表資料はSlideShareで公開しています。当日の発表はUstreamのPFIチャンネルから視聴可能です。
+また、発表に関連する資料群（デモのレポジトリ・実験メモ・発表に関連して書いた文書） &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/10/09/experiment-oriented-program">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">読書帳</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:delta2323.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PFIセミナーで実験プログラム開発方法論について話しました</h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-10-09T00:06:00+09:00" pubdate data-updated="true">Oct 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>先日9月25日の社内セミナーにて「実験プログラム開発方法論」というタイトルで発表を行いました。
+発表資料はSlideShareで公開しています。当日の発表はUstreamのPFIチャンネルから視聴可能です。
+また、発表に関連する資料群（デモのレポジトリ・実験メモ・発表に関連して書いた文書）などをgoogle docsで公開しています。</p>
+
+<ul>
+  <li><a href="http://www.ustream.tv/channel/pfi-show">PFI Show(Ustream)</a></li>
+  <li><a href="https://docs.google.com/document/d/1PB6qHAt2Lyvm_AUXjiAjOt1v9BgbATnKtb38buwlOZI">20140925PFIセミナー関連資料置き場</a></li>
+</ul>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/39497239 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>以下では発表内容の簡単なまとめ、発表の補足、実験プログラムについて考える経緯について、随筆的に書いていこうと思います。</p>
+
+<!-- more -->
+
+<h2 id="section">発表内容について</h2>
+
+<p>実験プログラムは造語で、（科学）実験を行うために開発するソフトウェアを意図しています。
+発表では、実験プログラムが持つ特徴・典型パターン・開発上の課題とその解決策（案）について話しました。
+一部まとめの繰り返しになりますが、今回の発表での要旨・主張は以下の通りです。</p>
+
+<ul>
+  <li>
+    <p>実験プログラム開発にはソフトウェアの開発の方法論が有効。ただし、実験プログラムの開発に適した形で適用する事が必要。</p>
+  </li>
+  <li>
+    <p>実験プログラムはそれ単体として存在するのではなく、それらへの入力（データセット・設定ファイル）・出力（実験結果・ログ）・実験手順（実験手順プログラム・ドキュメント）・環境など周辺に存在するモジュールにも依存しており、実験プログラムと同様に管理・開発が必要である。</p>
+  </li>
+  <li>
+    <p>実験プログラムでは実験結果を出すことの優先度が高い点が通常のソフトウェアの開発と異なり、ソフトウェアの品質にかけるコスト（リファクタリング・バージョン管理・関数の汎用性）との優先度の問題がしばしば発生する。</p>
+  </li>
+  <li>
+    <p>実験結果の再現性を保ち、結果を後になって有効活用するには、生成方法と生成結果はそれらを独立して管理するだけではなく、それらの対応付けを併せて管理する事が重要。</p>
+  </li>
+</ul>
+
+<h2 id="section-1">発表の補足</h2>
+
+<ul>
+  <li>
+    <p>発表中で「パイプラインは実験プログラム固有」という旨の内容を話したのですが、通常のソフトウェア開発でも前のビルド結果を別のプログラムのビルドに利用するということは当たり前のように行いますので、あまり実験プログラムに固有というのは適切ではなかったです。</p>
+  </li>
+  <li>
+    <p>この発表を考えた当初はもう少し細かなノウハウについてお話をすることを想定していましたが、いざ資料にまとめてみると、そこに至るまでの前提・導入の話が予想以上にあることがわかり、結果的にそれらについてはほとんど触れられませんでした。それらについては、以下の文書も参考にして下さい（前述の資料置き場にもリンクはあります）。</p>
+
+    <ul>
+      <li><a href="https://docs.google.com/document/d/11Y3NYVCHilCRT-xyGEYuy8EphOyouc_iWOqO_ZiDLX0">git, mafを用いた実験プログラム開発方法論</a></li>
+    </ul>
+  </li>
+  <li>
+    <p>今回は実験結果を得ることを目的としたプログラムが興味対象で、そのプログラムを第三者が利用する事はあまり想定していませんでした。しかしそ、libsvm/liblinearやmecabなどのツールによって関連する分野の発展が加速された事を考えると、ソフトウェアとして第三者に利用されることを想定した実験プログラムを今回の話から除いてしまったのは話半分と言わざるを得ないと思います。これらについてはまた別の問題として気になる話ではあります。</p>
+  </li>
+</ul>
+
+<h2 id="section-2">発表のきっかけ</h2>
+
+<p>（書いていたら思ったより長文になってしまいました）</p>
+
+<p>今回このような発表を行ったきっかけは、自分がこういう方法論を欲していたというのがあります。
+仕事やプライベートで論文を読んだり、アルゴリズムを試しに書く事が多いのですが、アルゴリズムそのものの他に効果的なアルゴリズムを開発する方法も自然と問題意識として持っていました。</p>
+
+<p>周りの紹介でソフトウェア開発という分野を知り、関連する書籍やブログなどを読んでみると、コードを書いている時に感じる疑問にまさに答えてくれるようなものが多数でした。例えば、自分がこの会社に来て最初に読んだ本の一つがClean Codeという品質の高いコードを書くための技術についての本です。
+我流でコードを書いていた時に比べると効率や品質は大分意識できるようになりました（本当にきちんと書けているかどうかは周りに聞いてみないとわからないですが…）。</p>
+
+<p>一方で、これらの手法のうち幾つかは自分のケースにうまく適用できないと感じる事もありました。
+もちろん自分が手法を十分マスターしていない事も理由の一つだと思いますが、
+少し身の程をわきまえずに大胆な仮説を立てて、自分が開発しているプログラムは一般のソフトウェアとは要求が異なる部分もあるのではないかと考えてみることにしました。</p>
+
+<p>改めて思い返してみると、公開された場にある実験プログラム開発のノウハウというのはそれほど多くはないように思います。
+今回自分が紹介したようなジレンマは実験プログラムを開発していれば自然と発生する問題のはずなので、機械学習を研究するグループがこのようなノウハウを持っていないとは考えづらいです。
+おそらく各研究グループの中でこのようなノウハウは秘伝のタレとして伝えられたり、仲間同士で情報交換されており、外部になかなか現れていないだけだと思います。</p>
+
+<p>また、実験プログラム開発上の課題を課題に思うのは、研究開発という一部の職種の中で、さらにプログラム開発が研究に伴う一部の方々だけであるはずなので、ニーズがなかったとしても不思議ではありません。
+実際前述の「git, mafを用いた実験プログラム開発方法」の文書も、もともとはノウハウを社内の他のメンバーに共有しようという動機で書き始めました。</p>
+
+<p>もちろん公開の場でのノウハウの共有が全くないとは言えません。例えば機械学習系のライブラリのレポジトリのログで開発の過程を追ったり、githubのissueやgoogle groupではそのようなノウハウが議論される事がしばしばあります。しかし、埋もれていて見えていないノウハウの蓄積というのはもっとあるはずだと推測しています。</p>
+
+<p>ノウハウを方法論として確立する事はメリットは大きいと考えています（少なくとも実験プログラムを書く人間、というか自分はほしいです）。
+例えば以下の様な効果を期待しています</p>
+
+<ul>
+  <li>異なる研究グループの間で共通言語ができ、ノウハウのスムーズな共有・交換につながる</li>
+  <li>開発ノウハウを身につけることで、その部分で悩むことが少なくなれば、開発内容そのものにリソースを集中する事ができる</li>
+  <li>方法論としてまとめる事で何も意識せずに開発をしていたら3年かかるようなノウハウの修得が半年でできれば、残った時間をアルゴリズムの研究に費すことができる</li>
+</ul>
+
+<p>方法論を確立することの重要性を強調したいという意図があり、今回の発表では「実験プログラム”方法論”」などという大それたタイトルを付けました。</p>
+
+<p>今回残念だったのは、あまりサーベイや知り合いへのインタビューができず、世の中でのこのような実験プログラムの開発の現状をあまり把握できなかったということです。
+おそらく世の中は自分が話した内容よりももっと進んでいて、「こんなの知ってる」と言う感想を持っている方も多くいるのではないかと思います。
+自分の所ではこうしている、もっとここはこう工夫できるのではないかなどの感想がありましたら是非いただければと思います。
+今回の発表が実験プログラム開発の議論のきっかけになれば幸いです。</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kenta OONO</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-09T00:06:00+09:00" pubdate data-updated="true">Oct 9<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/fa-biao-zi-liao/'>発表資料</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/10/09/experiment-oriented-program/" data-via="" data-counturl="http://delta2323.github.io/blog/2014/10/09/experiment-oriented-program/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/07/matplotlib-on-macos/" title="Previous Post: matplotlib_on_macos">&laquo; matplotlib_on_macos</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/03/parser-tokenizer-pattern/">Tokenizer_builder_pattern</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/23/suwa-todo-mcmc/">Suwa_todo_mcmc</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/23/large-deviation-intro/">Large_deviation_intro</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Top Categories</h1>
+    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (11)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Kenta OONO -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+</html>
+
