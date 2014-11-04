@@ -4,7 +4,7 @@
   <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-10-09T00:28:39+09:00</updated>
+  <updated>2014-11-04T23:22:08+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Kraftの不等式]]></title>
+    <link href="http://delta2323.github.io/blog/2014/11/04/kraft-inequality/"/>
+    <updated>2014-11-04T23:21:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/11/04/kraft-inequality</id>
+    <content type="html"><![CDATA[<p>証明が面白かったので紹介。</p>
+
+<p>$\Sigma = \lbrace 0, 1\rbrace$を2文字からなるアルファベット集合、$\Sigma^{\ast}$を$\Sigma$をアルファベットとする語(word)全体の集合とする。
+語$w\in \Sigma^{\ast}$に対して、$w$の長さを$|w|$で表す（空文字は長さ$0$とみなす）
+語の集合$S\subset \Sigma^{\ast}$が、prefix-freeであるとは、任意の語$w, w’\in S$に対して、$w$は$w’$のprefixではない事を言う
+（空文字は全ての語のprefixであるとする。従って$S$がprefix-freeでかつ空文字を含むならば、$S$は空文字のみからなる集合である）。</p>
+
+<p>以上の設定のもとでKraftの定理の主張は以下の通り：語の集合$S\subset \Sigma^{\ast}$がprefix-freeならば、
+$\sum_{w\in S} \frac{1}{2^{|w|}} \leq 1$</p>
+
+<p>$S$がprefix-freeでなかったら、結論は成立するとは限らない。例えば$S = \lbrace 0, 1, 00\rbrace$などが反例である。</p>
+
+<p>証明は次の通り。
+確率1/2ずつで表裏が出るコインを投げる過程を繰り返して行いながら$\Sigma^{\ast}$の元を作成する過程を考える。
+初期状態は空文字で、各試行で表が出たら0、裏が出たら1を一番後ろに追加する。もし$S$のいずれかの元が得られたらそこでコイン投げを終了する。
+この過程では$S$の元が一つ得られて終了するか、永遠に過程が終わらないかのいずれかの事象が起こる。
+さらに$S$がprefix-freeであるという条件から、任意の$w\in S$に対して、$w$が得られるコイン投げ過程の途中で他の$S$の元が得られることはない。
+$w\in S$が得られる確率は$1/2^{|w|}$なので、</p>
+
+<p>$1 \geq $ ($S$のいずれかの元が得られる確率) $= \sum_{w\in S}$ ($w$が得られる確率) 
+$=\sum_{w\in S} \frac{1}{2^{|w|}}$</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PFIセミナーで実験プログラム開発方法論について話しました]]></title>

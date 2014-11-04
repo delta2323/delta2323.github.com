@@ -9,9 +9,8 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="先日9月25日の社内セミナーにて「実験プログラム開発方法論」というタイトルで発表を行いました。
-発表資料はSlideShareで公開しています。当日の発表はUstreamのPFIチャンネルから視聴可能です。
-また、発表に関連する資料群（デモのレポジトリ・実験メモ・発表に関連して書いた文書） &hellip;">
+  <meta name="description" content="証明が面白かったので紹介。 $\Sigma = \lbrace 0, 1\rbrace$を2文字からなるアルファベット集合、$\Sigma^{\ast}$を$\Sigma$をアルファベットとする語(word)全体の集合とする。
+語$w\in \Sigma^{\ast}$に対して、$w$の長さを$| &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/04/kraft-inequality/">Kraftの不等式</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-11-04T23:21:00+09:00" pubdate data-updated="true">Nov 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>証明が面白かったので紹介。</p>
+
+<p>$\Sigma = \lbrace 0, 1\rbrace$を2文字からなるアルファベット集合、$\Sigma^{\ast}$を$\Sigma$をアルファベットとする語(word)全体の集合とする。
+語$w\in \Sigma^{\ast}$に対して、$w$の長さを$|w|$で表す（空文字は長さ$0$とみなす）
+語の集合$S\subset \Sigma^{\ast}$が、prefix-freeであるとは、任意の語$w, w’\in S$に対して、$w$は$w’$のprefixではない事を言う
+（空文字は全ての語のprefixであるとする。従って$S$がprefix-freeでかつ空文字を含むならば、$S$は空文字のみからなる集合である）。</p>
+
+<p>以上の設定のもとでKraftの定理の主張は以下の通り：語の集合$S\subset \Sigma^{\ast}$がprefix-freeならば、
+$\sum_{w\in S} \frac{1}{2^{|w|}} \leq 1$</p>
+
+<p>$S$がprefix-freeでなかったら、結論は成立するとは限らない。例えば$S = \lbrace 0, 1, 00\rbrace$などが反例である。</p>
+
+<p>証明は次の通り。
+確率1/2ずつで表裏が出るコインを投げる過程を繰り返して行いながら$\Sigma^{\ast}$の元を作成する過程を考える。
+初期状態は空文字で、各試行で表が出たら0、裏が出たら1を一番後ろに追加する。もし$S$のいずれかの元が得られたらそこでコイン投げを終了する。
+この過程では$S$の元が一つ得られて終了するか、永遠に過程が終わらないかのいずれかの事象が起こる。
+さらに$S$がprefix-freeであるという条件から、任意の$w\in S$に対して、$w$が得られるコイン投げ過程の途中で他の$S$の元が得られることはない。
+$w\in S$が得られる確率は$1/2^{|w|}$なので、</p>
+
+<p>$1 \geq $ ($S$のいずれかの元が得られる確率) $= \sum_{w\in S}$ ($w$が得られる確率) 
+$=\sum_{w\in S} \frac{1}{2^{|w|}}$</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -658,53 +714,6 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/13/resume/">小道具集め</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-13T08:25:00+09:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近他の人と議論する機会が多くなってきて特に思うのが、パッと取り出せる知識の引き出しの重要性。確かにWikipediaや個人のウェブサイトなど辞書的に利用できるようなウェブサイトは多数あり、それらに書いてあるから必要になった時に調べれば良いというのは一理あるけれど、そもそも今の自分に必要な情報がある事に気づいて調べられるためには、そのきっかけとなる引き出しが必要。それに、発展した分野の常套手段に関する確かな知識は議論している時に適切な方向性に素早くに進むのに強力な道具になる。</p>
-
-<p>数式がメインの論文では、著者が証明したい定理の補題として、マイナーな等式や不等式評価をreferenceとして紹介されることがある。そういったものをストックとして貯めてるのは、手持ちの武器を充実させるのに役立つのではないかとふと思った。</p>
-
-<p>というわけで、論文や本・Wikipediaなどを読んだ時に、気になった定理・等式・不等式などをまとめてみようと思う。
-とりあえず数学の定理や補題に焦点を絞るけれど、うまくいきそうだったら別の種類にも試してみたい。</p>
-
-<p>今年のはじめにブログを書く宣言していたにも関わらずなんだかんだ言って、結局放置してしまっていたので、これを気にこのブログを掘り出した。
-ブログを再開するついでにこれまで寝かしていたいくつかの記事（主にOctpressのセッティングに関する記事）を公開した。
-目的がはっきりしているから今度はブログ書きを継続できるといいな。</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -718,6 +727,10 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/04/kraft-inequality/">Kraftの不等式</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a>
@@ -735,10 +748,6 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
         <a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/08/25/markov-inequality/">Markov&#8217;s Inequality</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -747,7 +756,7 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (6)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (7)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   
