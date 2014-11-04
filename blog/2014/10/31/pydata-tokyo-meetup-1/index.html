@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PyData Tokyo MeetupでCaffeとmafについて話しました - 読書帳</title>
+  <meta name="author" content="Kenta OONO">
+
+  
+  <meta name="description" content="10月30日のPyData Tokyo MeetUp #1にて「Caffeとmafを用いたディープラーニング開発・実験方法」というタイトルで発表を行いました。
+発表資料はSlideShareで公開しています。当日の発表に関する情報はconnpassにまとめられています（ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/10/31/pydata-tokyo-meetup-1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">読書帳</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:delta2323.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PyData Tokyo MeetupでCaffeとmafについて話しました</h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-10-31T22:09:19+09:00" pubdate data-updated="true">Oct 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>10月30日のPyData Tokyo MeetUp #1にて「Caffeとmafを用いたディープラーニング開発・実験方法」というタイトルで発表を行いました。
+発表資料はSlideShareで公開しています。当日の発表に関する情報はconnpassにまとめられています（私以外の発表の資料へのリンクや当日のUstreamでの配信へのリンクもあるようです）。また、当日までのtwitterの反応はtogetterにもまとめられていました。</p>
+
+<ul>
+  <li><a href="http://pydatatokyo.connpass.com/event/9543/">PyData Tokyo Meetup #1 - Deep Learning(connpass)</a></li>
+  <li><a href="http://togetter.com/li/739027?page=1">togetter</a></li>
+</ul>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/40911070 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>勉強会の立ち上げの会での講演という大役で恐れ多くありましたが、当日は質問や議論で盛り上がり安心しました。
+発表の機会を頂きましたPyData発起人の皆様、発表を聞いてくださった方々に改めてお礼を申し上げます。</p>
+
+<!-- more -->
+
+<h2 id="section">発表内容について</h2>
+
+<p>今回はディープラーニングライブラリの中でも特に開発が活発に行われているCaffeと、PFI/PFNで開発している実験ビルドツールのmafをそれぞれ紹介し、
+それらを組み合わせて使うデモを行いました。</p>
+
+<p>発起人の</p>
+
+<h2 id="section-1">質問の回答</h2>
+
+<p>頂いた質問について、きちんと答えられなかったものがいくつかありましたので、ここで改めて回答いたします。
+（自分が質問を間違って理解していたら申し訳ありません。指摘していただけるとありがたいです）</p>
+
+<h3 id="sparsitybloblayer">SparsityのあるBlob/Layerについて</h3>
+
+<p>入力が高次元の場合、重みやデータに何らかのsparsityの制約をいれる事ができないかというお話ですが、</p>
+
+<h3 id="mafcaffe-j1">mafをCaffeで実行する時の-j1オプションについて</h3>
+
+<p>mafを用いてCaffeを実行する際、1並列での実行を指定する-j1オプションを付けるのはなぜかという質問にきちんと回答できていませんでした。
+Caffeでは、Data Layerで入力として与えるファイルは適切な形式に変換する必要があります。
+その中の一つであるleveldb形式では、複数のプロセスから同時にデータにアクセスすることができません。
+そのため、mafで同じData Layerを実行する複数のタスクが並列に走った場合、競合が発生します。
+その他の形式（LMDB, HDF5形式）の場合にはこのような問題は私の知る限りでは起きていないようです。</p>
+
+<h3 id="mac-os-109caffe">Mac OS 10.9でのCaffeのインストールについて</h3>
+
+<p>やり方は公式のインストールの手順書に書かれていますが、Mac OS 10.9でのインストールは若干手間がかかります。
+この理由の一つが、Mac OS 10.9のデフォルトc++コンパイラであるClang++がデフォルトではlibc++を用いるのですが、
+NVIDIAのCUDAがlibstdc++でコンパイルしたライブラリとしかリンクできない事があります。</p>
+
+<p>（自分は何らかの手順を間違えたため、インストールができていませんでした。
+きちんとは追求していませんが、インストール済の依存ライブラリがlibc++でビルドされていたのが原因のようです。
+ただ、公式で稼働実績があるとありますので、このインストール手順自体は正しいと思います）。</p>
+
+<p>GPUを使わないのであれば、10.8以前の方法に1箇所手順を加えるだけでインストールを行うことができます。
+具体的には、Makefile.configの中で–libstdc++を利用する部分を削除し、コメントアウトされているCPU_ONLY:=1を削除すればよいです。
+これにより、GPUを使わない設定なり、また既にインストール済のlibc++でビルドされたツールとも問題なくリンクできます。</p>
+
+<p>この修正は、twitterで藤田さん(@muupan)に指摘していただきました。ありがとうございます。</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kenta OONO</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-31T22:09:19+09:00" pubdate data-updated="true">Oct 31<span>st</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/10/31/pydata-tokyo-meetup-1/" data-via="delta2323_" data-counturl="http://delta2323.github.io/blog/2014/10/31/pydata-tokyo-meetup-1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/11/delta-rule/" title="Previous Post: Delta Rule再訪">&laquo; Delta Rule再訪</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/11/04/kraft-inequality/" title="Next Post: Kraftの不等式">Kraftの不等式 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>大野健太（おおのけんた）<p/>
+  <p>1986年生まれ、株式会社Preferred Networks所属、興味分野は機械学習・数学（純粋/応用両方）などです</p>
+  <p>mailto: oono at preferredjp<br/>
+  twitter: <a href="https://twitter.com/delta2323_">@delta2323_</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/04/kraft-inequality/">Kraftの不等式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/31/pydata-tokyo-meetup-1/">PyData Tokyo MeetupでCaffeとmafについて話しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/11/delta-rule/">Delta Rule再訪</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Top Categories</h1>
+    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (12)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Kenta OONO -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+</html>
+

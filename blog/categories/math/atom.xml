@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | 読書帳]]></title>
   <link href="http://delta2323.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-11-04T23:22:08+09:00</updated>
+  <updated>2014-11-05T00:01:17+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -191,27 +191,45 @@ M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] 
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Markov's Inequality]]></title>
-    <link href="http://delta2323.github.io/blog/2014/08/25/markov-inequality/"/>
-    <updated>2014-08-25T20:58:00+09:00</updated>
-    <id>http://delta2323.github.io/blog/2014/08/25/markov-inequality</id>
-    <content type="html"><![CDATA[<p>非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
-Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
-Wikipediaにあるように証明は数行で終わるのだけれど、応用範囲がものすごく広くここからこの系統の種々の不等式を導ける。</p>
+    <title type="html"><![CDATA[Chernoff Inequality]]></title>
+    <link href="http://delta2323.github.io/blog/2014/08/25/chernoff-inequality/"/>
+    <updated>2014-08-25T21:17:15+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/08/25/chernoff-inequality</id>
+    <content type="html"><![CDATA[<p>$X_{1}, \ldots, X_{n}$を独立な確率変数（同分布である必要はない）で、ある$K&gt;0$が存在して、任意の$i$についてalmost surelyに$|X_{i}| &lt; K$が成立するとする。
+確率変数$X_{i}$の期待値を$\mu_{i}$、分散を$\sigma_{i}^{2}$とし、$\mu = \sum_{i=1}^{n} \mu_{i}$、$\sigma^{2} = \sum_{i=1}^{n} \sigma_{i}^{2}$、
+$S=\sum_{i=1}^{n}X_{i}$と置く。</p>
 
-<p>$X$を$\mathbb{R}$に値を取る非負の確率変数。$t&gt;0$に対して以下が成立する。</p>
+<p>この時、定数$C, c$が存在して、任意の$\lambda &gt; 0$に対し、</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align*}
+  \mathbb{P}(|S - \mu| > \lambda \sigma) <  C\max (\exp(-c\lambda^{2}), \exp(-c\lambda\sigma /K))
+\end{align*}
+ %]]&gt;</script>
+
+<p>証明は、まず、Hoeffding’s lammaと呼ばれる補題から、$X$の積率母関数に関する評価、</p>
 
 <script type="math/tex; mode=display">
 \begin{align*}
-  \mathbb{P}\left[ X \geq t\right] \leq \frac{\mathbb{E}[X]}{t}
+  \mathbb{E} \exp(tX) \leq \exp(O(t^{2} \sigma_{i}^{2}))
 \end{align*}
 </script>
 
-<p>$X$が非負の条件を外すと簡単に反例を作れる（例えば$X$が常に負を取るような確率変数など）。</p>
+<p>を得る。ここから、$X_{i}$達の独立性より$\mathbb{E}\exp(tS)$を$X_{i}$の積率母関数の積で書けるので、それぞれの項を上の不等式で評価する。
+最後にMarkovの補題を用いて、定理の左辺を上から評価し、最後に$t$について最小値をとる事で求める不等式が得られる。</p>
 
 <h2 id="section">出典</h2>
 
-<p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
+<p>下記参考文献の75ページ</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li><a href="http://terrytao.files.wordpress.com/2011/02/matrix-book.pdf">Topics in random matrix theory</a></li>
+</ul>
+
+<p>ランダム行列に関するTerence Tao氏講義ノート</p>
 ]]></content>
   </entry>
   

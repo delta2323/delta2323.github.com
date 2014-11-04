@@ -128,6 +128,219 @@ $=\sum_{w\in S} \frac{1}{2^{|w|}}$</p>
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/10/31/pydata-tokyo-meetup-1/">PyData Tokyo MeetupでCaffeとmafについて話しました</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-10-31T22:09:19+09:00" pubdate data-updated="true">Oct 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>10月30日のPyData Tokyo MeetUp #1にて「Caffeとmafを用いたディープラーニング開発・実験方法」というタイトルで発表を行いました。
+発表資料はSlideShareで公開しています。当日の発表に関する情報はconnpassにまとめられています（私以外の発表の資料へのリンクや当日のUstreamでの配信へのリンクもあるようです）。また、当日までのtwitterの反応はtogetterにもまとめられていました。</p>
+
+<ul>
+  <li><a href="http://pydatatokyo.connpass.com/event/9543/">PyData Tokyo Meetup #1 - Deep Learning(connpass)</a></li>
+  <li><a href="http://togetter.com/li/739027?page=1">togetter</a></li>
+</ul>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/40911070 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>勉強会の立ち上げの会での講演という大役で恐れ多くありましたが、当日は質問や議論で盛り上がり安心しました。
+発表の機会を頂きましたPyData発起人の皆様、発表を聞いてくださった方々に改めてお礼を申し上げます。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/10/31/pydata-tokyo-meetup-1/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/11/delta-rule/">Delta Rule再訪</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-10-11T21:43:45+09:00" pubdate data-updated="true">Oct 11<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="back-propagation">Back Propagationがわからなくなった</h2>
+
+<p>Neural NetworkでのいわゆるDelta Ruleがいろいろな文脈で
+最近のNeural Networkのアーキテクチャのバリエーションで学習に関しての記述で「これはBack Propagationでできる」と一言書いてあるのだけど、なんでそれが正しいのかがわからないことがよくあったりする。</p>
+
+<p>Back Propagationは損失関数をパラメータで偏微分した値が、DAGを逆向きに向かう方向に帰納的に求めることができるというもので、それを使ってSGD、AdaGrad、モーメント法などの方法でパラメータを更新することでNeural Networkを学習していくテクニックの事を言う。</p>
+
+<p>上のようにhandyに書かれると「えっ」となる程度にはまだ扱い慣れていない。
+本質的な計算は連鎖律だけなので、特別難しい事はしてないはず。
+こういうのを理解するには一回自分で手を動かして見るに限る。</p>
+
+<p>というわけで、Back Propagationがどういう時にできるのかを考えるために、適当な設定で実際にそれを導いてみる。</p>
+
+<h2 id="section">問題設定</h2>
+
+<p>まず問題設定を考える。ちょっと長いがここの部分が自分とこれを読んでもらう方々のコミュニケーションを行う基礎になるので丁寧に行うことにする。
+（ちょっと冗長に書きすぎている気がするけれど、逆に問題設定をいい加減に書いて、計算式だけ書いている読者に伝わっていない論文や本の方が多いように思う。
+記述量は少なくて一見簡単そうに見えるけれど、不正確に書かれているものと、記述量が多くて読むのに時間はかかるけれど、正確に書かれているものだったら、自分は後者の方がいいように思う。正確に書いていないのは読者のためではなく、正確に書けるほど理解できていないのではないかと穿ってみてしまう）。</p>
+
+<p>$G = (V, E)$を有向グラフとし、GはDAGであるとする。
+$v \in V$に対して$\mathrm{Pa}(v)\subset V$で$v$の親ノード、$\mathrm{Ch}(v)\subset V$で$v$の子ノードを表す。
+親ノードがない（すなわち、$\mathrm{Pa}(v) = \emptyset$）ノードを入力ノード、子ノードがない（すなわち$\mathrm{Ch}(v) = \emptyset$）出力ノードとし、
+入力ノード全体を$I \subset V$, 出力ノード全体を$O \subset V$で表す。</p>
+
+<p>各エッジに対してそのエッジの重みを表す関数を$w: E \to \mathbb{R}$と書く。
+$(u, v) \in E$に対して、$w(u, v)$を$w_{uv}$と書くことにする。</p>
+
+<p>各ノードに対する入出力に関する文字設定を行っていく。
+$x: V \to \mathbb{R}$をノードへの入力を表す関数、$y: V \to \mathbb{R}$をノードの出力を表す関数とする。
+すなわち、ノード$v$には入力$x(v)$が入力され、$y(v)$が出力される。
+この2つの関数を以下の方法で帰納的に決めていく。</p>
+
+<p>入力ノードに入力$x_{I} \in \mathbb{R}^{|I|}$を与えて、DAG $G$の方向に沿って計算を進めていく（すなわちforward）していくことで出力を得る。
+$x_{I}$を成分表示して、$x_{I} = (x_{v})_{v\in I}$とも書くことにする。</p>
+
+<p>$v$が入力ノード、すなわち$v\in I$の時には $x(v) = x_{v}$とする。
+$v$が入力ノードでない時には、$x(v) = \sum_{u\in \mathrm{Pa}(v)} w_{uv}h(u)$とする（$v$が入力ノードでない時には$\mathrm{Pa}(v)\not = \emptyset$であることに注意）。</p>
+
+<p>入力関数$x$を用いて、出力関数$y$を$y(v) = \sigma(x(v))$とする。ここで、$\sigma : \mathbb{R} \to \mathbb{R}$は活性化関数である。</p>
+
+<p>出力関数の一部$(y(v))_{v\in O}$をDAGの出力と思い、これを$y_{O}$と書く。
+DAGとDAGの”外の世界”とのつながりを考えると、DAGには入力$x_{I}$を与えて、出力$y_{O}$を得ていると見ることができる。</p>
+
+<p>以下では、$x(v), y(v)$をそれぞれ$x_{v}, y_{v}$と書く。
+入力ノードに関しては$x_{v}$は、関数$x$からくる$x_{v}$と、DAG $G$に与える入力$x_{I}$の一部としての$x_{v}$の2通りがあるが上記の定義から、これは同一のものであるので誤解はない。出力ノードに関する$y_{v}$についても同様である。</p>
+
+<p>損失関数を$L: \mathbb{R}^{|O|} \times \mathbb{R}^{|O|} \to \mathbb{R}$とする。
+その出力結果と教師ラベル$t_{O} \in \mathbb{R}^{|O|}$と比較して損失$L(y_{O}, t_{O})$を得る。
+以降$L$は$(y_{O}, t_{O})$で評価した値でしか使わないので、記号を簡単にするため、$L(y_{O}, t_{O})$を単に$L$と書いてしまう。</p>
+
+<p>今計算したいものは、$G$が持つパラメータで、損失を微分した値である。
+今回$G$が持つパラメータはノード間の重み$(w_{uv})_{(u, v) \in E}$なので、計算したいのは$\partial L / \partial w_{uv}$である
+（以下では単なる勾配と言ったら、この値の事を指すことにする）。</p>
+
+<h2 id="section-1">勾配・エラーを計算していく</h2>
+
+<p>というわけで上記の設定を元に計算していきたいのが、その前に変数間の依存関係を確認しておく。Notationの定義をきちんとしていないが、3段だけ展開するとこうなる。</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+L
+&= L(\{y_{v} | v\in O\}) \\ 
+&= L(\{y_{v}(\{w_{uv}, y_{u}| u\in \mathrm{Pa}(v)\}) | v\in O\}) \\
+&= L(\{y_{v}(\{w_{uv}, y_{u}(\{w_{wu}, y_{w}| w\in \mathrm{Pa}(u)\})| u\in \mathrm{Pa}(v)\}) | v\in O\}) \\ 
+\end{align}
+ %]]></script>
+
+<p>天下り的だがここで誤差関数を定義する。各ノード$v$に対して、誤差$\delta_{v}\in \mathbb{R}$を
+$\delta_{v} = \sigma ‘(v) \frac{\partial L}{\partial y_{v}}$で定義する。</p>
+
+<p>Back Propagationというと、$\partial L / \partial w_{uv}$を帰納的に計算していくものと説明されることが多いが、
+帰納的に計算されるのは誤差で、勾配は誤差から計算すると考えると理解しやすい。</p>
+
+<p>まず、この式を愚直計算してみる。</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+\frac{\partial L}{\partial w_{uv}}
+&= \frac{\partial y_{v}}{\partial w_{uv}} \frac{\partial L}{\partial y_{v}}\\
+&= \frac{\partial h_{v}}{\partial w_{uv}} \frac{\partial y_{v}}{\partial h_{v}} \frac{\partial L}{\partial y_{v}}\\
+&= y_{u} \sigma'(h_{v}) \frac{\partial L}{\partial y_{v}}\\
+&= y_{u} \delta_{v}
+\end{align}
+ %]]></script>
+
+<p>なので、勾配を計算するには、誤差を計算できればよい。</p>
+
+<h3 id="base-step-v">Base Step: $v$が出力ノードの時</h3>
+
+<p>今の問題設定では、活性化関数を微分した値$\sigma’$はforwardするときに計算できている。また、損失関数を出力ノードでの出力値で微分した値も計算できる。
+従って、$v$が出力ノードの場合には、誤差$\delta_{v}$を計算でき、勾配も計算できる。</p>
+
+<h3 id="inductive-step-v">Inductive Step: $v$が一般のノードの時</h3>
+
+<p>$v$が一般のノード場合には、$\sigma’(h_{v})$は計算できるが、$\frac{\partial L}{\partial y_{v}}$の方は直接は計算出来ない。
+そこで、この計算をもう少し進めることにする</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+\frac{\partial L}{\partial y_{v}}
+&= \sum_{w\in \mathrm{Ch}(v)} \frac{\partial y_{w}}{\partial y_{v}} \frac{\partial L}{\partial y_{w}}\\
+&= \sum_{w\in \mathrm{Ch}(v)} \frac{\partial h_{w}}{\partial y_{v}} \frac{\partial y_{w}}{\partial h_{w}} \frac{\partial L}{\partial y_{w}}\\
+&= \sum_{w\in \mathrm{Ch}(v)} \frac{\partial h_{w}}{\partial y_{v}} \sigma'(h_{w}) \frac{\partial L}{\partial y_{w}}\\
+&= \sum_{w\in \mathrm{Ch}(v)} w_{vw} \delta_{w}
+\end{align}
+ %]]></script>
+
+<p>従って、次の式が得られる</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{align}
+\delta_{v} = \sigma'(h_{v}) \frac{\partial L}{\partial y_{v}}\\
+&= \sigma'(h_{v}) \sum_{w\in \mathrm{Ch}(v)} w_{vw} \delta_{w}
+\end{align}
+ %]]></script>
+
+<p>この式をよく見てみると、あるノード$v$の誤差$\delta_{v}$はその子ノード達の誤差によって計算することができることがわかる。
+これが、「誤差をDAGとは逆向きに帰納的に計算していく」というBack Propagationである。</p>
+
+<p>一度誤差が計算できてしまえば、あとは勾配は誤差に出力値をかければ得られる。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a></h1>
     
     
@@ -171,6 +384,365 @@ $=\sum_{w\in S} \frac{1}{2^{|w|}}$</p>
     <footer>
       <a rel="full-article" href="/blog/2014/10/09/experiment-oriented-program/">Read on &rarr;</a>
     </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-10-07T19:17:01+09:00" pubdate data-updated="true">Oct 7<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>http://qiita.com/katryo/items/918667f28301fdec89ba
+http://matplotlib.org/users/customizing.html</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/03/parser-tokenizer-pattern/">Tokenizer_builder_pattern</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-10-03T05:58:08+09:00" pubdate data-updated="true">Oct 3<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>mafで最近よく使うお気に入りパターン。</p>
+
+<p>データのフォーマットを変換するときに、処理の最初にデータをパーズし、処理の最後にデータを後段の処理モジュールが受け入れられるフォーマットで出力する必要がある。</p>
+
+<p>このパターンはデータをパーズする具体的方法を記述する部分と具体的にデータファイル全体をパーズする
+具体例として、vowpal形式のファイルを入力し、何らかの処理をした上で、libsvm形式で出力する場合を考える。
+それぞれの形式は以下を参照</p>
+
+<p>vowpal
+https://github.com/JohnLangford/vowpal_wabbit/wiki/Input-format
+libsvm
+https://github.com/cjlin1/libsvm/blob/master/README</p>
+
+<p>どちらも1行に1サンプルの情報が記述されている
+まず、1行の文字列を得て、パーズを行う関数を用意する</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def vowpal_tokenizer(line):
+</span><span class="line">    
+</span><span class="line">    pass</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>そして、mafのタスクにparserを渡す</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">exp(source = 'path/to/input/file',
+</span><span class="line">    target = 'maf/output/node',
+</span><span class="line">	rule = parse_each_line(tokenizer = util.parser.vowpal_tokenizer)
+</span><span class="line">	)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>ruleの中でtokenizerに1行ずつ順にデータを渡していく</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">@maflib.util.rule
+</span><span class="line">def parse_each_line(task):
+</span><span class="line">    tokenizer = task.paramter['tokenizer']
+</span><span class="line">	samples = []
+</span><span class="line">    with open(task.inputs[0].read()) as i:
+</span><span class="line">	     for line in i.readlines():
+</span><span class="line">		     sample = tokenizer(line)
+</span><span class="line">			 samples.append(samples)
+</span><span class="line">    task.outputs[0].write(json.dumps(samples))</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>出力についても同様に、builderを関数として用意して、ruleに渡す</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">def libsvm_builder(label, values):
+</span><span class="line">    pass</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">exp(source = 'maf/input/node',
+</span><span class="line">    target = 'maf/output/node',
+</span><span class="line">	rule = builder_each_line(builder = util.builder.libsvm_builder)
+</span><span class="line">)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>builderの具体的な処理の中身は次の通り</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">@maflib.util.rule
+</span><span class="line">def builder_each_line(task):
+</span><span class="line">    builder = task.paramter['builder']
+</span><span class="line">    j = json.loads(task.inputs[0].read())
+</span><span class="line">	for sample in j
+</span><span class="line">	    line = builder(sample['label'], sample['feature'])
+</span><span class="line">		task.outputs[0].write(line, 'a')</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>データ形式の変換はtokenizerとbuilderを組み合わせれば良い</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">exp(source = 'path/to/input/file',
+</span><span class="line">    target = 'path/to/output/file',
+</span><span class="line">	rule = convert_each_line(tokenizer = util.tokenizer.vowpal_tokenizer,
+</span><span class="line">	                         builder = util.builder.libsvm_builder
+</span><span class="line">	)
+</span><span class="line">)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>convert関数には具体的なtokenizer, builderの手続きは書かず、ロジックだけを書く</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">@maflib.util.rule
+</span><span class="line">def convert_each_line(task):
+</span><span class="line">    tokenizer = task.parameter['tokenizer']
+</span><span class="line">    builder = task.paramter['builder']
+</span><span class="line">	with open(task.inputs[0], 'r') as i, open(task.outputs[0], 'w') as o:
+</span><span class="line">	    for line in i.readlines():
+</span><span class="line">		    o.write(builder(tokenizer(line)))</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>データのフォーマットはいろいろなバラエティがある一方、入力データの処理の仕方はフォーマットによらず共通している（例えば1行に1サンプルなど）場合が多く、
+このパターンでは、パーズの具体的な手続きとファイル全体の処理方法を分離することでそれをプラガブルにしている。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/23/suwa-todo-mcmc/">Suwa_todo_mcmc</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-09-23T18:23:28+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>http://arxiv.org/pdf/1106.3562v2.pdf
+http://www-adsys.sys.i.kyoto-u.ac.jp/mohzeki/YSMSPIP/Abst2012/abst_suwa.pdf</p>
+
+<p>http://www-adsys.sys.i.kyoto-u.ac.jp/mohzeki/YSMSPIP/Proc2012/all.pdf</p>
+
+<p>適当な確率分布π(x)をMCMCでサンプリングする場合、πT = πとなるような遷移行列Tを取ってきて、</p>
+
+<ul>
+  <li>
+    <p>適当な初期状態x_{0}をとる</p>
+  </li>
+  <li>
+    <p>T<em>{x</em>{t}}からランダムにサンプリングして、x_{t+1}とする</p>
+  </li>
+</ul>
+
+<p>を繰り返すことによってサンプリングできる。
+（xは離散値を取るとする）</p>
+
+<p>πT = πを満たすための十分条件として、詳細釣り合い条件π(x) T<em>{xy} = π(y)T</em>{yx}がある。
+これは十分条件でしかないが、この論文の主張によると、詳細釣り合い条件を満たしていないような遷移確率はこの論文での方法が初めてであるとのこと。</p>
+
+<p>この論文では、メトロポリスヘイスティングやギブスサンプリングで発生する棄却確率を低減でき、また多くの場合棄却確率を0にできることを主張している。</p>
+
+<p>MCMCでサンプリングを行う場合π<em>{x}そのものは計算出来ないと仮定することが多いので、それに比例するw</em>{x}を考える。πT = πはwT = wと同値。
+v<em>{xy} = w</em>{x} T<em>{xy}とすると、この条件は、w</em>{x} = Σ<em>{y} v</em>{xy}とかける。さらに、棄却確率は Σ<em>{x} v</em>{xx}/Σ<em>{x} w</em>{x}とかける。</p>
+
+<p>そこで、この論文では、w<em>{x}達をgivenとして、w</em>{x} = Σ<em>{y} v</em>{xy}, w<em>{x} = Σ</em>{y} v<em>{yx} を満たし、棄却確率を最小化するようなv</em>{xy}達を求めるアルゴリズムを提案している。
+この問題はallocation problemと呼ばれている。</p>
+
+<p>確かに、アルゴリズムはシンプルであるのだが、疑問なのがつぎの点である。実際にサンプリングをする時には、v<em>{xy}ではなく、(T</em>{xy})<em>{y} where T</em>{xy} = v<em>{xy}/w</em>{x} の分布に従ってサンプリングを行うが、
+これは本当に実行できるのかという点である。もともとMCMCはw<em>{x}の分配関数を計算出来ない（intractable）であることからこのような遷移確率を用いたサンプリングを行っているので、Σ</em>{x}は実行できないはずである。
+例えばxは2値を取る1000個のelementの全状態みたいなものを考えると、xの取りうる値は2^{1000}である。</p>
+
+<p>そうすると、そもそもこのT_{xy}達をメモリで持てるという仮定や、その上で確率分布を取るといったことが可能かどうかは怪しいのではと思う。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/23/large-deviation-intro/">Large_deviation_intro</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-09-23T14:22:05+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>読んだ
+http://people.math.umass.edu/~rsellis/pdf-files/boltzmann.pdf</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/15/birkhoff-von-neumann/">Birkhoff_von_neumann</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-09-15T23:36:35+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前に書いたHoffman–Wielandtの定理に関連してもう一つ。</p>
+
+<p>Hoffman-Wielangtの定理は、Todd Kemp氏のレクチャーノートのLemma 5.4として証明されている。
+Birkhoff-von Neumannの定理を用いると、その証明が比較的平易に行える事がわかった。</p>
+
+<p>まず、Birkhoff-von Neumannの定理のステートメントを述べる為にいくつか言葉の定義を行う。</p>
+
+<p>$d$次元の正方行列が、2重確率行列 (doubly stochastic matrix)であるとは、各行、各列の和が全て1である事を言う。
+2つの2重確率行列の重み付き平均は再び2重確率行列となるので、2重確率行列全体の集合全体は凸であり、さらに多面体である事が知られている。これをBirkohff polytopeという。</p>
+
+<p>特別な2重確率行列として、permutation matrixがある。これは、各行・各列に1つだけ1、残りが0である製法行列をいう。ベクトルにpermutation matrixをかけるとベクトルのエントリをシャッフル効果があるのでこう呼ばれる。</p>
+
+<p>以上の準備のもとで、Birkhoff polytopeはpermutation matrix全体の集合の凸包であるというのが、Birkhoff-von Neumann定理である。</p>
+
+<p>このことの帰結、Birkhoff polytope上に値を取る線形関数はpermutation matrix乗で最大・最小値を取る事がわかる。
+前述のKemp氏のレクチャーノートでは、2つの対称行列の固有値を小さい順に並べた時の差の2乗の和をBirkhoff polytope上の線形関数で上から抑えた上でBirkhoff-von Neumannの定理を適用、考える対象をpermutation matrixに絞った上で、更に固有値を小さい順に並べていることから、permutationの中でも、単位行列で最大値を取ることを示し、それを式変形すると、その値は差の2乗のTraceであることを示している。</p>
+
+<p>http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf</p>
+</div>
+  
   
 
 
@@ -228,492 +800,6 @@ $=\sum_{w\in S} \frac{1}{2^{|w|}}$</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-09-15T21:22:00+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>NIPS2012のランダム行列のチュートリアルからの抜粋。</p>
-
-<p>$\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、非対角要素は標準正規分布に従う独立な確率変数とする。
-すなわち、</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-
-\begin{align*}
-  \mathbf{W}_{d} = \sum_{i < j} X_{ij} \left(\mathbf{E}_{ij} + \mathbf{E}_{ji}\right)\quad
-  (X_{ij})_{i < j} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_{d(d-1)/2}) 
-\end{align*}
- %]]></script>
-
-<p>$\lambda_{d}$を$\mathbf{W}_{d}$の最大固有値とすると、$\lambda_{d}/\sqrt{d}$は$d\to \infty$でalmost surelyに2に収束する。</p>
-
-<p>参考にしているチュートリアルでの比較的簡単な証明で得られる結果（参考資料の定理4.1.1）では、
-ここまでtightなバウンドを示すことができない（$\log d$のfactorがかかる）。
-これ自体の証明は結構大変らしいが、できれば何か直感的な理解ができるような説明があるとうれしい。</p>
-
-<p>また、ここで$\mathbf{W}_{d}$の事をWigner行列と呼んでいるが、Wigner行列自体はもっと広いクラスの行列を指す言葉の様子。
-統計物理の文脈でよく出るようで、関連するチュートリアルや講義資料が多く見つかった。</p>
-
-<p>（追記）</p>
-
-<p>しばらく前にここまで原稿を書いた後によくよく考えたら、これはWigner’s Semicircle Lawからすぐに示せることに気づいた。
-実際、以下のTodd Kemp氏のレクチャーノートで、Lemma 6.1としてこの事実をSemicircle Lawから示している。
-NIPS2012のチュートリアルにあった「難しい定理」というのはSemicircle Lawの事だったのかな。</p>
-
-<p>ついでに上に挙げたWigner行列のもっと広義の定義というのは、Kemp氏のチュートリアルによると、各エントリが独立かつ2乗の期待値が有限。さらに対角成分はi.i.d.の分布、非対角成分も（対角成分とは異なるかもしれない）i.i.d.の分布というものを言う（従って、スカラーの確率変数としては対角成分と非対角成分の2種類しかなく、2乗の期待値もその2種類での有限性だけ言えば十分）。
-また、Wigner行列を$d^{-1/2}$（$d$は行列のサイズ）でスケール変換したものもWigner行列と言うらしい。</p>
-
-<h2 id="section">出典</h2>
-
-<p>Tropp氏のチュートリアルの35ページ、4.4.1章</p>
-
-<h2 id="section-1">参考文献</h2>
-
-<ul>
-  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
-</ul>
-
-<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
-
-<ul>
-  <li><a href="http://www.umpa.ens-lyon.fr/%7Eaguionne/pcmipark.pdf">Statistical Mechanics and Random Matrices</a></li>
-</ul>
-
-<p>Alice Guionnet氏のレクチャーノート</p>
-
-<ul>
-  <li><a href="http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf">MATH 247A: INTRODUCTION TO RANDOM MATRIX THEORY</a></li>
-</ul>
-
-<p>Todd Kemp氏のレクチャーノート</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-26T22:00:00+09:00" pubdate data-updated="true">Aug 26<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>通常の確率変数と同様に行列に値を取る確率変数に対しても積率母関数とキュムラント母関数を定義できる。
-具体的には$d$次正方行列に値を取る確率変数$\mathbf{X}$に対して、その積率母関数(Moment Generating Function:MGF)$ M_{\mathbf{X}}$とキュムラント母関数(Cummurant Generating Function:CGF) $\Xi_{\mathbf{X}}$をスカラー値の場合と同様の形式に以下で定義する。すなわち、</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  M_{\mathbf{X}}(\theta) = \mathbb{E}\left[ \exp (\theta \mathbf{X})\right]\\
-  \Xi_{\mathbf{X}}(\theta) = \log \mathbb{E}\left[ \exp (\theta \mathbf{X})\right]
-\end{align*}
-</script>
-
-<p>ここで$\theta \in \mathbb{R}$。</p>
-
-<p>すると、CGFに関して次が成立する。$\mathbf{X}_{i}(i = 1, \ldots, n)$を$d$次正方行列に値を取る独立な確率変数として、次の不等式が成立する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathrm{tr} \exp \left(\Xi_{\left(\sum_{i} \mathbf{X}_{i}\right)}(\theta)\right) \leq \mathrm{tr} \exp \left( \sum_{i} \Xi_{\mathbf{X}_{i}} (\theta)\right).
-\end{align*}
-</script>
-
-<p>スカラー値の確率変数の場合、MGFには乗法性、CGFには加法性が成立する。MGFの乗法性は次のように示せる。</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-
-\begin{align*}
-M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] \\
-                          &= \mathbb{E}\left[ \prod_{i} \exp(\theta X_{i}) \right] \\
-                          &= \prod_{i} \mathbb{E}\left[ \exp(\theta X_{i}) \right] \\
-						  &= \prod_{i} M_{X_{i}} (\theta)
-\end{align*}
- %]]></script>
-
-<p>ここで、3行目の等式では、$X_{i}$達の独立性を用いた。この式の$\log$を取れば、CGFの加法性も言える。</p>
-
-<p>しかし、行列値の場合はこのような式変形はできない。
-スカラー値$x, y$に対しては、$\exp(x+y) = \exp(x)\exp(y)$が成立する。
-一方、行列$\mathrm{X}, \mathrm{Y}$に対しては、一般的には$\exp(\mathrm{X}+\mathrm{Y}) = \exp(\mathrm{X})\exp(\mathrm{Y})$が成立せず、従って、2行目の等式が成立しないためである
-（例えば$\mathrm{X}, \mathrm{Y}$が可換である事は$\exp$の分配法則が成立する十分条件である）。</p>
-
-<p>冒頭に上げた定理は、それにもかかわらず$\mathrm{tr} \exp$を取ればCGFに関しては劣加法性だけは成立している事を主張している。</p>
-
-<h2 id="section">出典</h2>
-
-<p>下記のチュートリアルの25ページ、Lemma 3.5.1</p>
-
-<h2 id="section-1">参考文献</h2>
-
-<ul>
-  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
-</ul>
-
-<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/25/markov-inequality/">Markov&#8217;s Inequality</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-25T20:58:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
-Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
-Wikipediaにあるように証明は数行で終わるのだけれど、応用範囲がものすごく広くここからこの系統の種々の不等式を導ける。</p>
-
-<p>$X$を$\mathbb{R}$に値を取る非負の確率変数。$t&gt;0$に対して以下が成立する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathbb{P}\left[ X \geq t\right] \leq \frac{\mathbb{E}[X]}{t}
-\end{align*}
-</script>
-
-<p>$X$が非負の条件を外すと簡単に反例を作れる（例えば$X$が常に負を取るような確率変数など）。</p>
-
-<h2 id="section">出典</h2>
-
-<p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/markdown-mode/">Emacsにmarkdown-modeを導入</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T13:41:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopressのブログの下書きはmarkdownで書かれている。
-業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。</p>
-
-<p>既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">M-x el-get-install markdown-mode</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>基本的には下記のサイトで紹介されている方法で導入できたが、Octopressが自動生成するmarkdownテンプレートの拡張子が.markdownなので、markdonw-modeに紐付ける拡張子は.mdと.markdownの2種類とした。その結果.emacsの設定は以下のようになった。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">;; markdown
-</span><span class="line">(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-</span><span class="line">(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-</span><span class="line">(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">参考サイト</h2>
-
-<ul>
-  <li><a href="http://futurismo.biz/archives/2137">Futurismo</a></li>
-</ul>
-
-<p>この方法で導入することができた。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/top-category-plugin/">トップ画面にカテゴリ一覧を表示する</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>せっかくブログ記事にカテゴリを付与しているのに、カテゴリ名で記事一覧を引く事ができないのは不便なのでトップ画面にカテゴリ一覧を追加した。</p>
-
-<h2 id="section">参考サイト</h2>
-
-<ul>
-  <li><a href="http://qiita.com/amay077/items/3296fdf1ea11c7c9ace4">Octopress Top Categories Plugin を使う</a></li>
-</ul>
-
-<p>amay077さんのQiitaの投稿。記事の通りに作業しうまく導入できた。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/style-change/">スタイルシートを変更する</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopressでスタイルシートをカスタマイズするには、sass/custom/_styles.scssを変更すれば良い。
-例えばこのブログの場合、見出しのフォントが少し大きいと感じたのでサイズを調整した。</p>
-
-<p>例えばこのような設定で各エントリのタイトルのサイズを変更できた（もう少し上手く書けるかもしれないけれど、動いているようなのでこれで良しとしている）。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">.entry-title * {
-</span><span class="line">  font-size: 24px;
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">.entry-title {
-</span><span class="line">  font-size: 24px;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">参考サイト</h2>
-
-<ul>
-  <li><a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Alessandro Melandri</a></li>
-</ul>
-
-<p>この記事の方法で正しく設定できた。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/13/sauer/">Sauer&#8217;s Theorem</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-13T08:26:00+09:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>定理を述べるために、まず関数族に対して、growth functionとVC次元を定義する。
-$X$を集合、$\mathcal{H}$を$X$から${ -1, 1 }$への写像の部分集合とする。
-$X$の有限部分集合の$S \subset X$, $|S| = m$に対して、$\mathcal{H}$の$S$への制限
-$\mathcal{H}\mid_{S}$を次の様に定義する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathcal{H}\left|_{S}\right. = \{(f(x))_{x\in S} \mid f \in \mathcal{H}\}
-\end{align*}
-</script>
-
-<p>さらに、$\mathcal{H}$のgrowth function $g_{\mathcal{H}} : \mathbb{N}\to \mathbb{N}$を次で定義する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  g_{\mathcal{H}}(m) = \max_{S\subset X, |S|=m} \left|\mathcal{H}\left|_{S}\right.\right|
-\end{align*}
-</script>
-
-<p>すると、自明な不等式として、$g_{\mathcal{H}}(m) \leq 2^{m}$が成立する。
-また、ある$m$で等号が成立していたら、任意の$m’ \leq m$でも等号は成立している
-（等号を達成する$m$点集合$S$に対して、$S$の$m’$点部分集合を取れば良い）。</p>
-
-<p>この不等式で等式が成立する最大の$m$を$\mathcal{H}$のVC次元と定義する
-（任意の$m$で等号が成立する場合には、VC次元は無限大と定義する）。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \text{VC-}\mathrm{dim}(\mathcal{H}) = \max \{ m \mid g_{\mathcal{H}}(m) = 2^{m}\}
-\end{align*}
-</script>
-
-<p>以上を準備として、Sauerの定理は次の通り</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  g_{\mathcal{H}}(m) \leq \sum_{i=0}^{\text{VC-}\mathrm{dim}(\mathcal{H})} \binom{m}{i}
-\end{align*}
-</script>
-
-<h2 id="section">出典</h2>
-
-<ul>
-  <li><a href="http://www.cs.huji.ac.il/~shais/IML2014.html">Understanding Machine Learning, Shai Shalev-Shwartz</a>の6.5.1章</li>
-</ul>
-
-<p>会社では著者名を取ってSSS本と呼んでいる。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -725,6 +811,13 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 <aside class="sidebar">
   
     <section>
+  <h1>About Me</h1>
+  <p>大野健太（おおのけんた）<p/>
+  <p>1986年生まれ、株式会社Preferred Networks所属、興味分野は機械学習・数学（純粋/応用両方）などです</p>
+  <p>mailto: oono at preferredjp<br/>
+  twitter: <a href="https://twitter.com/delta2323_">@delta2323_</a></p>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -733,19 +826,19 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
       </li>
     
       <li class="post">
+        <a href="/blog/2014/10/31/pydata-tokyo-meetup-1/">PyData Tokyo MeetupでCaffeとmafについて話しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/11/delta-rule/">Delta Rule再訪</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/09/15/inverse-tangent-addition-formula/">Inverse Tangentの加法定理</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a>
+        <a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a>
       </li>
     
   </ul>
@@ -756,7 +849,7 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (7)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (12)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   

@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Suwa_todo_mcmc - 読書帳</title>
+  <meta name="author" content="Kenta OONO">
+
+  
+  <meta name="description" content="http://arxiv.org/pdf/1106.3562v2.pdf
+http://www-adsys.sys.i.kyoto-u.ac.jp/mohzeki/YSMSPIP/Abst2012/abst_suwa.pdf http://www-adsys.sys.i.kyoto-u.ac.jp &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/09/23/suwa-todo-mcmc">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">読書帳</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:delta2323.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Suwa_todo_mcmc</h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-09-23T18:23:28+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>http://arxiv.org/pdf/1106.3562v2.pdf
+http://www-adsys.sys.i.kyoto-u.ac.jp/mohzeki/YSMSPIP/Abst2012/abst_suwa.pdf</p>
+
+<p>http://www-adsys.sys.i.kyoto-u.ac.jp/mohzeki/YSMSPIP/Proc2012/all.pdf</p>
+
+<p>適当な確率分布π(x)をMCMCでサンプリングする場合、πT = πとなるような遷移行列Tを取ってきて、</p>
+
+<ul>
+  <li>
+    <p>適当な初期状態x_{0}をとる</p>
+  </li>
+  <li>
+    <p>T<em>{x</em>{t}}からランダムにサンプリングして、x_{t+1}とする</p>
+  </li>
+</ul>
+
+<p>を繰り返すことによってサンプリングできる。
+（xは離散値を取るとする）</p>
+
+<p>πT = πを満たすための十分条件として、詳細釣り合い条件π(x) T<em>{xy} = π(y)T</em>{yx}がある。
+これは十分条件でしかないが、この論文の主張によると、詳細釣り合い条件を満たしていないような遷移確率はこの論文での方法が初めてであるとのこと。</p>
+
+<p>この論文では、メトロポリスヘイスティングやギブスサンプリングで発生する棄却確率を低減でき、また多くの場合棄却確率を0にできることを主張している。</p>
+
+<p>MCMCでサンプリングを行う場合π<em>{x}そのものは計算出来ないと仮定することが多いので、それに比例するw</em>{x}を考える。πT = πはwT = wと同値。
+v<em>{xy} = w</em>{x} T<em>{xy}とすると、この条件は、w</em>{x} = Σ<em>{y} v</em>{xy}とかける。さらに、棄却確率は Σ<em>{x} v</em>{xx}/Σ<em>{x} w</em>{x}とかける。</p>
+
+<p>そこで、この論文では、w<em>{x}達をgivenとして、w</em>{x} = Σ<em>{y} v</em>{xy}, w<em>{x} = Σ</em>{y} v<em>{yx} を満たし、棄却確率を最小化するようなv</em>{xy}達を求めるアルゴリズムを提案している。
+この問題はallocation problemと呼ばれている。</p>
+
+<p>確かに、アルゴリズムはシンプルであるのだが、疑問なのがつぎの点である。実際にサンプリングをする時には、v<em>{xy}ではなく、(T</em>{xy})<em>{y} where T</em>{xy} = v<em>{xy}/w</em>{x} の分布に従ってサンプリングを行うが、
+これは本当に実行できるのかという点である。もともとMCMCはw<em>{x}の分配関数を計算出来ない（intractable）であることからこのような遷移確率を用いたサンプリングを行っているので、Σ</em>{x}は実行できないはずである。
+例えばxは2値を取る1000個のelementの全状態みたいなものを考えると、xの取りうる値は2^{1000}である。</p>
+
+<p>そうすると、そもそもこのT_{xy}達をメモリで持てるという仮定や、その上で確率分布を取るといったことが可能かどうかは怪しいのではと思う。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kenta OONO</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-23T18:23:28+09:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/09/23/suwa-todo-mcmc/" data-via="delta2323_" data-counturl="http://delta2323.github.io/blog/2014/09/23/suwa-todo-mcmc/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/23/large-deviation-intro/" title="Previous Post: large_deviation_intro">&laquo; large_deviation_intro</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/10/03/parser-tokenizer-pattern/" title="Next Post: tokenizer_builder_pattern">tokenizer_builder_pattern &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>大野健太（おおのけんた）<p/>
+  <p>1986年生まれ、株式会社Preferred Networks所属、興味分野は機械学習・数学（純粋/応用両方）などです</p>
+  <p>mailto: oono at preferredjp<br/>
+  twitter: <a href="https://twitter.com/delta2323_">@delta2323_</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/04/kraft-inequality/">Kraftの不等式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/31/pydata-tokyo-meetup-1/">PyData Tokyo MeetupでCaffeとmafについて話しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/11/delta-rule/">Delta Rule再訪</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Top Categories</h1>
+    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (12)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Kenta OONO -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+</html>
+

@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Birkhoff_von_neumann - 読書帳</title>
+  <meta name="author" content="Kenta OONO">
+
+  
+  <meta name="description" content="前に書いたHoffman–Wielandtの定理に関連してもう一つ。 Hoffman-Wielangtの定理は、Todd Kemp氏のレクチャーノートのLemma 5.4として証明されている。
+Birkhoff-von Neumannの定理を用いると、その証明が比較的平易に行える事がわかった。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://delta2323.github.io/blog/2014/09/15/birkhoff-von-neumann">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">読書帳</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:delta2323.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Birkhoff_von_neumann</h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-09-15T23:36:35+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>前に書いたHoffman–Wielandtの定理に関連してもう一つ。</p>
+
+<p>Hoffman-Wielangtの定理は、Todd Kemp氏のレクチャーノートのLemma 5.4として証明されている。
+Birkhoff-von Neumannの定理を用いると、その証明が比較的平易に行える事がわかった。</p>
+
+<p>まず、Birkhoff-von Neumannの定理のステートメントを述べる為にいくつか言葉の定義を行う。</p>
+
+<p>$d$次元の正方行列が、2重確率行列 (doubly stochastic matrix)であるとは、各行、各列の和が全て1である事を言う。
+2つの2重確率行列の重み付き平均は再び2重確率行列となるので、2重確率行列全体の集合全体は凸であり、さらに多面体である事が知られている。これをBirkohff polytopeという。</p>
+
+<p>特別な2重確率行列として、permutation matrixがある。これは、各行・各列に1つだけ1、残りが0である製法行列をいう。ベクトルにpermutation matrixをかけるとベクトルのエントリをシャッフル効果があるのでこう呼ばれる。</p>
+
+<p>以上の準備のもとで、Birkhoff polytopeはpermutation matrix全体の集合の凸包であるというのが、Birkhoff-von Neumann定理である。</p>
+
+<p>このことの帰結、Birkhoff polytope上に値を取る線形関数はpermutation matrix乗で最大・最小値を取る事がわかる。
+前述のKemp氏のレクチャーノートでは、2つの対称行列の固有値を小さい順に並べた時の差の2乗の和をBirkhoff polytope上の線形関数で上から抑えた上でBirkhoff-von Neumannの定理を適用、考える対象をpermutation matrixに絞った上で、更に固有値を小さい順に並べていることから、permutationの中でも、単位行列で最大値を取ることを示し、それを式変形すると、その値は差の2乗のTraceであることを示している。</p>
+
+<p>http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Kenta OONO</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-15T23:36:35+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/09/15/birkhoff-von-neumann/" data-via="delta2323_" data-counturl="http://delta2323.github.io/blog/2014/09/15/birkhoff-von-neumann/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/15/inverse-tangent-addition-formula/" title="Previous Post: Inverse Tangentの加法定理">&laquo; Inverse Tangentの加法定理</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/09/23/large-deviation-intro/" title="Next Post: large_deviation_intro">large_deviation_intro &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>大野健太（おおのけんた）<p/>
+  <p>1986年生まれ、株式会社Preferred Networks所属、興味分野は機械学習・数学（純粋/応用両方）などです</p>
+  <p>mailto: oono at preferredjp<br/>
+  twitter: <a href="https://twitter.com/delta2323_">@delta2323_</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/11/04/kraft-inequality/">Kraftの不等式</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/31/pydata-tokyo-meetup-1/">PyData Tokyo MeetupでCaffeとmafについて話しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/11/delta-rule/">Delta Rule再訪</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Top Categories</h1>
+    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (12)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Kenta OONO -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+</html>
+
