@@ -9,8 +9,7 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="NIPS2012のランダム行列のチュートリアルからの抜粋。 $\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、非対角要素は標準正規分布に従う独立な確率変数とする。
-すなわち、 % <![CDATA[ \begin{align*} \mathbf{W}_{d} = \sum_{ &hellip;">
+  <meta name="description" content="最近他の人と議論する機会が多くなってきて特に思うのが、パッと取り出せる知識の引き出しの重要性。確かにWikipediaや個人のウェブサイトなど辞書的に利用できるようなウェブサイトは多数あり、それらに書いてあるから必要になった時に調べれば良いというのは一理あるけれど、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +70,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/13/resume/">小道具集め</a></h1>
     
     
       <p class="meta">
@@ -88,67 +87,23 @@
 
 
 
-	<time datetime="2014-09-15T21:22:00+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
+	<time datetime="2014-08-13T08:25:00+09:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>NIPS2012のランダム行列のチュートリアルからの抜粋。</p>
+  <div class="entry-content"><p>最近他の人と議論する機会が多くなってきて特に思うのが、パッと取り出せる知識の引き出しの重要性。確かにWikipediaや個人のウェブサイトなど辞書的に利用できるようなウェブサイトは多数あり、それらに書いてあるから必要になった時に調べれば良いというのは一理あるけれど、そもそも今の自分に必要な情報がある事に気づいて調べられるためには、そのきっかけとなる引き出しが必要。それに、発展した分野の常套手段に関する確かな知識は議論している時に適切な方向性に素早くに進むのに強力な道具になる。</p>
 
-<p>$\mathbf{W}_{d}$を$d$次元対称行列で対角要素は$0$、非対角要素は標準正規分布に従う独立な確率変数とする。
-すなわち、</p>
+<p>数式がメインの論文では、著者が証明したい定理の補題として、マイナーな等式や不等式評価をreferenceとして紹介されることがある。そういったものをストックとして貯めてるのは、手持ちの武器を充実させるのに役立つのではないかとふと思った。</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
+<p>というわけで、論文や本・Wikipediaなどを読んだ時に、気になった定理・等式・不等式などをまとめてみようと思う。
+とりあえず数学の定理や補題に焦点を絞るけれど、うまくいきそうだったら別の種類にも試してみたい。</p>
 
-\begin{align*}
-  \mathbf{W}_{d} = \sum_{i < j} X_{ij} \left(\mathbf{E}_{ij} + \mathbf{E}_{ji}\right)\quad
-  (X_{ij})_{i < j} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_{d(d-1)/2}) 
-\end{align*}
- %]]></script>
-
-<p>$\lambda_{d}$を$\mathbf{W}_{d}$の最大固有値とすると、$\lambda_{d}/\sqrt{d}$は$d\to \infty$でalmost surelyに2に収束する。</p>
-
-<p>参考にしているチュートリアルでの比較的簡単な証明で得られる結果（参考資料の定理4.1.1）では、
-ここまでtightなバウンドを示すことができない（$\log d$のfactorがかかる）。
-これ自体の証明は結構大変らしいが、できれば何か直感的な理解ができるような説明があるとうれしい。</p>
-
-<p>また、ここで$\mathbf{W}_{d}$の事をWigner行列と呼んでいるが、Wigner行列自体はもっと広いクラスの行列を指す言葉の様子。
-統計物理の文脈でよく出るようで、関連するチュートリアルや講義資料が多く見つかった。</p>
-
-<p>（追記）</p>
-
-<p>しばらく前にここまで原稿を書いた後によくよく考えたら、これはWigner’s Semicircle Lawからすぐに示せることに気づいた。
-実際、以下のTodd Kemp氏のレクチャーノートで、Lemma 6.1としてこの事実をSemicircle Lawから示している。
-NIPS2012のチュートリアルにあった「難しい定理」というのはSemicircle Lawの事だったのかな。</p>
-
-<p>ついでに上に挙げたWigner行列のもっと広義の定義というのは、Kemp氏のチュートリアルによると、各エントリが独立かつ2乗の期待値が有限。さらに対角成分はi.i.d.の分布、非対角成分も（対角成分とは異なるかもしれない）i.i.d.の分布というものを言う（従って、スカラーの確率変数としては対角成分と非対角成分の2種類しかなく、2乗の期待値もその2種類での有限性だけ言えば十分）。
-また、Wigner行列を$d^{-1/2}$（$d$は行列のサイズ）でスケール変換したものもWigner行列と言うらしい。</p>
-
-<h2 id="section">出典</h2>
-
-<p>Tropp氏のチュートリアルの35ページ、4.4.1章</p>
-
-<h2 id="section-1">参考文献</h2>
-
-<ul>
-  <li><a href="http://users.cms.caltech.edu/~jtropp/notes/Tro12-User-Friendly-Tools-NIPS.pdf">User-Friendly Tools for Random Matrices: An Introduction</a></li>
-</ul>
-
-<p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
-
-<ul>
-  <li><a href="http://www.umpa.ens-lyon.fr/%7Eaguionne/pcmipark.pdf">Statistical Mechanics and Random Matrices</a></li>
-</ul>
-
-<p>Alice Guionnet氏のレクチャーノート</p>
-
-<ul>
-  <li><a href="http://www.math.ucsd.edu/~tkemp/247A/247A.Notes.pdf">MATH 247A: INTRODUCTION TO RANDOM MATRIX THEORY</a></li>
-</ul>
-
-<p>Todd Kemp氏のレクチャーノート</p>
+<p>今年のはじめにブログを書く宣言していたにも関わらずなんだかんだ言って、結局放置してしまっていたので、これを気にこのブログを掘り出した。
+ブログを再開するついでにこれまで寝かしていたいくつかの記事（主にOctpressのセッティングに関する記事）を公開した。
+目的がはっきりしているから今度はブログ書きを継続できるといいな。</p>
 
 </div>
   
@@ -162,7 +117,7 @@ NIPS2012のチュートリアルにあった「難しい定理」というのは
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/14/stability-of-markov-chain/">Stability_of_markov_chain</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/10/octopress-command/">Octopress CheatSheet</a></h1>
     
     
       <p class="meta">
@@ -179,151 +134,23 @@ NIPS2012のチュートリアルにあった「難しい定理」というのは
 
 
 
-	<time datetime="2014-09-14T07:25:22+09:00" pubdate data-updated="true">Sep 14<span>th</span>, 2014</time>
+	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>これのTheorem3
-http://arxiv.org/pdf/1306.1091.pdf</p>
-
-<p>Reference元はこれらしい
-http://www.sciencedirect.com/science/article/pii/S0024379501003202</p>
-
-<p>更に言うとこれらしい
-http://www.jstor.org/discover/10.2307/3212261?uid=3738328&amp;uid=2129&amp;uid=2&amp;uid=70&amp;uid=4&amp;sid=21104159480671</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/06/hausdorff-measure/">Hausdorff_measure</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-09-06T22:17:27+09:00" pubdate data-updated="true">Sep 6<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>http://en.wikipedia.org/wiki/Hausdorff_measure</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/06/coarea-formula/">Coarea_formula</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-09-06T22:02:33+09:00" pubdate data-updated="true">Sep 6<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>geometric measure theoryという分野の有名な定理の一つ</p>
-
-<p>wikipediaにも乗っているほど有名な定理らしい</p>
-
-<p>Fubiniの定理のgeneralizationと思える</p>
-
-<p>参考にした論文では、これを用いてthreshold setの表面積の期待値を上から評価している。
-そして、期待値が小さいことから、適当なパラメータsが存在して、threshold setの表面積が実際に低くなることを証明している</p>
-
-<p>http://en.wikipedia.org/wiki/Coarea_formula</p>
-
-<p>http://arxiv.org/pdf/1309.1387v2.pdf</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/03/shannon-source-coding-theorem/">Shannon_source_coding_theorem</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-09-03T17:24:13+09:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Deep AutoRegressive Networkの3章に言及あり</p>
-
-<p>Mackay 2003(Information theory inference and learning algorithms ch. 6)
-Information Theory, Inference, and Learning Algorithms
-http://www.inference.phy.cam.ac.uk/mackay/itila/book.html
-結構有名な本らしい</p>
-
-<p>http://www.iip.ist.i.kyoto-u.ac.jp/member/cuturi/Teaching/KU/2011/IIS/lec4-IT-2011.pdf
-http://www.cs.cmu.edu/~aarti/Class/10704/lec8-srccodingHuffman.pdf</p>
+  <div class="entry-content"><div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ rake new_post\["&lt;title&gt;"\] # 新規記事作成
+</span><span class="line">$ rake preview # localhost:4000でプレビュー表示
+</span><span class="line">$ rake generate # 現在の設定でブログを生成
+</span><span class="line">$ rake publish_draft # 下書き記事を公開設定に変更
+</span><span class="line">$ rake gen_deploy # 本番反映</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
   
@@ -337,7 +164,7 @@ http://www.cs.cmu.edu/~aarti/Class/10704/lec8-srccodingHuffman.pdf</p>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/09/03/gaussian-gradient/">Gaussian_gradient</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/10/golden-thompson/">Golden Thompson</a></h1>
     
     
       <p class="meta">
@@ -354,95 +181,35 @@ http://www.cs.cmu.edu/~aarti/Class/10704/lec8-srccodingHuffman.pdf</p>
 
 
 
-	<time datetime="2014-09-03T01:38:22+09:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2014</time>
+	<time datetime="2014-08-10T14:31:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>http://arxiv.org/pdf/1401.4082v3.pdf
-これの7, 8について書く</p>
-</div>
-  
-  
+  <div class="entry-content"><p>試しに一つエントリを作ってみる。
+このぐらいの軽さで継続していけるようにしたい。</p>
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-26T22:00:00+09:00" pubdate data-updated="true">Aug 26<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>通常の確率変数と同様に行列に値を取る確率変数に対しても積率母関数とキュムラント母関数を定義できる。
-具体的には$d$次正方行列に値を取る確率変数$\mathbf{X}$に対して、その積率母関数(Moment Generating Function:MGF)$ M_{\mathbf{X}}$とキュムラント母関数(Cummurant Generating Function:CGF) $\Xi_{\mathbf{X}}$をスカラー値の場合と同様の形式に以下で定義する。すなわち、</p>
+<p>A, BをHermite 行列として、</p>
 
 <script type="math/tex; mode=display">
 \begin{align*}
-  M_{\mathbf{X}}(\theta) = \mathbb{E}\left[ \exp (\theta \mathbf{X})\right]\\
-  \Xi_{\mathbf{X}}(\theta) = \log \mathbb{E}\left[ \exp (\theta \mathbf{X})\right]
+  \mathrm{tr} \exp (A+B) \leq \mathrm{tr}(\exp (A) \exp (B))
 \end{align*}
 </script>
 
-<p>ここで$\theta \in \mathbb{R}$。</p>
-
-<p>すると、CGFに関して次が成立する。$\mathbf{X}_{i}(i = 1, \ldots, n)$を$d$次正方行列に値を取る独立な確率変数として、次の不等式が成立する。</p>
+<p>ただし、行列が3つだと同様の式は成立しない。つまり、A, B, CをHermite行列に対して、以下の式は一般的には成立しない。</p>
 
 <script type="math/tex; mode=display">
 \begin{align*}
-  \mathrm{tr} \exp \left(\Xi_{\left(\sum_{i} \mathbf{X}_{i}\right)}(\theta)\right) \leq \mathrm{tr} \exp \left( \sum_{i} \Xi_{\mathbf{X}_{i}} (\theta)\right).
+  \mathrm{tr} \exp (A+B+C) \leq \mathrm{tr}(\exp (A) \exp (B) \exp(C))
 \end{align*}
 </script>
 
-<p>スカラー値の確率変数の場合、MGFには乗法性、CGFには加法性が成立する。MGFの乗法性は次のように示せる。</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-
-\begin{align*}
-M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] \\
-                          &= \mathbb{E}\left[ \prod_{i} \exp(\theta X_{i}) \right] \\
-                          &= \prod_{i} \mathbb{E}\left[ \exp(\theta X_{i}) \right] \\
-						  &= \prod_{i} M_{X_{i}} (\theta)
-\end{align*}
- %]]></script>
-
-<p>ここで、3行目の等式では、$X_{i}$達の独立性を用いた。この式の$\log$を取れば、CGFの加法性も言える。</p>
-
-<p>しかし、行列値の場合はこのような式変形はできない。
-スカラー値$x, y$に対しては、$\exp(x+y) = \exp(x)\exp(y)$が成立する。
-一方、行列$\mathrm{X}, \mathrm{Y}$に対しては、一般的には$\exp(\mathrm{X}+\mathrm{Y}) = \exp(\mathrm{X})\exp(\mathrm{Y})$が成立せず、従って、2行目の等式が成立しないためである
-（例えば$\mathrm{X}, \mathrm{Y}$が可換である事は$\exp$の分配法則が成立する十分条件である）。</p>
-
-<p>冒頭に上げた定理は、それにもかかわらず$\mathrm{tr} \exp$を取ればCGFに関しては劣加法性だけは成立している事を主張している。</p>
-
 <h2 id="section">出典</h2>
 
-<p>下記のチュートリアルの25ページ、Lemma 3.5.1</p>
+<p>下記のチュートリアルの30ページ</p>
 
 <h2 id="section-1">参考文献</h2>
 
@@ -464,7 +231,7 @@ M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] 
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/25/chernoff-inequality/">Chernoff Inequality</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/10/change-to-update-time/">記事の公開日時を最終更新日時にする</a></h1>
     
     
       <p class="meta">
@@ -481,144 +248,349 @@ M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] 
 
 
 
-	<time datetime="2014-08-25T21:17:15+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
+	<time datetime="2014-08-10T11:49:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>$X_{1}, \ldots, X_{n}$を独立な確率変数（同分布である必要はない）で、ある$K&gt;0$が存在して、任意の$i$についてalmost surelyに$|X_{i}| &lt; K$が成立するとする。
-確率変数$X_{i}$の期待値を$\mu_{i}$、分散を$\sigma_{i}^{2}$とし、$\mu = \sum_{i=1}^{n} \mu_{i}$、$\sigma^{2} = \sum_{i=1}^{n} \sigma_{i}^{2}$、
-$S=\sum_{i=1}^{n}X_{i}$と置く。</p>
+  <div class="entry-content"><p>元々のデフォルトだとブログ記事の投稿時間は下書きを作成した時間だったのだけれど、記事を書いた後何日か寝かせた後に公開する事が結構あるので、公開した時を時刻を投稿時間にしたいと思い変更した。</p>
 
-<p>この時、定数$C, c$が存在して、任意の$\lambda &gt; 0$に対し、</p>
+<h2 id="section">参考にしたサイト</h2>
+
+<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
+
+<ul>
+  <li><a href="https://gist.github.com/shimotori/5325720">shimotori / article.html</a></li>
+</ul>
+
+<p>上記のgistで書かれている通り行い、うまく行きました。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/more/">Octopressの記事に「続きを読む」を追加する</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T11:42:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressの記事に「続きを読む」を追加するには、表示させたい箇所に <code>&lt;!-- more --&gt;</code>を追加すれば良い。</p>
+
+<h2 id="section">参考</h2>
+
+<ul>
+  <li><a href="http://octopress.org/docs/blogging/">Octopress</a></li>
+</ul>
+
+<p>ここに書いてある通りでうまくいった。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/10/default-unpublised/">記事をデフォルトでは非公開設定にする</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-08-10T11:42:00+09:00" pubdate data-updated="true">Aug 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>デフォルトでは記事は非公開設定にしておきたい。その方法を調べた。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/10/default-unpublised/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/26/manage-draft/">記事の下書きの管理</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-01-26T10:42:22+09:00" pubdate data-updated="true">Jan 26<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>普段のメールでもそうなのだけれど、緊急のものでなければ文章を書いた後にそれを「寝かし」てから公開する事が多い
+（なので、このブログでも日付が公開日時より大分前になってしまう記事が今後増えるような気がする）。
+Octopressで下書きってどう管理するのが良いのだろうと思い、調べてみた。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/01/26/manage-draft/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/25/nips-reading/">NIPS2013読み会で発表しました</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-01-25T01:49:35+09:00" pubdate data-updated="true">Jan 25<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1/23に開催されたNIPS2013読み会に詠み人として参加しました。
+主催者の<a href="https://twitter.com/sla">@sla</a>さんをはじめ、参加していただいた皆さんありがとうございました。
+資料はSlideShareで公開しています（SlideShare上だと日本語部分が文字化けしてしまっていますが、ダウンロードすれば直るはずです）。</p>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/30337341 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>自分が発表したのは”Inverse Density as an Inverse Problem: The Fredholm Equation Approach”という密度比推定に関する論文です。
+密度比推定の問題を第1種Fredholm方程式という良く知られた積分方程式に変形し、やはり良く知られたTikhonov-Phillips正則化という方法で得られる値を近似解として用いています。</p>
+
+<p>発表資料中でも挙げていますが、密度比推定全般に関する説明は東工大杉山先生の2012年のMLSSでの講演資料が非常に詳しく、この分野を概観する事が出来ます。
+今回の発表の準備でも大変参考にさせていただきました。</p>
+
+<h2 id="section">関連サイト</h2>
+
+<ul>
+  <li>
+    <p><a href="http://connpass.com/event/4728/">NIPS2013読み会</a>(connpass)</p>
+  </li>
+  <li>
+    <p><a href="http://togetter.com/li/620871">NIPS2013読み会</a>(Togetter)</p>
+  </li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/21/gwas-phewas/">GWAS, Post-GWASに関する資料を公開しました</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-01-21T09:04:37+09:00" pubdate data-updated="true">Jan 21<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。</p>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/30240670 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、かなり詳しい方に入ると思います。海外文献ではPhe-WASを用いて実際に行った網羅的探索を報告した論文の他にも、以下の2記事がおすすめです。</p>
+
+<ul>
+  <li><a href="http://www.nytimes.com/2013/11/28/science/linking-genes-to-diseases-by-sifting-through-electronic-medical-records.html?_r=0">Linking Genes to Diseases by Sifting Through Electronic Medical Records</a> (New York Times 2013年11月28日)</li>
+</ul>
+
+<p>Phe-WASに関するNew York Timesの記事、提唱者のJoshua氏がインタビューされています。</p>
+
+<ul>
+  <li><a href="http://www.tcpinnovations.com/drugbaron/phewas-the-tool-thats-revolutionizing-drug-development-that-youve-likely-never-heard-of/">PheWAS – the tool that’s revolutionizing drug development that you’ve likely never heard of</a> (Drug Baron 2014年1月3日)</li>
+</ul>
+
+<p>PheWASの利点・欠点を特に創薬の観点から詳しく議論しています。非常に参考になりました。</p>
+
+<ul>
+  <li><a href="https://github.com/petehamilton/Octopress-Slideshare-Plugin">Octopress-Slideshare-Plugin</a></li>
+</ul>
+
+<p>OctopressへのSlideShareの埋め込みにはこちらのプラグインを使用しました。README.mdのやり方をそのまま実行して出来ました</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/12/first-post/">テスト投稿</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-01-12T13:14:10+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今年はきちんとものを書こうと決めたので、個人サイトとブログの整備を行う。
+個人サイトは昔作ったものがあったのでそれを掘り出して利用する。
+ブログについては調べてみると、Octpress + Github PagesがMarkDownも使えて便利そうなのでこれを採用しようと思う。</p>
+
+<h2 id="section">数式の表示</h2>
 
 <script type="math/tex; mode=display">% <![CDATA[
 
 \begin{align*}
-  \mathbb{P}(|S - \mu| > \lambda \sigma) <  C\max (\exp(-c\lambda^{2}), \exp(-c\lambda\sigma /K))
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
 \end{align*}
  %]]></script>
 
-<p>証明は、まず、Hoeffding’s lammaと呼ばれる補題から、$X$の積率母関数に関する評価、</p>
+<h2 id="section-1">参考にしたサイト</h2>
 
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathbb{E} \exp(tX) \leq \exp(O(t^{2} \sigma_{i}^{2}))
-\end{align*}
-</script>
-
-<p>を得る。ここから、$X_{i}$達の独立性より$\mathbb{E}\exp(tS)$を$X_{i}$の積率母関数の積で書けるので、それぞれの項を上の不等式で評価する。
-最後にMarkovの補題を用いて、定理の左辺を上から評価し、最後に$t$について最小値をとる事で求める不等式が得られる。</p>
-
-<h2 id="section">出典</h2>
-
-<p>下記参考文献の75ページ</p>
-
-<h2 id="section-1">参考文献</h2>
+<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
 
 <ul>
-  <li><a href="http://terrytao.files.wordpress.com/2011/02/matrix-book.pdf">Topics in random matrix theory</a></li>
+  <li><a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/">Glide Note</a></li>
 </ul>
 
-<p>ランダム行列に関するTerence Tao氏講義ノート</p>
-</div>
-  
-  
+<p>Rubyの管理はrbenvで既に行っていたので、rvmは使用しなかった。</p>
 
+<h4 id="section-2">数式の表示について</h4>
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/25/markov-inequality/">Markov&#8217;s Inequality</a></h1>
-    
-    
-      <p class="meta">
-	
+<ul>
+  <li><a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">Carpe diem (Felix’s blog)</a></li>
+</ul>
 
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-25T20:58:00+09:00" pubdate data-updated="true">Aug 25<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
-Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
-Wikipediaにあるように証明は数行で終わるのだけれど、応用範囲がものすごく広くここからこの系統の種々の不等式を導ける。</p>
-
-<p>$X$を$\mathbb{R}$に値を取る非負の確率変数。$t&gt;0$に対して以下が成立する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathbb{P}\left[ X \geq t\right] \leq \frac{\mathbb{E}[X]}{t}
-\end{align*}
-</script>
-
-<p>$X$が非負の条件を外すと簡単に反例を作れる（例えば$X$が常に負を取るような確率変数など）。</p>
-
-<h2 id="section">出典</h2>
-
-<p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/24/azuma-lemma/">Azuma&#8217; Lemma</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-24T14:41:27+09:00" pubdate data-updated="true">Aug 24<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Chernoffの不等式では、$X_{i}$達の独立性を仮定していた。
-しかし、実はもっと緩い仮定でもChernoffの不等式に近い不等式を示すことができる。
-それがAzumaの不等式。</p>
-
-<p>Wikipediaを信じるならば、名前は、発見者の吾妻一興氏に由来し、この論文で発表されたのが初出らしい。</p>
-
-<p>http://projecteuclid.org/DPubS?verb=Display&amp;version=1.0&amp;service=UI&amp;handle=euclid.tmj/1178243286&amp;page=record</p>
+<p>ここに書いている通りに行ってうまくいった。</p>
 </div>
   
   
@@ -627,8 +599,6 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
     </article>
   
   <div class="pagination">
-    
-      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -654,19 +624,19 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
       </li>
     
       <li class="post">
-        <a href="/blog/2014/10/31/pydata-tokyo-meetup-1/">PyData Tokyo MeetupでCaffeとmafについて話しました</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/10/11/delta-rule/">Delta Rule再訪</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/10/07/matplotlib-on-macos/">Matplotlib_on_macos</a>
+        <a href="/blog/2014/09/15/inverse-tangent-addition-formula/">Inverse Tangentの加法定理</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a>
       </li>
     
   </ul>
@@ -677,7 +647,7 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/math'>math (12)</a></li><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (7)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   
