@@ -9,8 +9,8 @@
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="証明が面白かったので紹介。 $\Sigma = \lbrace 0, 1\rbrace$を2文字からなるアルファベット集合、$\Sigma^{\ast}$を$\Sigma$をアルファベットとする語(word)全体の集合とする。
-語$w\in \Sigma^{\ast}$に対して、$w$の長さを$| &hellip;">
+  <meta name="description" content="測度の収束の種類としてVague Convergenceというものがあることを知る。 定義自体は弱収束とよく似ている。
+$\mathbb{R}$上の測度の列$(\mu_{n})_{n=0, \ldots}$が$\mu$にVague収束するとは、任意の$f\in \mathcal{C}_{\ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/01/vague-convergence/">測度のVague収束</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2015-01-01T18:37:00+09:00" pubdate data-updated="true">Jan 1<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>測度の収束の種類としてVague Convergenceというものがあることを知る。</p>
+
+<p>定義自体は弱収束とよく似ている。
+$\mathbb{R}$上の測度の列$(\mu_{n})_{n=0, \ldots}$が$\mu$にVague収束するとは、任意の$f\in \mathcal{C}_{\infty}(\mathbb{R})$に対して、
+$\int_{\mathbb{R}} f(x) \mathrm{d}{\mu_{n}}(x)$が$\int_{\mathbb{R}} f(x) \mathrm{d}{\mu}(x)$に収束することをいう。
+ここで、$\mathcal{C}_{\infty}(\mathbb{R})$は、$\mathbb{R}$上の連続関数$f$で、$f(x) \to 0$ (as $x \to \pm \infty$)となるものを言う
+（下記の参考文献では$\mathcal{C}_{0}(\mathbb{R})$と書いているけれど、自分はこの記号はコンパクト台に使うことが多い気がしたので表記を変えてみた）。</p>
+
+<p>上記の定義は$\mathbb{R}$上であったが、Vague収束の概念はより一般的にLocally Compact Hausdorffな位相空間でも良いらしい。</p>
+
+<p>上の定義で、$\mathcal{C}_{\infty}(\mathbb{R})$を連続関数全体の集合$\mathcal{C}^{0}(\mathbb{R})$に変更すると弱収束の定義になる。
+$\mathcal{C}_{\infty}(\mathbb{R}) \subset \mathcal{C}^{0}(\mathbb{R})$なので、弱収束すればVague収束するが、その逆は成立しない。
+例えば参考文献の例を挙げると、$\mu$を台がコンパクトで全空間での積分が有限な測度として、$\mu_{n}(x) = \mu(x-n)$と定義すると、$(\mu_{n})_{n=0, \ldots}$は0にVague収束するが弱収束はしない。
+従って、Vague収束は弱収束より真に弱い条件となっている。</p>
+
+<p>しかし、測度が確率測度であるときはVague収束の収束先に追加で条件をつければ弱収束が言える。
+具体的には参考文献のFact2にある通り、確率測度列がVague収束し、さらに収束先も確率測度である時、この収束列はVague収束先に弱収束している。</p>
+
+<h2 id="section">出典</h2>
+
+<p>RANDOM MATRIX THEORYの12ページ3.1章</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www-personal.umich.edu/~yudovina/lecture_notes/random_matrices.pdf">RANDOM MATRIX THEORY</a> S. Kargin and E. Yudovina</p>
+  </li>
+  <li>
+    <p>Wikipediaの<a href="http://en.wikipedia.org/wiki/Vanish_at_infinity">Vague topology</a>の項目</p>
+  </li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -678,69 +746,6 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/17/style-change/">スタイルシートを変更する</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-17T13:38:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopressでスタイルシートをカスタマイズするには、sass/custom/_styles.scssを変更すれば良い。
-例えばこのブログの場合、見出しのフォントが少し大きいと感じたのでサイズを調整した。</p>
-
-<p>例えばこのような設定で各エントリのタイトルのサイズを変更できた（もう少し上手く書けるかもしれないけれど、動いているようなのでこれで良しとしている）。</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">.entry-title * {
-</span><span class="line">  font-size: 24px;
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">.entry-title {
-</span><span class="line">  font-size: 24px;
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="section">参考サイト</h2>
-
-<ul>
-  <li><a href="http://melandri.net/2012/02/14/octopress-theme-customization/">Alessandro Melandri</a></li>
-</ul>
-
-<p>この記事の方法で正しく設定できた。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -763,6 +768,10 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/01/vague-convergence/">測度のVague収束</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/04/kraft-inequality/">Kraftの不等式</a>
       </li>
     
@@ -778,10 +787,6 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
         <a href="/blog/2014/09/15/inverse-tangent-addition-formula/">Inverse Tangentの加法定理</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -790,7 +795,7 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (7)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (4)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (8)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (4)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   

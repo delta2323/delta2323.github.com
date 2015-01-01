@@ -4,7 +4,7 @@
   <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2015-01-01T18:32:51+09:00</updated>
+  <updated>2015-01-01T18:38:05+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[測度のVague収束]]></title>
+    <link href="http://delta2323.github.io/blog/2015/01/01/vague-convergence/"/>
+    <updated>2015-01-01T18:37:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2015/01/01/vague-convergence</id>
+    <content type="html"><![CDATA[<p>測度の収束の種類としてVague Convergenceというものがあることを知る。</p>
+
+<p>定義自体は弱収束とよく似ている。
+$\mathbb{R}$上の測度の列$(\mu_{n})_{n=0, \ldots}$が$\mu$にVague収束するとは、任意の$f\in \mathcal{C}_{\infty}(\mathbb{R})$に対して、
+$\int_{\mathbb{R}} f(x) \mathrm{d}{\mu_{n}}(x)$が$\int_{\mathbb{R}} f(x) \mathrm{d}{\mu}(x)$に収束することをいう。
+ここで、$\mathcal{C}_{\infty}(\mathbb{R})$は、$\mathbb{R}$上の連続関数$f$で、$f(x) \to 0$ (as $x \to \pm \infty$)となるものを言う
+（下記の参考文献では$\mathcal{C}_{0}(\mathbb{R})$と書いているけれど、自分はこの記号はコンパクト台に使うことが多い気がしたので表記を変えてみた）。</p>
+
+<p>上記の定義は$\mathbb{R}$上であったが、Vague収束の概念はより一般的にLocally Compact Hausdorffな位相空間でも良いらしい。</p>
+
+<p>上の定義で、$\mathcal{C}_{\infty}(\mathbb{R})$を連続関数全体の集合$\mathcal{C}^{0}(\mathbb{R})$に変更すると弱収束の定義になる。
+$\mathcal{C}_{\infty}(\mathbb{R}) \subset \mathcal{C}^{0}(\mathbb{R})$なので、弱収束すればVague収束するが、その逆は成立しない。
+例えば参考文献の例を挙げると、$\mu$を台がコンパクトで全空間での積分が有限な測度として、$\mu_{n}(x) = \mu(x-n)$と定義すると、$(\mu_{n})_{n=0, \ldots}$は0にVague収束するが弱収束はしない。
+従って、Vague収束は弱収束より真に弱い条件となっている。</p>
+
+<p>しかし、測度が確率測度であるときはVague収束の収束先に追加で条件をつければ弱収束が言える。
+具体的には参考文献のFact2にある通り、確率測度列がVague収束し、さらに収束先も確率測度である時、この収束列はVague収束先に弱収束している。</p>
+
+<h2 id="section">出典</h2>
+
+<p>RANDOM MATRIX THEORYの12ページ3.1章</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www-personal.umich.edu/~yudovina/lecture_notes/random_matrices.pdf">RANDOM MATRIX THEORY</a> S. Kargin and E. Yudovina</p>
+  </li>
+  <li>
+    <p>Wikipediaの<a href="http://en.wikipedia.org/wiki/Vanish_at_infinity">Vague topology</a>の項目</p>
+  </li>
+</ul>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Kraftの不等式]]></title>
@@ -776,37 +816,6 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
     <p><a href="http://togetter.com/li/620871">NIPS2013読み会</a>(Togetter)</p>
   </li>
 </ul>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GWAS, Post-GWASに関する資料を公開しました]]></title>
-    <link href="http://delta2323.github.io/blog/2014/01/21/gwas-phewas/"/>
-    <updated>2014-01-21T09:04:37+09:00</updated>
-    <id>http://delta2323.github.io/blog/2014/01/21/gwas-phewas</id>
-    <content type="html"><![CDATA[<p>先週の会社のセミナーでGWASとPost-GWASについて、特にPhe-WASについて話をしました。その資料を公開します。</p>
-
-<iframe src="http://www.slideshare.net/slideshow/embed_code/30240670 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
-
-<p>海外文献紹介として「Phe-WAS」という言葉を挙げている記事はいくつかありますが、PheWASの手法や利点・欠点について日本語で解説した資料はなかなかなく、かなり詳しい方に入ると思います。海外文献ではPhe-WASを用いて実際に行った網羅的探索を報告した論文の他にも、以下の2記事がおすすめです。</p>
-
-<ul>
-  <li><a href="http://www.nytimes.com/2013/11/28/science/linking-genes-to-diseases-by-sifting-through-electronic-medical-records.html?_r=0">Linking Genes to Diseases by Sifting Through Electronic Medical Records</a> (New York Times 2013年11月28日)</li>
-</ul>
-
-<p>Phe-WASに関するNew York Timesの記事、提唱者のJoshua氏がインタビューされています。</p>
-
-<ul>
-  <li><a href="http://www.tcpinnovations.com/drugbaron/phewas-the-tool-thats-revolutionizing-drug-development-that-youve-likely-never-heard-of/">PheWAS – the tool that’s revolutionizing drug development that you’ve likely never heard of</a> (Drug Baron 2014年1月3日)</li>
-</ul>
-
-<p>PheWASの利点・欠点を特に創薬の観点から詳しく議論しています。非常に参考になりました。</p>
-
-<ul>
-  <li><a href="https://github.com/petehamilton/Octopress-Slideshare-Plugin">Octopress-Slideshare-Plugin</a></li>
-</ul>
-
-<p>OctopressへのSlideShareの埋め込みにはこちらのプラグインを使用しました。README.mdのやり方をそのまま実行して出来ました</p>
 ]]></content>
   </entry>
   

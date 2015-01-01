@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | 読書帳]]></title>
   <link href="http://delta2323.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2015-01-01T18:32:51+09:00</updated>
+  <updated>2015-01-01T18:38:05+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[測度のVague収束]]></title>
+    <link href="http://delta2323.github.io/blog/2015/01/01/vague-convergence/"/>
+    <updated>2015-01-01T18:37:00+09:00</updated>
+    <id>http://delta2323.github.io/blog/2015/01/01/vague-convergence</id>
+    <content type="html"><![CDATA[<p>測度の収束の種類としてVague Convergenceというものがあることを知る。</p>
+
+<p>定義自体は弱収束とよく似ている。
+$\mathbb{R}$上の測度の列$(\mu_{n})_{n=0, \ldots}$が$\mu$にVague収束するとは、任意の$f\in \mathcal{C}_{\infty}(\mathbb{R})$に対して、
+$\int_{\mathbb{R}} f(x) \mathrm{d}{\mu_{n}}(x)$が$\int_{\mathbb{R}} f(x) \mathrm{d}{\mu}(x)$に収束することをいう。
+ここで、$\mathcal{C}_{\infty}(\mathbb{R})$は、$\mathbb{R}$上の連続関数$f$で、$f(x) \to 0$ (as $x \to \pm \infty$)となるものを言う
+（下記の参考文献では$\mathcal{C}_{0}(\mathbb{R})$と書いているけれど、自分はこの記号はコンパクト台に使うことが多い気がしたので表記を変えてみた）。</p>
+
+<p>上記の定義は$\mathbb{R}$上であったが、Vague収束の概念はより一般的にLocally Compact Hausdorffな位相空間でも良いらしい。</p>
+
+<p>上の定義で、$\mathcal{C}_{\infty}(\mathbb{R})$を連続関数全体の集合$\mathcal{C}^{0}(\mathbb{R})$に変更すると弱収束の定義になる。
+$\mathcal{C}_{\infty}(\mathbb{R}) \subset \mathcal{C}^{0}(\mathbb{R})$なので、弱収束すればVague収束するが、その逆は成立しない。
+例えば参考文献の例を挙げると、$\mu$を台がコンパクトで全空間での積分が有限な測度として、$\mu_{n}(x) = \mu(x-n)$と定義すると、$(\mu_{n})_{n=0, \ldots}$は0にVague収束するが弱収束はしない。
+従って、Vague収束は弱収束より真に弱い条件となっている。</p>
+
+<p>しかし、測度が確率測度であるときはVague収束の収束先に追加で条件をつければ弱収束が言える。
+具体的には参考文献のFact2にある通り、確率測度列がVague収束し、さらに収束先も確率測度である時、この収束列はVague収束先に弱収束している。</p>
+
+<h2 id="section">出典</h2>
+
+<p>RANDOM MATRIX THEORYの12ページ3.1章</p>
+
+<h2 id="section-1">参考文献</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www-personal.umich.edu/~yudovina/lecture_notes/random_matrices.pdf">RANDOM MATRIX THEORY</a> S. Kargin and E. Yudovina</p>
+  </li>
+  <li>
+    <p>Wikipediaの<a href="http://en.wikipedia.org/wiki/Vanish_at_infinity">Vague topology</a>の項目</p>
+  </li>
+</ul>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Kraftの不等式]]></title>
@@ -187,31 +227,6 @@ M_{\sum_{i}X_{i}}(\theta) &= \mathbb{E}\left[ \exp(\theta \sum_{i}X_{i})\right] 
 
 <p>Joel A. Tropp氏のNIPS2012のチュートリアル</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Markov's Inequality]]></title>
-    <link href="http://delta2323.github.io/blog/2014/08/25/markov-inequality/"/>
-    <updated>2014-08-25T20:58:00+09:00</updated>
-    <id>http://delta2323.github.io/blog/2014/08/25/markov-inequality</id>
-    <content type="html"><![CDATA[<p>非負の確率変数が外れ値を取る確率は期待値で抑えられるという定理。
-Concentration Inequalityと呼ばれる一連の不等式達の中でおそらくいちばん基本的な不等式。
-Wikipediaにあるように証明は数行で終わるのだけれど、応用範囲がものすごく広くここからこの系統の種々の不等式を導ける。</p>
-
-<p>$X$を$\mathbb{R}$に値を取る非負の確率変数。$t&gt;0$に対して以下が成立する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathbb{P}\left[ X \geq t\right] \leq \frac{\mathbb{E}[X]}{t}
-\end{align*}
-</script>
-
-<p>$X$が非負の条件を外すと簡単に反例を作れる（例えば$X$が常に負を取るような確率変数など）。</p>
-
-<h2 id="section">出典</h2>
-
-<p>色々。例えばWikpediaの<a href="http://en.wikipedia.org/wiki/Concentration_inequality">Concentration Inequalities</a>の項目。</p>
 ]]></content>
   </entry>
   
