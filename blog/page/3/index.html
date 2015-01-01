@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Emacsにmarkdown-modeを導入 - 読書帳</title>
+  <title>読書帳</title>
   <meta name="author" content="Kenta OONO">
 
   
-  <meta name="description" content="Octopressのブログの下書きはmarkdownで書かれている。
-業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。 既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。 1
-M-x &hellip;">
+  <meta name="description" content="今年はきちんとものを書こうと決めたので、個人サイトとブログの整備を行う。
+個人サイトは昔作ったものがあったのでそれを掘り出して利用する。
+ブログについては調べてみると、Octpress + Github PagesがMarkDownも使えて便利そうなのでこれを採用しようと思う。 数式の表示 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ M-x &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://delta2323.github.io/blog/2014/08/17/markdown-mode">
+  <link rel="canonical" href="http://delta2323.github.io/blog/page/3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="読書帳" type="application/atom+xml">
@@ -64,12 +64,15 @@ M-x &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Emacsにmarkdown-modeを導入</h1>
+      <h1 class="entry-title"><a href="/blog/2014/01/12/first-post/">テスト投稿</a></h1>
     
     
       <p class="meta">
@@ -86,95 +89,69 @@ M-x &hellip;">
 
 
 
-	<time datetime="2014-08-17T13:41:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
+	<time datetime="2014-01-12T13:14:10+09:00" pubdate data-updated="true">Jan 12<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Octopressのブログの下書きはmarkdownで書かれている。
-業務内でもmarkdownを書く機会は多いのでこれを機会にemacsにmarkdown-modeを導入することにした。</p>
+  <div class="entry-content"><p>今年はきちんとものを書こうと決めたので、個人サイトとブログの整備を行う。
+個人サイトは昔作ったものがあったのでそれを掘り出して利用する。
+ブログについては調べてみると、Octpress + Github PagesがMarkDownも使えて便利そうなのでこれを採用しようと思う。</p>
 
-<p>既にel-getは導入済みだったので、markdown-mode自体はel-getで導入した。</p>
+<h2 id="section">数式の表示</h2>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">M-x el-get-install markdown-mode</span></code></pre></td></tr></table></div></figure></notextile></div>
+<script type="math/tex; mode=display">% <![CDATA[
 
-<p>基本的には下記のサイトで紹介されている方法で導入できたが、Octopressが自動生成するmarkdownテンプレートの拡張子が.markdownなので、markdonw-modeに紐付ける拡張子は.mdと.markdownの2種類とした。その結果.emacsの設定は以下のようになった。</p>
+\begin{align*}
+  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
+      \vdots & \ddots & \vdots \\
+      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+ %]]></script>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">;; markdown
-</span><span class="line">(autoload 'markdown-mode "markdown-mode.el" "Major mode for editing Markdown files" t)
-</span><span class="line">(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-</span><span class="line">(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))</span></code></pre></td></tr></table></div></figure></notextile></div>
+<h2 id="section-1">参考にしたサイト</h2>
 
-<h2 id="section">参考サイト</h2>
+<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
 
 <ul>
-  <li><a href="http://futurismo.biz/archives/2137">Futurismo</a></li>
+  <li><a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/">Glide Note</a></li>
 </ul>
 
-<p>この方法で導入することができた。</p>
+<p>Rubyの管理はrbenvで既に行っていたので、rvmは使用しなかった。</p>
+
+<h4 id="section-2">数式の表示について</h4>
+
+<ul>
+  <li><a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">Carpe diem (Felix’s blog)</a></li>
+</ul>
+
+<p>ここに書いている通りに行ってうまくいった。</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Kenta OONO</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2014-08-17T13:41:00+09:00" pubdate data-updated="true">Aug 17<span>th</span>, 2014</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/emacs/'>emacs</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://delta2323.github.io/blog/2014/08/17/markdown-mode/" data-via="delta2323_" data-counturl="http://delta2323.github.io/blog/2014/08/17/markdown-mode/" >Tweet</a>
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/08/17/top-category-plugin/" title="Previous Post: トップ画面にカテゴリ一覧を表示する">&laquo; トップ画面にカテゴリ一覧を表示する</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/08/25/markov-inequality/" title="Next Post: Markov's Inequality">Markov's Inequality &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -221,7 +198,6 @@ M-x &hellip;">
 
   
 </aside>
-
 
     </div>
   </div>

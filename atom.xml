@@ -4,7 +4,7 @@
   <title><![CDATA[読書帳]]></title>
   <link href="http://delta2323.github.io/atom.xml" rel="self"/>
   <link href="http://delta2323.github.io/"/>
-  <updated>2014-11-05T00:07:46+09:00</updated>
+  <updated>2015-01-01T18:32:51+09:00</updated>
   <id>http://delta2323.github.io/</id>
   <author>
     <name><![CDATA[Kenta OONO]]></name>
@@ -39,6 +39,88 @@ $w\in S$が得られる確率は$1/2^{|w|}$なので、</p>
 
 <p>$1 \geq $ ($S$のいずれかの元が得られる確率) $= \sum_{w\in S}$ ($w$が得られる確率) 
 $=\sum_{w\in S} \frac{1}{2^{|w|}}$</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PyData Tokyo MeetupでCaffeとmafについて話しました]]></title>
+    <link href="http://delta2323.github.io/blog/2014/10/31/pydata-tokyo-meetup-1/"/>
+    <updated>2014-10-31T22:09:19+09:00</updated>
+    <id>http://delta2323.github.io/blog/2014/10/31/pydata-tokyo-meetup-1</id>
+    <content type="html"><![CDATA[<p>10月30日のPyData Tokyo MeetUp #1にて「Caffeとmafを用いたディープラーニング開発・実験方法」というタイトルで発表を行いました。
+発表資料はSlideShareで公開しています。当日の発表に関する情報はconnpassにまとめられています
+（私以外の発表の資料へのリンクや当日のUstreamでの配信へのリンクもあります）。
+また、当日までのtwitterの反応はtogetterにもまとめられています。</p>
+
+<ul>
+  <li><a href="http://pydatatokyo.connpass.com/event/9543/">PyData Tokyo Meetup #1 - Deep Learning(connpass)</a></li>
+  <li><a href="http://togetter.com/li/739027?page=1">PyData Tokyo MeetUp #1(togetter)</a></li>
+</ul>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/40911070 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>勉強会の立ち上げ会での講演という大役で恐れ多くありましたが、興味を持っていただいたようで当日は質問や議論で盛りあがり一安心しました。
+発表の機会をくださったPyData発起人の皆様、発表を聞いてくださった方々に改めてお礼を申し上げます。
+PyDataは「濃い」勉強会を行うことを目標としているとのことで、陰ながら応援をさせていただければと考えております。</p>
+
+<h2 id="section">発表内容について</h2>
+
+<p>今回はディープラーニングライブラリの中でも特に開発が活発に行われているCaffeと、PFI/PFNで開発している実験ビルドツールのmafをそれぞれ紹介しました。
+また、
+発起人の柴田さんから、Caffeを用いて参加者の方が自分で何か作れるようになるとうれしい人が集まっていると事前に聞いておりましたので、
+デモを通じてmafとCaffeを用いて具体的に実験を行う具体的な方法を紹介しました。</p>
+
+<h2 id="section-1">質問の回答</h2>
+
+<p>頂いた質問について、きちんと答えられなかったものがいくつかありましたので、ここで改めて回答いたします。
+自分が質問を間違って理解していたら申し訳ありません。指摘していただけるとありがたいです。</p>
+
+<h3 id="section-2">高次元な入力データを扱う方法について</h3>
+
+<p>入力が高次元で疎な場合に、BlobとLayerを駆使して効率的に学習を行う方法がないかという質問を頂きました。
+疎なデータを入力するためのInput Blob(Sparse Blob)は議論で挙がり、Pull Request上で既に実装されているのですが、まだマージされていないようです。
+ですので、もし利用する場合には、ローカルレポジトリにforkし、このリクエストをマージし、自己責任で利用する必要がありそうです。</p>
+
+<p>参考：<a href="https://github.com/BVLC/caffe/pull/937">Sparse Data Support #937</a></p>
+
+<p>また、返答中で「Torch7と勘違いしているかもしれない」とも話しました。
+確認した所、疎なデータを入力して内積計算するLayerがTorch7にも存在しました。</p>
+
+<p>参考：SparseLinear Layer関係
+- <a href="https://github.com/torch/nn/blob/fb6c9672752db4a1d346d956fcee65c184018281/SparseLinear.lua">コード</a>
+- <a href="https://github.com/torch/nn/blob/db5afc539566c306e0e8cc193da392848f14b72f/doc/simple.md#nn.SparseLinear">ドキュメント</a></p>
+
+<h3 id="mafcaffe-j1">mafをCaffeで実行する際の-j1オプションについて</h3>
+
+<p>デモでmafを用いてCaffeを実行した際、1並列での実行を指定する-j1オプションを付けたのはなぜかという質問にきちんと回答ができていませんでした。
+これは今回のデモで用いたNeural NetでのData Layerがleveldb形式であった事が原因です。</p>
+
+<p>Data Layerを用いて入力データを与える場合、入力ファイルを予め適切なファイル形式に変換しなければなりません（そのためのスクリプトはCaffe側で用意されています）。
+その形式の1つのleveldb形式では、同じファイルに複数のプロセスから同時にデータにアクセスすることができません（下記issue参照）。
+今回のデモでは、色々なパラメータでのprototxtを生成・利用しましたが、Data Layerで利用しているファイルは共通していました。
+そのため、複数のタスクが並列に走った場合競合が発生します。
+下記のissueによると、ファイル形式がleveldbではなくLMDBを用いれば並列実行しても問題ないようです。</p>
+
+<p>参考：<a href="https://github.com/BVLC/caffe/issues/695">Parallel access to Leveldb #695</a></p>
+
+<h3 id="mac-os-109caffe">Mac OS 10.9でのCaffeのインストールについて</h3>
+
+<p>公式サイトに手順は書かれていますが、Mac OS 10.9でのインストール方法は10.8以前とは異なります。
+その原因の一つがデフォルトで使用するC++ライブラリです。
+Mac OS 10.9ではデフォルトC++コンパイラであるClang++はlibc++をデフォルトで用いています。
+しかし、NVIDIAのCUDAはlibstdc++でコンパイルしたライブラリとしかリンクできません。</p>
+
+<p>これの回避策は大きく分けて2通りあります。
+一つ目はClangのコンパイラをlibc++からlibstdc++に変更する方法でこれは本家サイトで紹介されています。
+もしGPUを使用しないのであれば、もう一つの方法として、10.8以前の方法に1つ手順を加えるだけでインストールを行う方法があります。
+具体的には、Makefile.configの中で–libstdc++を利用する部分を削除し、コメントアウトされているCPU_ONLY:=1を有効すれば良いです。
+これにより、GPUを使わないのでデフォルトのライブラリがlibc++でも問題なくCaffeをビルドできます。</p>
+
+<p>GPUを使用しない場合のインストール手順はtwitterで<a href="https://twitter.com/mooopan">@mooopanさん</a>に指摘していただきました(<a href="https://twitter.com/mooopan/status/527812920302768128">参考</a>)。ありがとうございます。</p>
+
+<p>(2015/1/1追記)</p>
+
+<p>上記とほぼ同等の内容を会社の<a href="http://research.preferred.jp/2014/11/pydata-tokyo-meetup-1/">リサーチブログ</a>に載せたので、こちらでの文章は下書きとして未公開にしていましたが、せっかくこちらのブログ用にも整形していたので、こちらでも公開しました。</p>
 ]]></content>
   </entry>
   
@@ -725,55 +807,6 @@ Octopressで下書きってどう管理するのが良いのだろうと思い�
 </ul>
 
 <p>OctopressへのSlideShareの埋め込みにはこちらのプラグインを使用しました。README.mdのやり方をそのまま実行して出来ました</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[テスト投稿]]></title>
-    <link href="http://delta2323.github.io/blog/2014/01/12/first-post/"/>
-    <updated>2014-01-12T13:14:10+09:00</updated>
-    <id>http://delta2323.github.io/blog/2014/01/12/first-post</id>
-    <content type="html"><![CDATA[<p>今年はきちんとものを書こうと決めたので、個人サイトとブログの整備を行う。
-個人サイトは昔作ったものがあったのでそれを掘り出して利用する。
-ブログについては調べてみると、Octpress + Github PagesがMarkDownも使えて便利そうなのでこれを採用しようと思う。</p>
-
-<h2 id="section">数式の表示</h2>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-\begin{align*}
-  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
-      \vdots & \ddots & \vdots \\
-      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
-    \end{array} \right)
-  \left( \begin{array}{c}
-      y_1 \\
-      \vdots \\
-      y_n
-    \end{array} \right)
-\end{align*}
- %]]&gt;</script>
-
-<h2 id="section-1">参考にしたサイト</h2>
-
-<h4 id="octpress--github-pages">Octpress + Github Pagesの連携について</h4>
-
-<ul>
-  <li><a href="http://blog.glidenote.com/blog/2011/11/07/install-octopress-on-github/">Glide Note</a></li>
-</ul>
-
-<p>Rubyの管理はrbenvで既に行っていたので、rvmは使用しなかった。</p>
-
-<h4 id="section-2">数式の表示について</h4>
-
-<ul>
-  <li><a href="http://www.idryman.org/blog/2012/03/10/writing-math-equations-on-octopress/">Carpe diem (Felix’s blog)</a></li>
-</ul>
-
-<p>ここに書いている通りに行ってうまくいった。</p>
 ]]></content>
   </entry>
   

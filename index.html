@@ -128,6 +128,116 @@ $=\sum_{w\in S} \frac{1}{2^{|w|}}$</p>
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/10/31/pydata-tokyo-meetup-1/">PyData Tokyo MeetupでCaffeとmafについて話しました</a></h1>
+    
+    
+      <p class="meta">
+	
+
+
+
+
+
+
+
+
+  
+
+
+
+	<time datetime="2014-10-31T22:09:19+09:00" pubdate data-updated="true">Oct 31<span>st</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>10月30日のPyData Tokyo MeetUp #1にて「Caffeとmafを用いたディープラーニング開発・実験方法」というタイトルで発表を行いました。
+発表資料はSlideShareで公開しています。当日の発表に関する情報はconnpassにまとめられています
+（私以外の発表の資料へのリンクや当日のUstreamでの配信へのリンクもあります）。
+また、当日までのtwitterの反応はtogetterにもまとめられています。</p>
+
+<ul>
+  <li><a href="http://pydatatokyo.connpass.com/event/9543/">PyData Tokyo Meetup #1 - Deep Learning(connpass)</a></li>
+  <li><a href="http://togetter.com/li/739027?page=1">PyData Tokyo MeetUp #1(togetter)</a></li>
+</ul>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/40911070 " width="595" height="446" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen=""></iframe>
+
+<p>勉強会の立ち上げ会での講演という大役で恐れ多くありましたが、興味を持っていただいたようで当日は質問や議論で盛りあがり一安心しました。
+発表の機会をくださったPyData発起人の皆様、発表を聞いてくださった方々に改めてお礼を申し上げます。
+PyDataは「濃い」勉強会を行うことを目標としているとのことで、陰ながら応援をさせていただければと考えております。</p>
+
+<h2 id="section">発表内容について</h2>
+
+<p>今回はディープラーニングライブラリの中でも特に開発が活発に行われているCaffeと、PFI/PFNで開発している実験ビルドツールのmafをそれぞれ紹介しました。
+また、
+発起人の柴田さんから、Caffeを用いて参加者の方が自分で何か作れるようになるとうれしい人が集まっていると事前に聞いておりましたので、
+デモを通じてmafとCaffeを用いて具体的に実験を行う具体的な方法を紹介しました。</p>
+
+<h2 id="section-1">質問の回答</h2>
+
+<p>頂いた質問について、きちんと答えられなかったものがいくつかありましたので、ここで改めて回答いたします。
+自分が質問を間違って理解していたら申し訳ありません。指摘していただけるとありがたいです。</p>
+
+<h3 id="section-2">高次元な入力データを扱う方法について</h3>
+
+<p>入力が高次元で疎な場合に、BlobとLayerを駆使して効率的に学習を行う方法がないかという質問を頂きました。
+疎なデータを入力するためのInput Blob(Sparse Blob)は議論で挙がり、Pull Request上で既に実装されているのですが、まだマージされていないようです。
+ですので、もし利用する場合には、ローカルレポジトリにforkし、このリクエストをマージし、自己責任で利用する必要がありそうです。</p>
+
+<p>参考：<a href="https://github.com/BVLC/caffe/pull/937">Sparse Data Support #937</a></p>
+
+<p>また、返答中で「Torch7と勘違いしているかもしれない」とも話しました。
+確認した所、疎なデータを入力して内積計算するLayerがTorch7にも存在しました。</p>
+
+<p>参考：SparseLinear Layer関係
+- <a href="https://github.com/torch/nn/blob/fb6c9672752db4a1d346d956fcee65c184018281/SparseLinear.lua">コード</a>
+- <a href="https://github.com/torch/nn/blob/db5afc539566c306e0e8cc193da392848f14b72f/doc/simple.md#nn.SparseLinear">ドキュメント</a></p>
+
+<h3 id="mafcaffe-j1">mafをCaffeで実行する際の-j1オプションについて</h3>
+
+<p>デモでmafを用いてCaffeを実行した際、1並列での実行を指定する-j1オプションを付けたのはなぜかという質問にきちんと回答ができていませんでした。
+これは今回のデモで用いたNeural NetでのData Layerがleveldb形式であった事が原因です。</p>
+
+<p>Data Layerを用いて入力データを与える場合、入力ファイルを予め適切なファイル形式に変換しなければなりません（そのためのスクリプトはCaffe側で用意されています）。
+その形式の1つのleveldb形式では、同じファイルに複数のプロセスから同時にデータにアクセスすることができません（下記issue参照）。
+今回のデモでは、色々なパラメータでのprototxtを生成・利用しましたが、Data Layerで利用しているファイルは共通していました。
+そのため、複数のタスクが並列に走った場合競合が発生します。
+下記のissueによると、ファイル形式がleveldbではなくLMDBを用いれば並列実行しても問題ないようです。</p>
+
+<p>参考：<a href="https://github.com/BVLC/caffe/issues/695">Parallel access to Leveldb #695</a></p>
+
+<h3 id="mac-os-109caffe">Mac OS 10.9でのCaffeのインストールについて</h3>
+
+<p>公式サイトに手順は書かれていますが、Mac OS 10.9でのインストール方法は10.8以前とは異なります。
+その原因の一つがデフォルトで使用するC++ライブラリです。
+Mac OS 10.9ではデフォルトC++コンパイラであるClang++はlibc++をデフォルトで用いています。
+しかし、NVIDIAのCUDAはlibstdc++でコンパイルしたライブラリとしかリンクできません。</p>
+
+<p>これの回避策は大きく分けて2通りあります。
+一つ目はClangのコンパイラをlibc++からlibstdc++に変更する方法でこれは本家サイトで紹介されています。
+もしGPUを使用しないのであれば、もう一つの方法として、10.8以前の方法に1つ手順を加えるだけでインストールを行う方法があります。
+具体的には、Makefile.configの中で–libstdc++を利用する部分を削除し、コメントアウトされているCPU_ONLY:=1を有効すれば良いです。
+これにより、GPUを使わないのでデフォルトのライブラリがlibc++でも問題なくCaffeをビルドできます。</p>
+
+<p>GPUを使用しない場合のインストール手順はtwitterで<a href="https://twitter.com/mooopan">@mooopanさん</a>に指摘していただきました(<a href="https://twitter.com/mooopan/status/527812920302768128">参考</a>)。ありがとうございます。</p>
+
+<p>(2015/1/1追記)</p>
+
+<p>上記とほぼ同等の内容を会社の<a href="http://research.preferred.jp/2014/11/pydata-tokyo-meetup-1/">リサーチブログ</a>に載せたので、こちらでの文章は下書きとして未公開にしていましたが、せっかくこちらのブログ用にも整形していたので、こちらでも公開しました。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a></h1>
     
     
@@ -631,89 +741,6 @@ Wikipediaにあるように証明は数行で終わるのだけれど、応用�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/13/sauer/">Sauer&#8217;s Theorem</a></h1>
-    
-    
-      <p class="meta">
-	
-
-
-
-
-
-
-
-
-  
-
-
-
-	<time datetime="2014-08-13T08:26:00+09:00" pubdate data-updated="true">Aug 13<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>定理を述べるために、まず関数族に対して、growth functionとVC次元を定義する。
-$X$を集合、$\mathcal{H}$を$X$から${ -1, 1 }$への写像の部分集合とする。
-$X$の有限部分集合の$S \subset X$, $|S| = m$に対して、$\mathcal{H}$の$S$への制限
-$\mathcal{H}\mid_{S}$を次の様に定義する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \mathcal{H}\left|_{S}\right. = \{(f(x))_{x\in S} \mid f \in \mathcal{H}\}
-\end{align*}
-</script>
-
-<p>さらに、$\mathcal{H}$のgrowth function $g_{\mathcal{H}} : \mathbb{N}\to \mathbb{N}$を次で定義する。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  g_{\mathcal{H}}(m) = \max_{S\subset X, |S|=m} \left|\mathcal{H}\left|_{S}\right.\right|
-\end{align*}
-</script>
-
-<p>すると、自明な不等式として、$g_{\mathcal{H}}(m) \leq 2^{m}$が成立する。
-また、ある$m$で等号が成立していたら、任意の$m’ \leq m$でも等号は成立している
-（等号を達成する$m$点集合$S$に対して、$S$の$m’$点部分集合を取れば良い）。</p>
-
-<p>この不等式で等式が成立する最大の$m$を$\mathcal{H}$のVC次元と定義する
-（任意の$m$で等号が成立する場合には、VC次元は無限大と定義する）。</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  \text{VC-}\mathrm{dim}(\mathcal{H}) = \max \{ m \mid g_{\mathcal{H}}(m) = 2^{m}\}
-\end{align*}
-</script>
-
-<p>以上を準備として、Sauerの定理は次の通り</p>
-
-<script type="math/tex; mode=display">
-\begin{align*}
-  g_{\mathcal{H}}(m) \leq \sum_{i=0}^{\text{VC-}\mathrm{dim}(\mathcal{H})} \binom{m}{i}
-\end{align*}
-</script>
-
-<h2 id="section">出典</h2>
-
-<ul>
-  <li><a href="http://www.cs.huji.ac.il/~shais/IML2014.html">Understanding Machine Learning, Shai Shalev-Shwartz</a>の6.5.1章</li>
-</ul>
-
-<p>会社では著者名を取ってSSS本と呼んでいる。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -740,6 +767,10 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
       </li>
     
       <li class="post">
+        <a href="/blog/2014/10/31/pydata-tokyo-meetup-1/">PyData Tokyo MeetupでCaffeとmafについて話しました</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/10/09/experiment-oriented-program/">PFIセミナーで実験プログラム開発方法論について話しました</a>
       </li>
     
@@ -751,10 +782,6 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
         <a href="/blog/2014/09/15/gaussian-wigner-matrices/">Gaussian Wigner Matrixの最大固有値の収束</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/08/26/subadditibity-of-matrix-cgf/">Matrix キュムラント母関数の劣加法性</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -763,7 +790,7 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
 
 <section>
   <h1>Top Categories</h1>
-    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (7)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (3)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
+    <ul id="top-category-list"><li><a href='/blog/categories/octopress'>octopress (8)</a></li><li><a href='/blog/categories/math'>math (7)</a></li><li><a href='/blog/categories/発表資料'>発表資料 (4)</a></li><li><a href='/blog/categories/general'>general (1)</a></li><li><a href='/blog/categories/emacs'>emacs (1)</a></li></ul>
 </section>
 
   
@@ -772,7 +799,7 @@ $\mathcal{H}\mid_{S}$を次の様に定義する。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Kenta OONO -
+  Copyright &copy; 2015 - Kenta OONO -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
